@@ -81,7 +81,7 @@ class ImageInput(RelativeLayout):
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            box_layout.add_widget(Button(text = str(i), height = 40, size_hint_y = None))
+            box_layout.add_widget(TextInput(hint_text = "M"+str(i), height = 40, size_hint_y = None))
             box_layout.height += 40
 
         material_scrollview.add_widget(box_layout)
