@@ -20,6 +20,7 @@ from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.core.window import Window
 
 WIDTH = 800
 HEIGHT= 640
@@ -30,6 +31,8 @@ Config.set('graphics', 'width', WIDTH)
 Config.set('graphics', 'height', HEIGHT)
 Config.set('graphics', 'minimum_width', MIN_WIDTH)
 Config.set('graphics', 'minimum_height', MIN_HEIGHT)
+
+Window.clearcolor = (.7, .7, .7, 1)
 
 class SeismicRadarTabs(TabbedPanel):
     pass
@@ -81,8 +84,8 @@ class ImageInput(RelativeLayout):
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            box_layout.add_widget(TextInput(hint_text = "M"+str(i), height = 40, size_hint_y = None))
-            box_layout.height += 40
+            box_layout.add_widget(TextInput(hint_text = "M"+str(i), height = 30, size_hint_y = None))
+            box_layout.height += 30
 
         material_scrollview.add_widget(box_layout)
 
