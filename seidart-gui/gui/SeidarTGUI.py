@@ -20,7 +20,6 @@ from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
-from kivy.core.window import Window
 
 WIDTH = 800
 HEIGHT= 640
@@ -31,8 +30,6 @@ Config.set('graphics', 'width', WIDTH)
 Config.set('graphics', 'height', HEIGHT)
 Config.set('graphics', 'minimum_width', MIN_WIDTH)
 Config.set('graphics', 'minimum_height', MIN_HEIGHT)
-
-Window.clearcolor = (.7, .7, .7, 1)
 
 class SeismicRadarTabs(TabbedPanel):
     pass
@@ -49,12 +46,12 @@ class GlacierImage(Image):
 class MaterialWindow(ScrollView):
     pass
 
-#This is an exercise in my ability to push stuff to the repo.
 
 class ImageInput(RelativeLayout):
     def __init__(self, **kwargs):
         super(ImageInput, self).__init__(**kwargs)
 
+        self.box_layout = None
         self.image = None
 
     def getImage(self):
@@ -79,15 +76,23 @@ class ImageInput(RelativeLayout):
         
         material_count = len(re.findall("M,", contents))
         material_scrollview = MaterialWindow()
-        box_layout = BoxLayout(orientation = 'vertical', size_hint_y= None, height =0)
+
+        if not self.box_layout:
+            for i in self.box_layout:
+                pass
+                #delete all of the "i"s
+            self.box_layout.height = 0
+            
+        else:
+            self.box_layout = BoxLayout(orientation = 'vertical', size_hint_y= None, height =0)
 
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            box_layout.add_widget(TextInput(hint_text = "M"+str(i), height = 30, size_hint_y = None))
-            box_layout.height += 30
+            self.box_layout.add_widget(Button(text = str(i), height = 40, size_hint_y = None))
+            self.box_layout.height += 40
 
-        material_scrollview.add_widget(box_layout)
+        material_scrollview.add_widget(self.box_layout)
 
         app = App.get_running_app()
         app.root.add_widget(material_scrollview)
