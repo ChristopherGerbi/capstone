@@ -3,4 +3,6 @@ python:
   - "3.8"
 # command to install dependencies
 install:
-  - pip install -r ../requirements.txt
+  - pip install -r requirements.txt
+before_script: cd seidart-gui/gui/tests
+script: pytest
