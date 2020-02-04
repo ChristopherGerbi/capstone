@@ -1,9 +1,10 @@
 #:kivy 1.11.1 
+
 <SeismicRadarTabs>:
-    size_hint: .4, .20
-    pos_hint: {'x':0.58, 'y':0.2}
+    size_hint: 0.4, 0.26
+    pos_hint: {'x':0.575, 'y':0.43}
     do_default_tab: False
-    tab_height: 40
+    tab_height: 30
     tab_pos: 'top_mid'
 
     TabbedPanelItem:
@@ -11,133 +12,151 @@
         RelativeLayout:
             Label: 
                 text: "Source"
-                pos_hint: {'x': 0, 'y':0.76}
-                size_hint: 1, 0.24
+                pos_hint: {'x': 0, 'y':0.8}
+                size_hint: 1, 0.2
             
             TextInput:
-                hint_text: "x"
+                hint_text: "X Posision"
                 multiline: False
-                pos_hint: {'x': 0, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
-                hint_text: "y"
+                hint_text: "Y Position"
                 multiline: False
-                pos_hint: {'x': 0.34, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0.335, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
-                hint_text: "z"
+                hint_text: "Z Position"
                 multiline: False
-                pos_hint: {'x': 0.68, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0.67, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
                 hint_text: "Time Step"
                 multiline: False
+                font_size: 16
                 pos_hint: {"x":0, "y":0.26}
-                size_hint: 0.49, 0.24
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Theta"
                 multiline: False
-                pos_hint: {"x":0.51, "y":0.26}
-                size_hint: 0.49, 0.24
+                font_size: 16
+                pos_hint: {"x":0.5, "y":0.26}
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Frequency"
                 multiline: False
+                font_size: 16
                 pos_hint: {"x":0, "y":0}
-                size_hint: 0.49, 0.24
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Phi"
                 multiline: False
-                pos_hint: {"x":0.51, "y":0}
-                size_hint: 0.49, 0.24
-
-        
+                font_size: 16
+                pos_hint: {"x":0.5, "y":0}
+                size_hint: 0.5, 0.26
 
     TabbedPanelItem:
         text: "Radar"
         RelativeLayout:
             Label: 
                 text: "Source"
-                pos_hint: {'x': 0, 'y':0.76}
-                size_hint: 1, 0.24
+                pos_hint: {'x': 0, 'y':0.8}
+                size_hint: 1, 0.2
             
             TextInput:
-                hint_text: "x"
+                hint_text: "X Position"
                 multiline: False
-                pos_hint: {'x': 0, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
-                hint_text: "y"
+                hint_text: "Y Position"
                 multiline: False
-                pos_hint: {'x': 0.34, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0.335, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
-                hint_text: "z"
+                hint_text: "Z Position"
                 multiline: False
-                pos_hint: {'x': 0.68, 'y':0.51}
-                size_hint: 0.32, 0.24
+                font_size: 16
+                pos_hint: {'x': 0.67, 'y':0.52}
+                size_hint: 0.33, 0.26
             TextInput:
                 hint_text: "Time Step"
                 multiline: False
+                font_size: 16
                 pos_hint: {"x":0, "y":0.26}
-                size_hint: 0.49, 0.24
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Theta"
                 multiline: False
-                pos_hint: {"x":0.51, "y":0.26}
-                size_hint: 0.49, 0.24
+                font_size: 16
+                pos_hint: {"x":0.5, "y":0.26}
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Frequency"
                 multiline: False
+                font_size: 16
                 pos_hint: {"x":0, "y":0}
-                size_hint: 0.49, 0.24
+                size_hint: 0.5, 0.26
             TextInput:
                 hint_text: "Phi"
                 multiline: False
-                pos_hint: {"x":0.51, "y":0}
-                size_hint: 0.49, 0.24
-
+                font_size: 16
+                pos_hint: {"x":0.5, "y":0}
+                size_hint: 0.5, 0.26
 
 <SpacialInformation>:
-    size_hint: 0.34, 0.12
-    pos_hint: {'x':0.55, 'y':0.6}
+    size_hint: 0.4, 0.12
+    pos_hint: {'x':0.575, 'y':0.73}
 
     TextInput:
-        hint_text: "Time Step"
-        size_hint: 0.49, 0.33
-        pos_hint: {'x':0, 'y':0}
+        hint_text: "Time Step Out"
+        font_size: 16
+        size_hint: 0.5, 0.42
+        pos_hint: {'x':0, 'y':-0.1}
 
     TextInput:
         hint_text: "Boundary"
-        size_hint: 0.49, 0.33
-        pos_hint: {'x':0.51, 'y':0}
+        font_size: 16
+        size_hint: 0.5, 0.42
+        pos_hint: {'x':0.51, 'y':-0.1}
 
     TextInput:
         hint_text: "X Position"
-        size_hint: 0.32, 0.33
+        font_size: 16
+        size_hint: 0.33, 0.42
         pos_hint: {'x':0, 'y':0.35}
 
     TextInput:
         hint_text: "Y Position"
-        size_hint: 0.32, 0.33
+        font_size: 16
+        size_hint: 0.33, 0.42
         pos_hint: {'x':0.34, 'y':0.35}
 
     TextInput:
         hint_text: "Z Position"
-        size_hint: 0.32, 0.33
+        font_size: 16
+        size_hint: 0.33, 0.42
         pos_hint: {'x':0.68, 'y':0.35}
 
     Label:
         text: "Spacial Information"
-        pos_hint: {'x': 0.4, 'y':0.66}
+        color: 0,0,0,1
+        pos_hint: {'x': 0.4, 'y':0.8}
         size_hint: 0.2, 0.33
 
 <DimensionButtons>:
     size_hint: 0.4, 0.1
-    pos_hint: {'x': 0.5, 'y': 0.8}
+    pos_hint: {'x': 0.575, 'y': 0.88}
 
     Label:
         text: "Dimensions to be plotted"
-        pos_hint: {'x': 0, 'y': 0.5}
+        color: 0,0,0,1
+        pos_hint: {'x': 0, 'y': 0.45}
         size_hint: 1, 0.5
     
     ToggleButton:
@@ -160,27 +179,32 @@
     TextInput:
         hint_text: "Enter the name of your image"
         multiline: False
-        pos_hint: {"x":0, "y":0.92}
-        size_hint: 0.7, 0.08
+        background_color: 1, 1, 1, 1 #color of textbox
+        font_size: 16
+        pos_hint: {"x":0, "y":0.9}
+        size_hint: 0.7, 0.1
         id: file_path
 
     Button:
         text: "Import Image"
-        pos_hint: {"x":0.7, "y":0.92}
-        size_hint: 0.3, 0.08
+        pos_hint: {"x":0.7, "y":0.8975}
+        size_hint: 0.3, 0.105
         id: file_input
         on_release: root.getImage()
 
 <GlacierImage>:
-    size_hint: 0.8, 0.8
+    size_hint: 1, 1
     id: "image"
 
-
 <MaterialWindow>:
-    size_hint: 0.7, 0.45
+    size_hint: 0.95, 0.4
+    pos_hint: {"x":0.025, "y":0}
     id: material_window
-    minimum_height: 40
+    minimum_height: 10
     do_scroll_y: True
+
+
+
 
 
 
