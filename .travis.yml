@@ -4,5 +4,7 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-before_script: cd seidart-gui/gui/tests
+before_script: 
+  - cd seidart-gui/gui/tests
+  - sudo apt install gfortran
 script: pytest
