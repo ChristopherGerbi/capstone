@@ -37,6 +37,9 @@ class SeismicRadarTabs(TabbedPanel):
 class SpacialInformation(RelativeLayout):
     pass
 
+class MaterialBox(BoxLayout):
+    pass
+
 class DimensionButtons(RelativeLayout):
     pass
 
@@ -44,14 +47,54 @@ class GlacierImage(Image):
     pass
 
 class MaterialWindow(ScrollView):
+    def __init__(self, **kwargs):
+        super(MaterialWindow, self).__init__(**kwargs)
+
+        self.file_name = ""
+
+class RunButton(Button):
+    def __init__(self, **kwargs):
+        super(RunButton, self).__init__(**kwargs)
+
+    def run(self):
+        #print (self.parent.name)
+        for i in self.parent.children:
+            if i.name == "material_window":
+                for j in i.children:
+                    if j.name == "material_box":
+                        for k in reversed(j.children):
+                            #i.file_name
+
+                            #find the first instance of an empty slot
+                            
+                            #split that line on ","
+                            #construct the material
+
+                            #replace the first
+                            f  = open(i.file_name, "r+")
+                            text = f.read()
+                            
+                            temp = re.findall("M.*,,,,,,,", text)[0]
+                            text = re.sub("M.*,,,,,,,", k.text, text, count = 1)
+
+                            f.seek(0)
+                            #Update this so it writes the proper material information
+                            f.write(text)
+                            f.truncate()
+
+
+class MaterialInput(TextInput):
     pass
 
-#This is an exercise in my ability to push stuff to the repo.
+class TotalLayout(RelativeLayout):
+    def __init__(self, **kwargs):
+        super(TotalLayout, self).__init__(**kwargs)
 
 class ImageInput(RelativeLayout):
     def __init__(self, **kwargs):
         super(ImageInput, self).__init__(**kwargs)
 
+        self.box_layout = None
         self.image = None
 
     def getImage(self):
@@ -74,34 +117,44 @@ class ImageInput(RelativeLayout):
         prj = open(file_name + ".prj", 'r')
         contents = prj.read()
         
+        #Fix multiple image inputing stuff
         material_count = len(re.findall("M,", contents))
         material_scrollview = MaterialWindow()
-        box_layout = BoxLayout(orientation = 'vertical', size_hint_y= None, height =0)
+        material_scrollview.file_name = file_name + ".prj"
+
+        if  self.box_layout:
+            for i in self.box_layout:
+                pass
+                #delete all of the "i"s
+            self.box_layout.height = 0
+            
+        else:
+            self.box_layout = MaterialBox(orientation = 'vertical', size_hint_y= None, height =0)
 
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            box_layout.add_widget(TextInput(hint_text = "M"+str(i), height = 40, size_hint_y = None))
-            box_layout.height += 40
+            self.box_layout.add_widget(MaterialInput(hint_text = "Enter material " + str(i), height = 40, size_hint_y = None))
+            self.box_layout.height += 40
 
-        material_scrollview.add_widget(box_layout)
+        material_scrollview.add_widget(self.box_layout)
 
-        app = App.get_running_app()
-        app.root.add_widget(material_scrollview)
-
+        self.parent.add_widget(material_scrollview)
+        
         print (material_count)
-
 
 
 class SeidarTGUI(App):
     def build(self):
-        layout = RelativeLayout(size=(WIDTH, HEIGHT))
+        layout = TotalLayout(size=(WIDTH, HEIGHT))
 
         image_input = ImageInput()        
         seismic_radar_tabbed_panel = SeismicRadarTabs()
         spacial_inputs = SpacialInformation()
         dimension_buttons = DimensionButtons()
+        run_button = RunButton()
 
+        layout.add_widget(run_button)
         layout.add_widget(image_input)
         layout.add_widget(dimension_buttons)
         layout.add_widget(seismic_radar_tabbed_panel)
