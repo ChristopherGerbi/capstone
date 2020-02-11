@@ -1,12 +1,14 @@
 import kivy, sys
 import os
 import re
+import exe
+import numpy as np
 
 kivy.require('1.11.1')
 
 sys.path.append("../")
-import exe
 
+MATERIALS = None
 
 from kivy.app import App
 from kivy.uix.label import Label
@@ -153,7 +155,10 @@ class ImageInput(RelativeLayout):
 
 
 class SeidarTGUI(App):
+
     def build(self):
+        print (MATERIALS)
+
         #base tabbed thing
         base = TotalLayout(size=(WIDTH, HEIGHT))
 
@@ -196,5 +201,6 @@ class SeidarTGUI(App):
 
         return base
 
-if __name__ == '__main__':
+
+def startGui():
     SeidarTGUI().run()
