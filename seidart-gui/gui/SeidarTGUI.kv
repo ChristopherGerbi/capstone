@@ -1,113 +1,110 @@
 #:kivy 1.11.1 
 
-<SeismicRadarTabs>:
-    size_hint: 0.4, 0.26
-    pos_hint: {'x':0.575, 'y':0.43}
-    do_default_tab: False
-    tab_height: 30
-    tab_pos: 'top_mid'
-    name: "seismic_tabs"
-    TabbedPanelItem:
-        text: "Seismic"
-        RelativeLayout:
-            Label: 
-                text: "Source"
-                pos_hint: {'x': 0, 'y':0.8}
-                size_hint: 1, 0.2
-            
-            TextInput:
-                hint_text: "X Posision"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Y Position"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0.335, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Z Position"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0.67, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Time Step"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0, "y":0.26}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Theta"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0.5, "y":0.26}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Frequency"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0, "y":0}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Phi"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0.5, "y":0}
-                size_hint: 0.5, 0.26
+<Radar>:
+    name: "radar"
+    pos_hint: {'x': .2, 'y': .5}
+    size_hint: 0.25, 0.25
+    RelativeLayout:
+        Label: 
+            text: "Source"
+            pos_hint: {'x': 0, 'y':0.8}
+            size_hint: 1, 0.2
+        
+        TextInput:
+            hint_text: "X Posision"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Y Position"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0.335, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Z Position"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0.67, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Time Step"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0, "y":0.26}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Theta"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0.5, "y":0.26}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Frequency"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0, "y":0}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Phi"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0.5, "y":0}
+            size_hint: 0.5, 0.26
 
-    TabbedPanelItem:
-        text: "Radar"
-        RelativeLayout:
-            Label: 
-                text: "Source"
-                pos_hint: {'x': 0, 'y':0.8}
-                size_hint: 1, 0.2
-            
-            TextInput:
-                hint_text: "X Position"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Y Position"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0.335, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Z Position"
-                multiline: False
-                font_size: 16
-                pos_hint: {'x': 0.67, 'y':0.52}
-                size_hint: 0.33, 0.26
-            TextInput:
-                hint_text: "Time Step"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0, "y":0.26}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Theta"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0.5, "y":0.26}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Frequency"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0, "y":0}
-                size_hint: 0.5, 0.26
-            TextInput:
-                hint_text: "Phi"
-                multiline: False
-                font_size: 16
-                pos_hint: {"x":0.5, "y":0}
-                size_hint: 0.5, 0.26
+<Seismic>:
+    name: "seismic"
+    pos_hint: {'x': 0, 'y': .5}
+    size_hint: 0.25, 0.25
+    RelativeLayout:
+        Label: 
+            text: "Source"
+            pos_hint: {'x': 0, 'y':0.8}
+            size_hint: 1, 0.2
+        
+        TextInput:
+            hint_text: "X Position"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Y Position"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0.335, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Z Position"
+            multiline: False
+            font_size: 16
+            pos_hint: {'x': 0.67, 'y':0.52}
+            size_hint: 0.33, 0.26
+        TextInput:
+            hint_text: "Time Step"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0, "y":0.26}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Theta"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0.5, "y":0.26}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Frequency"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0, "y":0}
+            size_hint: 0.5, 0.26
+        TextInput:
+            hint_text: "Phi"
+            multiline: False
+            font_size: 16
+            pos_hint: {"x":0.5, "y":0}
+            size_hint: 0.5, 0.26
 
 <SpacialInformation>:
     size_hint: 0.4, 0.12
@@ -197,18 +194,20 @@
     id: image
     name: "glacier_image"
 <MaterialWindow>:
-    size_hint: 0.95, 0.4
+    size_hint: 0.5, 0.8
     pos_hint: {"x":0.025, "y":0}
     name: "material_window"
     minimum_height: 10
     do_scroll_y: True
 <MaterialBox>:
     name: "material_box"
-<TotalLayout>:
-    id: primary_layout
+
 <RunButton>:
     text: "run"
     size_hint: 0.1, 0.1
     name: "run_button"
-    pos_hint: {"x":0.4, "y":0.5}
+    pos_hint: {"x":0.8, "y":0.1}
     on_release: root.run()
+
+<TotalLayout>:
+    id: primary_layout

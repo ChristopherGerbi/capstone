@@ -63,8 +63,8 @@ D,nmats,3
 D,tfile,
 
 # number, id, R/G/B, Temperature, Attenuation, Density, Porosity, Water_Content, Anisotropic, ANG_File
-123
-1234
+fdsa
+
 
 
 # The source parameters for the seismic model
