@@ -141,6 +141,8 @@ class ImageInput(RelativeLayout):
         else:
             self.box_layout = MaterialBox(orientation = 'vertical', size_hint_y= None, height =0)
 
+        #######
+
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
