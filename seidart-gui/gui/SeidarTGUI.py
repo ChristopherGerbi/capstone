@@ -81,7 +81,7 @@ class RunButton(Button):
                             #construct the material
 
                             #replace the first
-                            f  = open(i.file_name, "r+")
+                            f  = open("gui/"+i.file_name, "r+")
                             text = f.read()
                             
                             temp = re.findall("M.*,,,,,,,", text)[0]
@@ -121,7 +121,7 @@ class ImageInput(RelativeLayout):
         #prjbuild -i /path/to/geometry/image.png -o project_filename.prj
 
         #find a way to call prjbuild
-        command = "python3 /exe/prjbuild.py -i" + file_name + ".png -o " + file_name + ".prj"
+        command = "python exe/prjbuild.py -i gui/" + file_name + ".png -o gui/" + file_name + ".prj"
         os.system(command)
 
         print (file_name)
