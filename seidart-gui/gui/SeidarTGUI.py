@@ -115,16 +115,18 @@ class ImageInput(RelativeLayout):
         file_name = self.ids['file_path'].text
 
         self.image = GlacierImage()
-        self.image.source = file_name + ".png"
+        self.image.source = "gui/" + file_name + ".png"
         self.add_widget(self.image)
 
         #prjbuild -i /path/to/geometry/image.png -o project_filename.prj
 
         #find a way to call prjbuild
-        command = "python3 ../exe/prjbuild.py -i" + file_name + ".png -o " + file_name + ".prj"
+        command = "python3 /exe/prjbuild.py -i" + file_name + ".png -o " + file_name + ".prj"
         os.system(command)
 
-        prj = open(file_name + ".prj", 'r')
+        print (file_name)
+
+        prj = open("gui/" + file_name + ".prj", 'r')
         contents = prj.read()
         
         #Fix multiple image inputing stuff
