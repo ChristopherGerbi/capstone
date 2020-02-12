@@ -141,10 +141,24 @@ class ImageInput(RelativeLayout):
         else:
             self.box_layout = MaterialBox(orientation = 'vertical', size_hint_y= None, height =0)
 
+        #Acquire the colors from the prj
+        colors = re.findall(",,.*/.*/.*,", contents)
+        colorsKivy = []
+        for i in range(len(colors)):
+            colors[i] = colors[i][2:]
+            colors[i] = colors[i][:-7]
+
+            colorsSplit = colors[i].split("/")
+
+            colorsTuple = ((float(colorsSplit[0])/256),(float(colorsSplit[1])/256),(float(colorsSplit[2])/256),1)
+
+            colorsKivy.append(colorsTuple)
+
+
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            self.box_layout.add_widget(MaterialInput(hint_text = "Enter material " + str(i), height = 40, size_hint_y = None))
+            self.box_layout.add_widget(MaterialInput(hint_text = "Enter material " + str(i+1), height = 40, size_hint_y = None, background_color = colorsKivy[i]))
             self.box_layout.height += 40
 
         material_scrollview.add_widget(self.box_layout)

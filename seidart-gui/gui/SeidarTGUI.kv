@@ -52,7 +52,6 @@
             font_size: 16
             pos_hint: {"x":0.5, "y":0}
             size_hint: 0.5, 0.26
-
 <Seismic>:
     name: "seismic"
     pos_hint: {'x': 0, 'y': .5}
@@ -105,7 +104,6 @@
             font_size: 16
             pos_hint: {"x":0.5, "y":0}
             size_hint: 0.5, 0.26
-
 <SpacialInformation>:
     size_hint: 0.4, 0.12
     pos_hint: {'x':0.575, 'y':0.73}
@@ -145,7 +143,6 @@
         color: 0,0,0,1
         pos_hint: {'x': 0.4, 'y':0.8}
         size_hint: 0.2, 0.33
-
 <DimensionButtons>:
     size_hint: 0.4, 0.1
     pos_hint: {'x': 0.575, 'y': 0.88}
@@ -168,7 +165,6 @@
         pos_hint: {"x": 0.5, "y":0}
         size_hint: 0.5, 0.5
         group: "dimension"
-
 <ImageInput>:
     size_hint: 0.5, 0.5
     pos_hint: {"x": 0, "y": 0.5}
@@ -181,6 +177,7 @@
         pos_hint: {"x":0, "y":0.9}
         size_hint: 0.7, 0.1
         id: file_path
+        on_text_validate: root.getImage()
 
     Button:
         text: "Import Image"
@@ -188,7 +185,6 @@
         size_hint: 0.3, 0.105
         id: file_input
         on_release: root.getImage()
-
 <GlacierImage>:
     size_hint: 1, 1
     id: image
@@ -201,13 +197,11 @@
     do_scroll_y: True
 <MaterialBox>:
     name: "material_box"
-
 <RunButton>:
     text: "run"
     size_hint: 0.1, 0.1
     name: "run_button"
     pos_hint: {"x":0.8, "y":0.1}
     on_release: root.run()
-
 <TotalLayout>:
     id: primary_layout
