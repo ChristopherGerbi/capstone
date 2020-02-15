@@ -179,7 +179,7 @@ class SeidarTGUI(App):
         base = TotalLayout(size=(WIDTH, HEIGHT))
 
         panel1 = TabbedPanelItem()
-        panel1.text = "test"
+        panel1.text = "PRJ Info"
 
         #layout for the first tab
         panel1_layout = RelativeLayout()
