@@ -63,9 +63,9 @@ D,nmats,3
 D,tfile,
 
 # number, id, R/G/B, Temperature, Attenuation, Density, Porosity, Water_Content, Anisotropic, ANG_File
-M,0,,120/152/76,,,,,,,
-M,1,,220/220/220,,,,,,,
-M,2,,255/75/75,,,,,,,
+M,0,,120/152/76,,,,,0,False,
+M,1,,220/220/220,,,,,0,False,
+M,2,,255/75/75,,,,,0,False,
 
 # The source parameters for the seismic model
 S,dt,

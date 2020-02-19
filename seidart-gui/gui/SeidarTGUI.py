@@ -23,6 +23,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
+from kivy.uix.gridlayout import GridLayout
 
 temp = TabbedPanelItem()
 
@@ -68,11 +69,31 @@ class RunButton(Button):
 
     def run(self):
         #print (self.parent.name)
+        file_name = ""
         for i in self.parent.children:
-            if i.name == "material_window":
+            if i.name == "image_input":
+                file_name = i.file_name
+                command = "python exe/prjbuild.py -i gui/" + i.file_name + ".png -o gui/" + i.file_name + ".prj"
+                os.system(command)
+
+
+        f = open("gui/"+file_name +".prj", "r+")
+        text = f.read()
+        for i in self.parent.children:
+            if i.name == "radar":
+                radar = i.children[0] 
+            elif i.name == "seismic":
+                seismic = i.children[0]
+            elif i.name == "spacial_information":
+                pass
+            elif i.name == "material_window":
                 for j in i.children:
                     if j.name == "material_box":
+                        
+                        materialColors = re.findall("\d+/\d+/\d+", text)
+                        print (materialColors)
                         for k in reversed(j.children):
+                            """
                             #i.file_name
 
                             #find the first instance of an empty slot
@@ -87,14 +108,43 @@ class RunButton(Button):
                             temp = re.findall("M.*,,,,,,,", text)[0]
                             text = re.sub("M.*,,,,,,,", k.text, text, count = 1)
 
-                            f.seek(0)
-                            #Update this so it writes the proper material information
-                            f.write(text)
-                            f.truncate()
+                            """
+                            
+                            temp = "M," + str(k.material_number) + "," + k.children[6].text + "," + materialColors[k.material_number]
 
+                            for num in range(5,1, -1):
+                                temp += "," + k.children[num].text
 
-class MaterialInput(TextInput):
-    pass
+                            temp += ",0"
+
+                            temp += "," + str(k.children[1].active) + ","
+
+                            if k.children[1].active:
+                                temp+= k.children[0].text
+
+                            text = re.sub("M.*,,,,,,,",temp, text, count=1)
+
+                        f.seek(0)
+                        #Update this so it writes the proper material information
+                        f.write(text)
+                        f.truncate()
+
+        # command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
+        command = "python exe/prjrun.py " +file_name + ".prj -M b"
+        print (command)
+
+        ####################
+        #uncomment this when run method finalized
+        #os.system(command)
+                            
+
+class MaterialInput(GridLayout):
+    def __init__(self, **kwargs):
+        super(MaterialInput, self).__init__(**kwargs)
+
+        self.material_number = None
+        self.color = None
+
 
 class TotalLayout(TabbedPanel):
     def __init__(self, **kwargs):
@@ -106,42 +156,40 @@ class ImageInput(RelativeLayout):
 
         self.box_layout = None
         self.image = None
+        self.material_scrollview = None
+        self.file_name = ""
 
     def getImage(self):
-        #This allows for multiple images
-        if self.image:
-            self.remove_widget(self.image)
 
-        file_name = self.ids['file_path'].text
+        if self.image:
+            self.parent.remove_widget(self.material_scrollview)
+            self.material_scrollview = None
+            self.box_layout = None
+
+
+        self.file_name = self.ids['file_path'].text
 
         self.image = GlacierImage()
-        self.image.source = "gui/" + file_name + ".png"
+        self.image.source = "gui/" + self.file_name + ".png"
+
         self.add_widget(self.image)
 
         #prjbuild -i /path/to/geometry/image.png -o project_filename.prj
 
         #find a way to call prjbuild
-        command = "python exe/prjbuild.py -i gui/" + file_name + ".png -o gui/" + file_name + ".prj"
+        command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
         os.system(command)
 
-        print (file_name)
-
-        prj = open("gui/" + file_name + ".prj", 'r')
+        prj = open("gui/" + self.file_name + ".prj", 'r')
         contents = prj.read()
         
         #Fix multiple image inputing stuff
         material_count = len(re.findall("M,", contents))
-        material_scrollview = MaterialWindow()
-        material_scrollview.file_name = file_name + ".prj"
+        print (material_count)
+        self.material_scrollview = MaterialWindow()
+        self.material_scrollview.file_name = self.file_name + ".prj"
 
-        if  self.box_layout:
-            for i in self.box_layout:
-                pass
-                #delete all of the "i"s
-            self.box_layout.height = 0
-            
-        else:
-            self.box_layout = MaterialBox(orientation = 'vertical', size_hint_y= None, height =0)
+        self.box_layout = MaterialBox(spacing = 60, orientation = 'vertical', size_hint_y= None, height =0)
 
         #Acquire the colors from the prj
         colors = re.findall(",,.*/.*/.*,", contents)
@@ -160,20 +208,27 @@ class ImageInput(RelativeLayout):
         for i in range(material_count):
             #Replace this with a row for a material
             #Create a new "structure" in the KV file for a row, given the color from the .prj
-            self.box_layout.add_widget(MaterialInput(hint_text = "Enter material " + str(i+1), height = 40, size_hint_y = None, background_color = colorsKivy[i]))
-            self.box_layout.height += 40
+            temp = MaterialInput(size_hint_y = None, height = 40)
+            temp.material_number = i
+            temp.color = colorsKivy[i]
 
-        material_scrollview.add_widget(self.box_layout)
+            self.box_layout.add_widget(temp)
+            
+            ###################################################################################
+            #The spacing on this is too large, but decreasing it causes some rows to disappear#
+            ###################################################################################
+            self.box_layout.height += 80
 
-        self.parent.add_widget(material_scrollview)
-        
-        print (material_count)
+        try:
+            self.material_scrollview.add_widget(self.box_layout)
+        except:
+            pass
 
+        self.parent.add_widget(self.material_scrollview)
 
 class SeidarTGUI(App):
 
     def build(self):
-        print (MATERIALS)
 
         #base tabbed thing
         base = TotalLayout(size=(WIDTH, HEIGHT))

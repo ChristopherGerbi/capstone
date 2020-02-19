@@ -315,19 +315,19 @@
     Button:
         text: "Import Image"
         pos_hint: {"x":0.7, "y":0.8975}
-        size_hint: 0.3, 0.105
+        size_hint: 0.3, 0.1
         id: file_input
         on_release: root.getImage()
 <GlacierImage>:
-    size_hint: 1, 1
+    size_hint: 1, .9
     id: image
     name: "glacier_image"
 <MaterialWindow>:
-    size_hint: 0.5, 0.8
-    pos_hint: {"x":0.025, "y":0}
+    size_hint: 0.7, 0.5
     name: "material_window"
     minimum_height: 10
     do_scroll_y: True
+    pos_hint: {"y": -.2}
 <MaterialBox>:
     name: "material_box"
 <RunButton>:
@@ -337,6 +337,31 @@
     size_hint: 0.1, 0.06
     on_release: root.run()
 <TotalLayout>:
-    id: primary_layout
+    name: "total_layout"
     background_color: (2.9,2.9,2.9,2.9)
     tab_height: 25
+<MaterialInput>:
+    height: 40
+    rows: 1
+    cols: 7
+    
+    TextInput:
+        hint_text: "Name"
+        name: "material_name"
+    TextInput:
+        hint_text: "Temperature"
+        name: "material_temperature"
+    TextInput:
+        hint_text: "Attenuation"
+        name: "material_attenuation"
+    TextInput:
+        hint_text: "Density"
+        name: "material_density"
+    TextInput:
+        hint_text: "Porosity"
+        name: "material_water_content"
+    CheckBox:
+        name: "anisotropic_button"
+    TextInput:  
+        hint_text: "ang_file"
+        name: "material_ang_file"
