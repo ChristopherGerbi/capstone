@@ -10,7 +10,7 @@ import os.path
 import numpy as np
 import matplotlib.image as mpimg
 from subprocess import call
-import material_functions as mf
+#import materials.material_functions as mf
 
 # Modeling modules
 import seismicfdtd2d as seis2d

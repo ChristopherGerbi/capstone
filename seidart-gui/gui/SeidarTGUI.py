@@ -76,39 +76,45 @@ class RunButton(Button):
                 command = "python exe/prjbuild.py -i gui/" + i.file_name + ".png -o gui/" + i.file_name + ".prj"
                 os.system(command)
 
-
         f = open("gui/"+file_name +".prj", "r+")
         text = f.read()
         for i in self.parent.children:
             if i.name == "radar":
-                radar = i.children[0] 
+                radar = i.children[0]
+                text = re.sub("E,time_steps,", "E,time_steps,"+radar.children[6].text,text)
+                text = re.sub("E,x,", "E,x,"+radar.children[10].text,text)
+                text = re.sub("E,y,", "E,y,"+radar.children[9].text,text)
+                text = re.sub("E,z,", "E,z,"+radar.children[8].text,text)
+                text = re.sub("E,f0,", "E,f0,"+radar.children[2].text,text)
+                text = re.sub("E,theta,0", "E,theta,"+radar.children[4].text,text)
+                text = re.sub("E,phi,0", "E,phi,"+radar.children[0].text,text)
+                f.seek(0)
+                f.write(text)
+                f.truncate()
             elif i.name == "seismic":
                 seismic = i.children[0]
+                text = re.sub("S,time_steps,", "S,time_steps,"+seismic.children[6].text,text)
+                text = re.sub("S,x,", "S,x,"+seismic.children[10].text,text)
+                text = re.sub("S,y,", "S,y,"+seismic.children[9].text,text)
+                text = re.sub("S,z,", "S,z,"+seismic.children[8].text,text)
+                text = re.sub("S,f0,", "S,f0,"+seismic.children[2].text,text)
+                text = re.sub("S,theta,0", "S,theta,"+seismic.children[4].text,text)
+                text = re.sub("S,phi,0", "S,phi,"+seismic.children[0].text,text)
+                f.seek(0)
+                f.write(text)
+                f.truncate()
             elif i.name == "spacial_information":
-                pass
+                text = re.sub("D,dx", "D,dx,"+i.children[6].text, text)
+                text = re.sub("D,dy,n/a", "D,dy,"+i.children[5].text, text)
+                text = re.sub("D,dz", "D,dz,"+i.children[4].text, text)
+                
+                
             elif i.name == "material_window":
                 for j in i.children:
                     if j.name == "material_box":
                         
                         materialColors = re.findall("\d+/\d+/\d+", text)
-                        print (materialColors)
                         for k in reversed(j.children):
-                            """
-                            #i.file_name
-
-                            #find the first instance of an empty slot
-                            
-                            #split that line on ","
-                            #construct the material
-
-                            #replace the first
-                            f  = open("gui/"+i.file_name, "r+")
-                            text = f.read()
-                            
-                            temp = re.findall("M.*,,,,,,,", text)[0]
-                            text = re.sub("M.*,,,,,,,", k.text, text, count = 1)
-
-                            """
                             
                             temp = "M," + str(k.material_number) + "," + k.children[6].text + "," + materialColors[k.material_number]
 
@@ -135,7 +141,7 @@ class RunButton(Button):
 
         ####################
         #uncomment this when run method finalized
-        #os.system(command)
+        os.system(command)
                             
 
 class MaterialInput(GridLayout):
