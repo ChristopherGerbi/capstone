@@ -2,279 +2,379 @@
 
 <Radar>:
     name: "radar"
-    pos_hint: {'x': 0.57, 'y': 0.47}
-    size_hint: 0.4, 0.25
+    pos_hint: {'x': 0.55, 'y': 0.405}
+    size_hint: 0.21, 0.35
 
     RelativeLayout:
-        Label: 
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 2.0
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label:
             text: "Radar Source"
+            bold: True
             color: 0,0,0,1
-            font_size: 18
-            pos_hint: {'x': 0, 'y':1}
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.81}
             size_hint: 1, 0.2
         
-        Label: 
-            text: "Position:"
-            color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0, 'y':0.75}
-            size_hint: 0.2, 0.2
+        #Label: 
+        #    text: "Position:"
+        #    color: 0,0,0,1
+        #    pos_hint: {'x': 0, 'y':0.75}
+        #    size_hint: 0.45, 0.2
+        #    text_size: self.size
+        #    halign: 'left'
+        #    valign: 'middle'
 
         TextInput:
             hint_text: "X"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.21, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.1, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         TextInput:
             hint_text: "Y"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.32, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.38, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         TextInput:
             hint_text: "Z"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.43, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.66, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Time Step:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.58, 'y':0.75}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.54}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.8, "y":0.75}
-            size_hint: 0.2, 0.2
+            pos_hint: {"x":0.55, "y":0.52}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Theta:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0, 'y':0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {'x': 0, 'y':0.38}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.15, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.36}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
+            
 
         Label: 
             text: "Frequency:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.35, 'y':0.5}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.22}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.57, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.2}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Phi:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.7, 'y':0.5}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.05}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.85, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.04}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
 
 <Seismic>:
-    name: "seismic"    
-    pos_hint: {'x': 0.57, 'y': 0.28}
-    size_hint: 0.4, 0.25
+    name: "seismic"
+    pos_hint: {'x': 0.77, 'y': 0.405}
+    size_hint: 0.21, 0.35
 
     RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 2.0
+                rectangle: (self.x, self.y, self.width, self.height)
+
         Label: 
             text: "Seismic Source"
+            bold: True
             color: 0,0,0,1
-            font_size: 18
-            pos_hint: {'x': 0, 'y':1}
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.81}
             size_hint: 1, 0.2
         
-        Label: 
-            text: "Position:"
-            color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0, 'y':0.75}
-            size_hint: 0.2, 0.2
+        #Label: 
+        #    text: "Position:"
+        #    color: 0,0,0,1
+        #    pos_hint: {'x': 0, 'y':0.75}
+        #    size_hint: 0.45, 0.2
+        #    text_size: self.size
+        #    halign: 'left'
+        #    valign: 'middle'
 
         TextInput:
             hint_text: "X"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.21, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.1, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         TextInput:
             hint_text: "Y"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.32, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.38, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         TextInput:
             hint_text: "Z"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {'x': 0.43, 'y':0.75}
-            size_hint: 0.1, 0.2
+            pos_hint: {'x': 0.66, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Time Step:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.58, 'y':0.75}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.54}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.8, "y":0.75}
-            size_hint: 0.2, 0.2
+            pos_hint: {"x":0.55, "y":0.52}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Theta:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0, 'y':0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {'x': 0, 'y':0.38}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.15, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.36}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
+            
 
         Label: 
             text: "Frequency:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.35, 'y':0.5}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.22}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.57, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.2}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
 
         Label: 
             text: "Phi:"
             color: 0,0,0,1
-            font_size: 14
-            pos_hint: {'x': 0.7, 'y':0.5}
-            size_hint: 0.2, 0.2
+            pos_hint: {'x': 0, 'y':0.05}
+            size_hint: 0.51, 0.1
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
             font_size: 14
             multiline: False
-            pos_hint: {"x":0.85, "y":0.5}
-            size_hint: 0.15, 0.2
+            pos_hint: {"x":0.55, "y":0.04}
+            size_hint: 0.4, 0.14
+            halign: 'center'
+            valign: 'middle'
+
 <SpacialInformation>:
     name: "spacial_information"
-    size_hint: 0.4, 0.12
-    pos_hint: {'x':0.575, 'y':0.77}
+    pos_hint: {'x':0.55, 'y':0.77}
+    size_hint: 0.43, 0.17
     
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
 
-    Label:
-        text: "Spatial Information"
-        color: 0,0,0,1
-        font_size: 18
-        pos_hint: {'x': 0.4, 'y':1.05}
-        size_hint: 0.2, 0.33
+            Line:
+                width: 2.0
+                rectangle: (self.x, self.y, self.width, self.height)
 
-    Label:
-        text: "Image scale (Pixel/Meter):"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.2, 'y':0.65}
-        size_hint: 0.2, 0.33
+        Label:
+            text: "Spatial Information"
+            bold: True
+            color: 0,0,0,1
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.75}
+            size_hint: 1, 0.2
 
-    TextInput:
-        hint_text: "  X"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.6, 'y':0.6}
-        size_hint: 0.1, 0.4
+        Label:
+            text: "Image scale (Pixel/Meter):"
+            color: 0,0,0,1
+            pos_hint: {'x':0, 'y':0.4}
+            size_hint: 0.56, 0.29
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
 
-    TextInput:
-        hint_text: "  Y"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.72, 'y':0.6}
-        size_hint: 0.1, 0.4
+        TextInput:
+            hint_text: "X"
+            color: 0,0,0,1
+            font_size: 14
+            pos_hint: {'x':0.58, 'y':0.4}
+            size_hint: 0.12, 0.29
+            halign: 'center'
+            valign: 'middle'
+            multiline: False
 
-    TextInput:
-        hint_text: "  Z"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.84, 'y':0.6}
-        size_hint: 0.1, 0.4
-    
-    Label:
-        text: "Timesteps:"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.1, 'y':0.2}
-        size_hint: 0.1, 0.33
+        TextInput:
+            hint_text: "Y"
+            color: 0,0,0,1
+            font_size: 14
+            pos_hint: {'x':0.71, 'y':0.4}
+            size_hint: 0.12, 0.29
+            halign: 'center'
+            valign: 'middle'
+            multiline: False
 
-    TextInput:
-        hint_text: "  ###"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.27, 'y':0.15}
-        size_hint: 0.2, 0.4
+        TextInput:
+            hint_text: "Z"
+            color: 0,0,0,1
+            font_size: 14
+            pos_hint: {'x':0.84, 'y':0.4}
+            size_hint: 0.12, 0.29
+            halign: 'center'
+            valign: 'middle'
+            multiline: False
+        
+        Label:
+            text: "Timesteps:"
+            color: 0,0,0,1
+            text_size: self.size
+            pos_hint: {'x':0, 'y':0.08}
+            size_hint: 0.25, 0.29
+            halign: 'right'
+            valign: 'middle'
 
-    Label:
-        text: "Boundary:"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.53, 'y':0.2}
-        size_hint: 0.2, 0.33
+        TextInput:
+            hint_text: "###"
+            color: 0,0,0,1
+            font_size: 14
+            pos_hint: {'x':0.27, 'y':0.08}
+            size_hint: 0.2, 0.29
+            halign: 'center'
+            valign: 'middle'
+            multiline: False
 
-    TextInput:
-        hint_text: "  ###"
-        color: 0,0,0,1
-        font_size: 14
-        pos_hint: {'x':0.74, 'y':0.15}
-        size_hint: 0.2, 0.4      
+        Label:
+            text: "Boundary:"
+            color: 0,0,0,1
+            text_size: self.size
+            pos_hint: {'x':0.47, 'y':0.08}
+            size_hint: 0.25, 0.29
+            halign: 'right'
+            valign: 'middle'
+
+        TextInput:
+            hint_text: "###"
+            color: 0,0,0,1
+            font_size: 14
+            pos_hint: {'x':0.74, 'y':0.08}
+            size_hint: 0.2, 0.29
+            halign: 'center'
+            valign: 'middle'
+            multiline: False
+
 <DimensionButtons>:
     size_hint: 0.4, 0.1
     pos_hint: {'x': 0.61, 'y': 0.9}
@@ -298,6 +398,7 @@
         pos_hint: {"x": 0.75, "y":0.5}
         size_hint: 0.1, 0.45
         group: "dimension"
+
 <ImageInput>:
     size_hint: 0.5, 0.5
     pos_hint: {"x": 0, "y": 0.5}
@@ -307,39 +408,47 @@
         multiline: False
         background_color: 1, 1, 1, 1 #color of textbox
         font_size: 16
-        pos_hint: {"x":0, "y":0.9}
-        size_hint: 0.7, 0.1
+        pos_hint: {"x":0, "y":0.89}
+        size_hint: 0.7, 0.11
         id: file_path
         on_text_validate: root.getImage()
+        halign: 'center'
+        valign: 'left'
 
     Button:
         text: "Import Image"
-        pos_hint: {"x":0.7, "y":0.8975}
-        size_hint: 0.3, 0.1
+        pos_hint: {"x":0.7, "y":0.89}
+        size_hint: 0.3, 0.11
         id: file_input
         on_release: root.getImage()
+
 <GlacierImage>:
     size_hint: 1, .9
     id: image
     name: "glacier_image"
+
 <MaterialWindow>:
     size_hint: 0.7, 0.5
     name: "material_window"
     minimum_height: 10
     do_scroll_y: True
     pos_hint: {"y": -.2}
+
 <MaterialBox>:
     name: "material_box"
+
 <RunButton>:
     name: "run_button"
     text: "run"
     pos_hint: {"x":0.85, "y":0.05}
     size_hint: 0.1, 0.06
     on_release: root.run()
+
 <TotalLayout>:
     name: "total_layout"
     background_color: (2.9,2.9,2.9,2.9)
     tab_height: 25
+
 <MaterialInput>:
     height: 40
     rows: 1
