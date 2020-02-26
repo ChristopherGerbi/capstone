@@ -17,7 +17,7 @@ def prj_validation():
     built_prj_read = built_prj.read()
     encoded_post_image_prj = base64.encodebytes(built_prj_read)
 
-    empty_prj= open('empty.prj', 'rb')
+    empty_prj = open('empty.prj', 'rb')
     empty_prj_read = empty_prj.read()
     built_prj.write(empty_prj_read)
 
