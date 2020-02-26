@@ -104,9 +104,10 @@ class RunButton(Button):
                 f.write(text)
                 f.truncate()
             elif i.name == "spacial_information":
-                text = re.sub("D,dx", "D,dx,"+i.children[6].text, text)
-                text = re.sub("D,dy,n/a", "D,dy,"+i.children[5].text, text)
-                text = re.sub("D,dz", "D,dz,"+i.children[4].text, text)
+                spacial = i.children[0]
+                text = re.sub("D,dx", "D,dx,"+spacial.children[6].text, text)
+                text = re.sub("D,dy,n/a", "D,dy,"+spacial.children[5].text, text)
+                text = re.sub("D,dz", "D,dz,"+spacial.children[4].text, text)
                 
                 
             elif i.name == "material_window":
@@ -183,6 +184,7 @@ class ImageInput(RelativeLayout):
         #prjbuild -i /path/to/geometry/image.png -o project_filename.prj
 
         #find a way to call prjbuild
+        print (os.path.dirname(os.path.realpath(__file__)))
         command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
         os.system(command)
 
@@ -198,13 +200,12 @@ class ImageInput(RelativeLayout):
         self.box_layout = MaterialBox(spacing = 60, orientation = 'vertical', size_hint_y= None, height =0)
 
         #Acquire the colors from the prj
-        colors = re.findall(",,.*/.*/.*,", contents)
+        colors = re.findall("\d*/\d*/\d*", contents)
         colorsKivy = []
         for i in range(len(colors)):
-            colors[i] = colors[i][2:]
-            colors[i] = colors[i][:-7]
-
             colorsSplit = colors[i].split("/")
+            print (colors)
+
 
             colorsTuple = ((float(colorsSplit[0])/256),(float(colorsSplit[1])/256),(float(colorsSplit[2])/256),1)
 
