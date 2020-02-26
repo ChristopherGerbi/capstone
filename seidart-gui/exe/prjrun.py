@@ -13,7 +13,7 @@ from subprocess import call
 #import materials.material_functions as mf
 
 # Modeling modules
-import seismicFDTD2D as seis2d
+from fdtd import seismicFDTD2D as seis2d
 from fdtd import emFDTD2D as em2d
 
 # -------------------------- Command Line Arguments ---------------------------
