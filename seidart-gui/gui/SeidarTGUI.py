@@ -256,7 +256,9 @@ class SeidarTGUI(App):
         panel1_layout = RelativeLayout()
 
         # stupid stubs
-        panel2, panel3, panel4 = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
+        panel2, panel3, panel4, helpPanel = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
+
+        helpPanel.text = "Help Page"
 
         # input forms
         image_input = ImageInput()
@@ -280,8 +282,9 @@ class SeidarTGUI(App):
         # adding tabs to the window
         base.add_widget(panel1)
         base.add_widget(panel2)
-        base.add_widget(panel4)
         base.add_widget(panel3)
+        base.add_widget(panel4)
+        base.add_widget(helpPanel)
 
         # setting the default tab
         base.default_tab = panel1
