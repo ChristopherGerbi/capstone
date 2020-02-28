@@ -224,7 +224,7 @@ class ImageInput(RelativeLayout):
         for i in range(material_count):
             # Replace this with a row for a material
             # Create a new "structure" in the KV file for a row, given the color from the .prj
-            temp = MaterialInput(size_hint_y=None, height=40)
+            temp = MaterialInput(size_hint_y=None, height=30)
             temp.material_number = i
             temp.color = colorsKivy[i]
 
