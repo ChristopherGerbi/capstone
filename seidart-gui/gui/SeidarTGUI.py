@@ -5,6 +5,7 @@ import os
 import re
 import sys
 
+
 kivy.require('1.11.1')
 
 sys.path.append("../")
@@ -26,7 +27,6 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 from kivy.uix.gridlayout import GridLayout
 
-temp = TabbedPanelItem()
 
 WIDTH = 800
 HEIGHT = 640
@@ -68,7 +68,6 @@ class GlacierImage(Image):
 class MaterialWindow(ScrollView):
     def __init__(self, **kwargs):
         super(MaterialWindow, self).__init__(**kwargs)
-
         self.file_name = ""
 
 
@@ -196,7 +195,10 @@ class ImageInput(RelativeLayout):
         contents = prj.read()
 
         # Fix multiple image inputing stuff
+
         material_count = len(re.findall("M,", contents))
+
+
         self.material_scrollview = MaterialWindow()
         self.material_scrollview.file_name = self.file_name + ".prj"
 
@@ -222,9 +224,9 @@ class ImageInput(RelativeLayout):
 
             self.box_layout.add_widget(temp)
 
-            ###################################################################################
-            # The spacing on this is too large, but decreasing it causes some rows to disappear#
-            ###################################################################################
+            ####################################################################################
+            #TODO The spacing on this is too large, but decreasing it causes some rows to disappear#
+            ####################################################################################
             self.box_layout.height += 80
 
         try:
@@ -249,7 +251,6 @@ class SeidarTGUI(App):
 
         # stupid stubs
         panel2, panel3, panel4, helpPanel = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
-
         helpPanel.text = "Help Page"
 
         # input forms
