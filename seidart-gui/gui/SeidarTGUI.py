@@ -118,7 +118,6 @@ class RunButton(Button):
                 text = re.sub("D,dy,n/a", "D,dy," + spacial.children[5].text, text)
                 text = re.sub("D,dz", "D,dz," + spacial.children[4].text, text)
 
-
             elif i.name == "material_window":
                 for j in i.children:
                     if j.name == "material_box":
@@ -146,12 +145,8 @@ class RunButton(Button):
                         f.write(text)
                         f.truncate()
 
-        # command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
         command = "python exe/prjrun.py " + file_name + ".prj -M b"
-        print(command)
 
-        ####################
-        # uncomment this when run method finalized
         os.system(command)
 
 
@@ -194,7 +189,6 @@ class ImageInput(RelativeLayout):
         # prjbuild -i /path/to/geometry/image.png -o project_filename.prj
 
         # find a way to call prjbuild
-        print(os.path.dirname(os.path.realpath(__file__)))
         command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
         os.system(command)
 
@@ -203,7 +197,6 @@ class ImageInput(RelativeLayout):
 
         # Fix multiple image inputing stuff
         material_count = len(re.findall("M,", contents))
-        print(material_count)
         self.material_scrollview = MaterialWindow()
         self.material_scrollview.file_name = self.file_name + ".prj"
 
@@ -214,7 +207,6 @@ class ImageInput(RelativeLayout):
         colorsKivy = []
         for i in range(len(colors)):
             colorsSplit = colors[i].split("/")
-            print(colors)
 
             colorsTuple = (
             (float(colorsSplit[0]) / 256), (float(colorsSplit[1]) / 256), (float(colorsSplit[2]) / 256), 1)
