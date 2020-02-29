@@ -34,7 +34,7 @@
         TextInput:
             hint_text: "X"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.1, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -44,7 +44,7 @@
         TextInput:
             hint_text: "Y"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.38, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -54,7 +54,7 @@
         TextInput:
             hint_text: "Z"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.66, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -73,7 +73,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.52}
             size_hint: 0.4, 0.14
@@ -92,7 +92,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.36}
             size_hint: 0.4, 0.14
@@ -112,7 +112,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.2}
             size_hint: 0.4, 0.14
@@ -131,7 +131,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.04}
             size_hint: 0.4, 0.14
@@ -172,7 +172,7 @@
         TextInput:
             hint_text: "X"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.1, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -182,7 +182,7 @@
         TextInput:
             hint_text: "Y"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.38, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -192,7 +192,7 @@
         TextInput:
             hint_text: "Z"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {'x': 0.66, 'y':0.68}
             size_hint: 0.25, 0.14
@@ -211,7 +211,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.52}
             size_hint: 0.4, 0.14
@@ -230,7 +230,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.36}
             size_hint: 0.4, 0.14
@@ -250,7 +250,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.2}
             size_hint: 0.4, 0.14
@@ -269,7 +269,7 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
             multiline: False
             pos_hint: {"x":0.55, "y":0.04}
             size_hint: 0.4, 0.14
@@ -310,32 +310,32 @@
         TextInput:
             hint_text: "X"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
+            multiline: False
             pos_hint: {'x':0.58, 'y':0.4}
             size_hint: 0.12, 0.29
             halign: 'center'
             valign: 'middle'
-            multiline: False
 
         TextInput:
             hint_text: "Y"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
+            multiline: False
             pos_hint: {'x':0.71, 'y':0.4}
             size_hint: 0.12, 0.29
             halign: 'center'
             valign: 'middle'
-            multiline: False
 
         TextInput:
             hint_text: "Z"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
+            multiline: False
             pos_hint: {'x':0.84, 'y':0.4}
             size_hint: 0.12, 0.29
             halign: 'center'
             valign: 'middle'
-            multiline: False
         
         Label:
             text: "Timesteps:"
@@ -349,12 +349,12 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
+            multiline: False
             pos_hint: {'x':0.27, 'y':0.08}
             size_hint: 0.2, 0.29
             halign: 'center'
             valign: 'middle'
-            multiline: False
 
         Label:
             text: "Boundary:"
@@ -368,12 +368,12 @@
         TextInput:
             hint_text: "###"
             color: 0,0,0,1
-            font_size: 14
+            font_size: self.height - 16
+            multiline: False
             pos_hint: {'x':0.74, 'y':0.08}
             size_hint: 0.2, 0.29
             halign: 'center'
             valign: 'middle'
-            multiline: False
 
 <DimensionButtons>:
     size_hint: 0.4, 0.1
@@ -407,13 +407,13 @@
         hint_text: "Enter the name of your image"
         multiline: False
         background_color: 1, 1, 1, 1 #color of textbox
-        font_size: 16
+        font_size: self.height - 16
         pos_hint: {"x":0, "y":0.89}
         size_hint: 0.7, 0.11
         id: file_path
         on_text_validate: root.getImage()
-        halign: 'center'
-        valign: 'left'
+        halign: 'left'
+        valign: 'middle'
 
     Button:
         text: "Import Image"
@@ -439,9 +439,9 @@
 
 <RunButton>:
     name: "run_button"
-    text: "run"
-    pos_hint: {"x":0.85, "y":0.05}
-    size_hint: 0.1, 0.06
+    text: "Run"
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
     on_release: root.run()
 
 <TotalLayout>:
@@ -450,27 +450,64 @@
     tab_height: 25
 
 <MaterialInput>:
-    height: 40
+    height: 30
     rows: 1
     cols: 7
-    
+
+    canvas:
+        Color:
+            rgba: 2, 2, 2, 1
+
+        Line:
+            width: 1.0
+            rectangle: (self.x, self.y, self.width, self.height)
     TextInput:
-        hint_text: "Name"
         name: "material_name"
+        hint_text: "Name"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
     TextInput:
         hint_text: "Temperature"
         name: "material_temperature"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
     TextInput:
-        hint_text: "Attenuation"
         name: "material_attenuation"
+        hint_text: "Attenuation"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
     TextInput:
-        hint_text: "Density"
         name: "material_density"
+        hint_text: "Density"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
     TextInput:
-        hint_text: "Porosity"
         name: "material_water_content"
+        hint_text: "Porosity"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
     CheckBox:
         name: "anisotropic_button"
     TextInput:  
-        hint_text: "ang_file"
         name: "material_ang_file"
+        hint_text: "ang_file"
+        color: 0,0,0,1
+        font_size: self.height - 16
+        multiline: False
+        halign: 'center'
+        valign: 'middle'

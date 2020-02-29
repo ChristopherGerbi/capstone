@@ -216,7 +216,7 @@ class ImageInput(RelativeLayout):
         for i in range(material_count):
             # Replace this with a row for a material
             # Create a new "structure" in the KV file for a row, given the color from the .prj
-            temp = MaterialInput(size_hint_y=None, height=40)
+            temp = MaterialInput(size_hint_y=None, height=30)
             temp.material_number = i
             temp.color = colorsKivy[i]
 
@@ -248,7 +248,9 @@ class SeidarTGUI(App):
         panel1_layout = RelativeLayout()
 
         # stupid stubs
-        panel2, panel3, panel4 = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
+        panel2, panel3, panel4, helpPanel = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
+
+        helpPanel.text = "Help Page"
 
         # input forms
         image_input = ImageInput()
@@ -272,8 +274,9 @@ class SeidarTGUI(App):
         # adding tabs to the window
         base.add_widget(panel1)
         base.add_widget(panel2)
-        base.add_widget(panel4)
         base.add_widget(panel3)
+        base.add_widget(panel4)
+        base.add_widget(helpPanel)
 
         # setting the default tab
         base.default_tab = panel1
