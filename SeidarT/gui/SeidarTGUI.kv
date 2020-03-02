@@ -404,6 +404,7 @@
     pos_hint: {"x": 0, "y": 0.5}
     name: "image_input"
     TextInput:
+        name: "file_name"
         hint_text: "Enter the name of your image"
         multiline: False
         background_color: 1, 1, 1, 1 #color of textbox
@@ -416,6 +417,7 @@
         valign: 'middle'
 
     Button:
+        name: "import_image_button"
         text: "Import Image"
         pos_hint: {"x":0.7, "y":0.89}
         size_hint: 0.3, 0.11
@@ -511,3 +513,24 @@
         multiline: False
         halign: 'center'
         valign: 'middle'
+
+
+
+
+
+
+
+
+#this is an empty comment
+<MultiRunButton>:
+    name: "multi_run_button"
+    text: "Run"
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.MultiShot()
+<SingleRunButton>:
+    name: "single_run_button"
+    text: "Run"
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.SingleShot()

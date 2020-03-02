@@ -6,25 +6,25 @@
 # -----------------------------------------------------------------------------
 
 import argparse
-import numpy as np
 import matplotlib.image as mpimg
+import numpy as np
 
 # -------------------------- Command Line Arguments ---------------------------
 parser = argparse.ArgumentParser(description="""The seisarT software requires a 
 	.PNG image that is used to construct the model domain for seismic and 
 	electromagnetic wave propagation. Given the image file, a project file 
 	will be constructed which contains all the necessary parameters to be 
-	read in to the finite differences time domain modeling schemes.""" )
+	read in to the finite differences time domain modeling schemes.""")
 
-parser.add_argument( '-i', '--image_file', nargs=1, type=str, required = True, 
-						help='the full file path for the image', default=None)
+parser.add_argument('-i', '--image_file', nargs=1, type=str, required=True,
+                    help='the full file path for the image', default=None)
 
-parser.add_argument( '-o', '--project_file', nargs=1, type=str, required = False,
-	default = 'jordan_downs.prj',
-	help = """name of output file path with extension .prj and excluding 
+parser.add_argument('-o', '--project_file', nargs=1, type=str, required=False,
+                    default='jordan_downs.prj',
+                    help="""name of output file path with extension .prj and excluding 
 				the full path directory""")
 
-#parser.add_argument( 'm', '--metafile', nargs=1, type = str, required = False,
+# parser.add_argument( 'm', '--metafile', nargs=1, type = str, required = False,
 #	help = """name of the metafile template that will be produced corresponding to the
 #	project. Default is NoneType which will not return a file. """, default = None)
 
@@ -32,9 +32,11 @@ parser.add_argument( '-o', '--project_file', nargs=1, type=str, required = False
 args = parser.parse_args()
 image_file = ''.join(args.image_file)
 project_file = ''.join(args.project_file)
-#meta_file = ''.join(args.metafile)
+# meta_file = ''.join(args.metafile)
 
 new_line = '\n'
+
+
 # ------------------------ Some Necessary Definitions -------------------------
 
 def image2int(imfilename):
@@ -42,30 +44,29 @@ def image2int(imfilename):
     img = mpimg.imread(imfilename)
 
     # Convert RGB to a single value
-    rgb_int = np.array(65536*img[:,:,0] +  255*img[:,:,1] + img[:,:,2])
-    
+    rgb_int = np.array(65536 * img[:, :, 0] + 255 * img[:, :, 1] + img[:, :, 2])
+
     # Get the unique values of the image
     rgb_uni = np.unique(rgb_int)
-    
+
     # We want the unique rgb values too
-    rgb = np.zeros( [len(rgb_uni), 3] )
+    rgb = np.zeros([len(rgb_uni), 3])
 
     # reshape the image. We know it's three channels
-    img_vect = np.zeros( [np.prod(rgb_int.shape), 3] )
-    img_vect[:,0] = np.reshape(img[:, :, 0], np.prod(np.shape(img[:, :, 0]) ) )
-    img_vect[:,1] =	np.reshape(img[:, :, 1], np.prod(np.shape(img[:, :, 1]) ) )
-    img_vect[:,2] =	np.reshape(img[:, :, 2], np.prod(np.shape(img[:, :, 2]) ) )
+    img_vect = np.zeros([np.prod(rgb_int.shape), 3])
+    img_vect[:, 0] = np.reshape(img[:, :, 0], np.prod(np.shape(img[:, :, 0])))
+    img_vect[:, 1] = np.reshape(img[:, :, 1], np.prod(np.shape(img[:, :, 1])))
+    img_vect[:, 2] = np.reshape(img[:, :, 2], np.prod(np.shape(img[:, :, 2])))
 
     # mat_id = np.array( range(0, len(rgb_uni) ) )
-    for ind in range(0, len(rgb_uni) ):
-    	rgb_ind = np.reshape(rgb_int == rgb_uni[ind], [np.prod(rgb_int.shape)])
-    	rgb[ind,:] = (img_vect[rgb_ind,:])[0,:]
-    	rgb_int[ rgb_int == rgb_uni[ind] ] = ind	
-
+    for ind in range(0, len(rgb_uni)):
+        rgb_ind = np.reshape(rgb_int == rgb_uni[ind], [np.prod(rgb_int.shape)])
+        rgb[ind, :] = (img_vect[rgb_ind, :])[0, :]
+        rgb_int[rgb_int == rgb_uni[ind]] = ind
 
     if np.max(rgb) <= 1.0:
-    	rgb = rgb * 255
-    	rgb = rgb.astype(int)
+        rgb = rgb * 255
+        rgb = rgb.astype(int)
 
     return rgb_int.astype(int), rgb
 
@@ -131,60 +132,53 @@ mat_id = np.unique(im)
 # pertinant information after 
 
 with open(project_file, 'w') as prj:
-	prj.write(header_comment)
-	prj.write(new_line)
-	prj.write('I,'+image_file+new_line)
-	prj.write(new_line)
-
-
+    prj.write(header_comment)
+    prj.write(new_line)
+    prj.write('I,' + image_file + new_line)
+    prj.write(new_line)
 
 # ------------------------- Write Domain Parameters ---------------------------
 dim = 'D,dim,2'
-nx = 'D,nx,' + str(np.shape(im)[0]) 
-ny = 'D,ny,n/a' 
+nx = 'D,nx,' + str(np.shape(im)[0])
+ny = 'D,ny,n/a'
 nz = 'D,nz,' + str(np.shape(im)[1])
 dx = 'D,dx,'
 dy = 'D,dy,n/a'
 dz = 'D,dz,'
 cpml = 'D,cpml,20'
-nmat = 'D,nmats,' + str(len( np.unique(im) ))
+nmat = 'D,nmats,' + str(len(np.unique(im)))
 tfile = 'D,tfile,'
 # rundur = 'D,write,64'
 with open(project_file, 'a') as prj:
-	prj.write(dim+new_line)
-	prj.write(nx+new_line)
-	prj.write(ny+new_line)
-	prj.write(nz+new_line)
-	prj.write(dx+new_line)
-	prj.write(dy+new_line)
-	prj.write(dz+new_line)
-	prj.write(cpml+new_line)
-	prj.write(nmat+new_line)
-	prj.write(tfile + new_line)
-	# prj.write(rundur + new_line)
-	prj.write(new_line)
-
-
-
+    prj.write(dim + new_line)
+    prj.write(nx + new_line)
+    prj.write(ny + new_line)
+    prj.write(nz + new_line)
+    prj.write(dx + new_line)
+    prj.write(dy + new_line)
+    prj.write(dz + new_line)
+    prj.write(cpml + new_line)
+    prj.write(nmat + new_line)
+    prj.write(tfile + new_line)
+    # prj.write(rundur + new_line)
+    prj.write(new_line)
 
 # ------------------------- Write Material Parameters -------------------------
 
 header = ("# number, id, R/G/B, Temperature, Attenuation, Density, Porosity, "
-				"Water_Content, Anisotropic, ANG_File")
-
+          "Water_Content, Anisotropic, ANG_File")
 
 with open(project_file, 'a') as prj:
-	i = 0
+    i = 0
 
-	prj.write(header + new_line )
-	for x in mat_id:
-		ln = ('M,' + str(x) + ',,' + str(rgb[x,0])  + '/' + 
-			str(rgb[x,1]) + '/' + str(rgb[x,2]) + 
-			',,,,,,,')
-		prj.write( ln + new_line)
-	
-	prj.write(new_line)
+    prj.write(header + new_line)
+    for x in mat_id:
+        ln = ('M,' + str(x) + ',,' + str(rgb[x, 0]) + '/' +
+              str(rgb[x, 1]) + '/' + str(rgb[x, 2]) +
+              ',,,,,,,')
+        prj.write(ln + new_line)
 
+    prj.write(new_line)
 
 # ------------------------- Write Seismic Parameters --------------------------
 dt = 'dt,'
@@ -195,31 +189,29 @@ z = 'z,'
 f0 = 'f0,'
 theta = 'theta,0'
 phi = 'phi,0'
-source_file='source_file,'
+source_file = 'source_file,'
 
 comm = '# The source parameters for the seismic model'
 header = '# id, C11, C12, C13, C22, C23, C33, C44, C55, C66, rho'
 
 with open(project_file, 'a') as prj:
-	i = 0
-	prj.write(comm + new_line)
-	prj.write('S,' + dt + new_line)
-	prj.write('S,' + steps + new_line)
-	prj.write('S,' + x + new_line)
-	prj.write('S,' + y + new_line)
-	prj.write('S,' + z + new_line)
-	prj.write('S,' + f0 + new_line)
-	prj.write('S,' + theta + new_line)
-	prj.write('S,' + phi + new_line)
-	prj.write(new_line)
+    i = 0
+    prj.write(comm + new_line)
+    prj.write('S,' + dt + new_line)
+    prj.write('S,' + steps + new_line)
+    prj.write('S,' + x + new_line)
+    prj.write('S,' + y + new_line)
+    prj.write('S,' + z + new_line)
+    prj.write('S,' + f0 + new_line)
+    prj.write('S,' + theta + new_line)
+    prj.write('S,' + phi + new_line)
+    prj.write(new_line)
 
-	prj.write(header + new_line )
-	for ind in mat_id:
-		prj.write( 'C,' + str(ind) + ',,,,,,,,,,' + new_line)
-	
-	prj.write(new_line)
+    prj.write(header + new_line)
+    for ind in mat_id:
+        prj.write('C,' + str(ind) + ',,,,,,,,,,' + new_line)
 
-
+    prj.write(new_line)
 
 # -------------------------- Write Radar Parameters ---------------------------
 
@@ -227,30 +219,28 @@ comm = '# The source parameters for the elecromagnetic model'
 header = '# id, e11, e22, e33, s11, s22, s33'
 
 with open(project_file, 'a') as prj:
-	i = 0
+    i = 0
 
-	prj.write(comm + new_line)
-	prj.write('E,' + dt + new_line)
-	prj.write('E,' + steps + new_line)
-	prj.write('E,' + x + new_line)
-	prj.write('E,' + y + new_line)
-	prj.write('E,' + z + new_line)
-	prj.write('E,' + f0 + new_line)
-	prj.write('E,' + theta + new_line)
-	prj.write('E,' + phi + new_line)
+    prj.write(comm + new_line)
+    prj.write('E,' + dt + new_line)
+    prj.write('E,' + steps + new_line)
+    prj.write('E,' + x + new_line)
+    prj.write('E,' + y + new_line)
+    prj.write('E,' + z + new_line)
+    prj.write('E,' + f0 + new_line)
+    prj.write('E,' + theta + new_line)
+    prj.write('E,' + phi + new_line)
 
-	prj.write(new_line)
-	
-	prj.write(header + new_line )
-	for ind in mat_id:
-		prj.write( 'P,' + str(ind) + ',,,,,,,,,,' + new_line)
-	
-	prj.write(new_line)
+    prj.write(new_line)
 
+    prj.write(header + new_line)
+    for ind in mat_id:
+        prj.write('P,' + str(ind) + ',,,,,,,,,,' + new_line)
 
+    prj.write(new_line)
 
 # ------------------- Write Additional Survey File Tempates -------------------
-#meta_header = """
+# meta_header = """
 # Options for the following fields
 # project_file - (STRING) the file path to the project file
 # survey_type - (STRING) the type of survey you would like to model. Available 
@@ -278,9 +268,9 @@ with open(project_file, 'a') as prj:
 #					'cmp' this is the same value as initial position; moot
 #					'co' 			'' ''			''	''
 #
-#"""
+# """
 
-#if metafile:
+# if metafile:
 #	with open(metafile, 'w') as meta:
 #		meta.write(meta_header + new_line)
 #		meta.write('project_file: ' + project_file + new_line)
@@ -290,9 +280,3 @@ with open(project_file, 'a') as prj:
 #		meta.write('final_position: ' + str(np.shape(im)[0]) + '0 ' + str(np.shape(im)[0]) + new_line )
 #		meta.write('reciever_file: None' + new_line)
 #		meta.write('source_file: None' )
-
-
-
-
-
-

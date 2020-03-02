@@ -144,10 +144,35 @@ class RunButton(Button):
                         f.write(text)
                         f.truncate()
 
+        return file_name
+
+
+
+
+class SingleRunButton(RunButton):
+    def SingleShot(self):
+        file_name = super().run()
+
+        #single shot specific stuff
         command = "python exe/prjrun.py " + file_name + ".prj -M b"
 
-        os.system(command)
+        #os.system(command)
+        print (command)
 
+class MultiRunButton(RunButton):
+    def __init__(self, **kwargs):
+        super(MultiRunButton, self).__init__(**kwargs)
+    
+    def MultiShot(self):
+        file_name = super().run()
+
+        #multi shot specific stuff
+
+
+        command = "python exe/prjrun.py " + file_name + ".prj -M b"
+
+        #os.system(command)
+        print (command)
 
 class MaterialInput(GridLayout):
     def __init__(self, **kwargs):
@@ -165,20 +190,35 @@ class TotalLayout(TabbedPanel):
 class ImageInput(RelativeLayout):
     def __init__(self, **kwargs):
         super(ImageInput, self).__init__(**kwargs)
-
+        self.image_things = [] #list of 4 ImageInput 
         self.box_layout = None
         self.image = None
         self.material_scrollview = None
         self.file_name = ""
+        self.image_inputs = []
+        self.defaultTab = False
 
-    def getImage(self):
+    def getImage(self, first = True):
 
         if self.image:
-            self.parent.remove_widget(self.material_scrollview)
-            self.material_scrollview = None
-            self.box_layout = None
+            if first:
+                self.parent.remove_widget(self.material_scrollview)
+                self.material_scrollview = None
+                self.box_layout = None
+            self.remove_widget(self.image)
+            self.image = None
 
         self.file_name = self.ids['file_path'].text
+
+        if first:
+            for i in self.image_inputs:
+                if not i == self:
+                    for j in i.children:
+                        if j.name == "file_name":
+                            j.text = self.file_name
+                            i.getImage(first= False)
+                            break
+            
 
         self.image = GlacierImage()
         self.image.source = "gui/" + self.file_name + ".png"
@@ -186,55 +226,55 @@ class ImageInput(RelativeLayout):
         self.add_widget(self.image)
 
         # prjbuild -i /path/to/geometry/image.png -o project_filename.prj
+        if self.defaultTab:
+            # find a way to call prjbuild
+            command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
+            os.system(command)
 
-        # find a way to call prjbuild
-        command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
-        os.system(command)
+            prj = open("gui/" + self.file_name + ".prj", 'r')
+            contents = prj.read()
 
-        prj = open("gui/" + self.file_name + ".prj", 'r')
-        contents = prj.read()
+            # Fix multiple image inputing stuff
 
-        # Fix multiple image inputing stuff
-
-        material_count = len(re.findall("M,", contents))
+            material_count = len(re.findall("M,", contents))
 
 
-        self.material_scrollview = MaterialWindow()
-        self.material_scrollview.file_name = self.file_name + ".prj"
+            self.material_scrollview = MaterialWindow()
+            self.material_scrollview.file_name = self.file_name + ".prj"
 
-        self.box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
+            self.box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
 
-        # Acquire the colors from the prj
-        colors = re.findall("\d*/\d*/\d*", contents)
-        colorsKivy = []
-        for i in range(len(colors)):
-            colorsSplit = colors[i].split("/")
+            # Acquire the colors from the prj
+            colors = re.findall("\d*/\d*/\d*", contents)
+            colorsKivy = []
+            for i in range(len(colors)):
+                colorsSplit = colors[i].split("/")
 
-            colorsTuple = (
-            (float(colorsSplit[0]) / 256), (float(colorsSplit[1]) / 256), (float(colorsSplit[2]) / 256), 1)
+                colorsTuple = (
+                (float(colorsSplit[0]) / 256), (float(colorsSplit[1]) / 256), (float(colorsSplit[2]) / 256), 1)
 
-            colorsKivy.append(colorsTuple)
+                colorsKivy.append(colorsTuple)
 
-        for i in range(material_count):
-            # Replace this with a row for a material
-            # Create a new "structure" in the KV file for a row, given the color from the .prj
-            temp = MaterialInput(size_hint_y=None, height=30)
-            temp.material_number = i
-            temp.color = colorsKivy[i]
+            for i in range(material_count):
+                # Replace this with a row for a material
+                # Create a new "structure" in the KV file for a row, given the color from the .prj
+                temp = MaterialInput(size_hint_y=None, height=30)
+                temp.material_number = i
+                temp.color = colorsKivy[i]
 
-            self.box_layout.add_widget(temp)
+                self.box_layout.add_widget(temp)
 
-            ####################################################################################
-            #TODO The spacing on this is too large, but decreasing it causes some rows to disappear#
-            ####################################################################################
-            self.box_layout.height += 80
+                ####################################################################################
+                #TODO The spacing on this is too large, but decreasing it causes some rows to disappear#
+                ####################################################################################
+                self.box_layout.height += 80
 
-        try:
-            self.material_scrollview.add_widget(self.box_layout)
-        except:
-            pass
+            try:
+                self.material_scrollview.add_widget(self.box_layout)
+            except:
+                pass
 
-        self.parent.add_widget(self.material_scrollview)
+            self.parent.add_widget(self.material_scrollview)
 
 
 class SeidarTGUI(App):
@@ -248,6 +288,8 @@ class SeidarTGUI(App):
 
         # layout for the first tab
         panel1_layout = RelativeLayout()
+        panel2_layout = RelativeLayout()
+        
 
         # stupid stubs
         panel2, panel3, panel4, helpPanel = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
@@ -259,7 +301,20 @@ class SeidarTGUI(App):
         radar_stuff = Radar()
         spacial_inputs = SpacialInformation()
         dimension_buttons = DimensionButtons()
-        run_button = RunButton()
+        run_button = SingleRunButton()
+
+        run_button_2 = MultiRunButton()
+
+        image_input.defaultTab = True
+        image_input_2 = ImageInput()
+
+        panel2_layout.add_widget(image_input_2)
+        panel2_layout.add_widget(run_button_2)
+        panel2.add_widget(panel2_layout)
+
+        image_inputs = [image_input, image_input_2]
+        image_input.image_inputs = image_inputs
+        image_input_2.image_inputs = image_inputs
 
         # adding widgets to the layout
         panel1_layout.add_widget(run_button)

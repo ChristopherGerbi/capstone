@@ -73,7 +73,7 @@ def pressure_array(im, temp, rho, dz, pore=0, wc=0):
     # im is an m-by-n array of integer values corresponding to the material
     # temp and rho are k-by-1 indices
 
-    # First match the size of
+    # First match the size of 
     k = np.unique(im)
 
     # if len(pore) > 1 and not len(pore) == k :
@@ -329,7 +329,7 @@ def ice_stiffness(temperature=None, pressure=0):
 # -----------------------------------------------------------------------------
 
 def ice_permittivity(temperature):
-    # Allocate
+    # Allocate 
     P = np.zeros([3, 3])
 
     # The following is for 2-10 GHz. The details can be found in 
