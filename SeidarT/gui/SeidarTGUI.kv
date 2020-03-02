@@ -534,3 +534,102 @@
     pos_hint: {"x":0.91, "y":0.01}
     size_hint: 0.08, 0.05
     on_release: root.SingleShot()
+<MultiShotInput>:
+    name: "multi_shot_input"
+    pos_hint: {'x': 0.55, 'y': 0.405}
+    size_hint: 0.55, 0.35
+    RelativeLayout:
+        Label: 
+            text: "Initial Source"
+            bold: True
+            color: 0,0,0,1
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.81}
+            size_hint: 1, 0.2
+
+        TextInput:
+            hint_text: "X"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.1, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        TextInput:
+            hint_text: "Y"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.38, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        TextInput:
+            hint_text: "Z"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.66, 'y':0.68}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        Label: 
+            text: "Final Receiver"
+            bold: True
+            color: 0,0,0,1
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.61}
+            size_hint: 1, 0.2
+
+        TextInput:
+            hint_text: "X"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.1, 'y':0.48}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        TextInput:
+            hint_text: "Y"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.38, 'y':0.48}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        TextInput:
+            hint_text: "Z"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.66, 'y':0.48}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+
+        Label: 
+            text: "Receiver Spacing"
+            bold: True
+            color: 0,0,0,1
+            font_size: 20
+            pos_hint: {'x': 0, 'y':0.41}
+            size_hint: 1, 0.2
+
+        TextInput:
+            hint_text: "Spacing"
+            color: 0,0,0,1
+            font_size: self.height - 16
+            multiline: False
+            pos_hint: {'x': 0.1, 'y':0.28}
+            size_hint: 0.25, 0.14
+            halign: 'center'
+            valign: 'middle'
+        

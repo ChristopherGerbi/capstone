@@ -40,6 +40,9 @@ Config.set('graphics', 'minimum_height', MIN_HEIGHT)
 
 Window.clearcolor = (.7, .7, .7, 1)
 
+class MultiShotInput(Widget):
+    pass
+
 
 class Seismic(RelativeLayout):
     pass
@@ -166,10 +169,22 @@ class MultiRunButton(RunButton):
     def MultiShot(self):
         file_name = super().run()
 
+        command = "wide_angle -f " + file_name + ".prj -I"
+
         #multi shot specific stuff
+        for i in self.parent.children:
+            if i.name == "multi_shot_input":
+                child = i.children[0]
+                command += " " + child.children[8].text
+                command += " " + child.children[7].text
+                command += " " + child.children[6].text
+                command += " -F"
+                command += " " + child.children[4].text
+                command += " " + child.children[3].text
+                command += " " + child.children[2].text
+                command += " -d " + child.children[0].text
+                command += " -s" 
 
-
-        command = "python exe/prjrun.py " + file_name + ".prj -M b"
 
         #os.system(command)
         print (command)
@@ -304,6 +319,9 @@ class SeidarTGUI(App):
         run_button = SingleRunButton()
 
         run_button_2 = MultiRunButton()
+
+        multi_shot_inputs = MultiShotInput()
+        panel2_layout.add_widget(multi_shot_inputs)
 
         image_input.defaultTab = True
         image_input_2 = ImageInput()
