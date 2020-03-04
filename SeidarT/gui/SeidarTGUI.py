@@ -116,9 +116,9 @@ class RunButton(Button):
                 f.truncate()
             elif i.name == "spacial_information":
                 spacial = i.children[0]
-                text = re.sub("D,dx", "D,dx," + spacial.children[6].text, text)
+                text = re.sub("D,dx,", "D,dx," + spacial.children[6].text, text)
                 text = re.sub("D,dy,n/a", "D,dy," + spacial.children[5].text, text)
-                text = re.sub("D,dz", "D,dz," + spacial.children[4].text, text)
+                text = re.sub("D,dz,", "D,dz," + spacial.children[4].text, text)
 
             elif i.name == "material_window":
                 for j in i.children:
@@ -192,7 +192,6 @@ class MultiRunButton(RunButton):
 class MaterialInput(GridLayout):
     def __init__(self, **kwargs):
         super(MaterialInput, self).__init__(**kwargs)
-
         self.material_number = None
         self.color = None
 
@@ -214,7 +213,6 @@ class ImageInput(RelativeLayout):
         self.defaultTab = False
 
     def getImage(self, first = True):
-
         if self.image:
             if first:
                 self.parent.remove_widget(self.material_scrollview)
@@ -243,13 +241,17 @@ class ImageInput(RelativeLayout):
         # prjbuild -i /path/to/geometry/image.png -o project_filename.prj
         if self.defaultTab:
             # find a way to call prjbuild
-            command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
-            os.system(command)
+            prj = None
+            exists = False
+            try:
+                prj = open("gui/" + self.file_name + ".prj", 'r')
+                exists = True
+            except:
+                command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
+                os.system(command)
+                prj = open("gui/" + self.file_name + ".prj", 'r')
 
-            prj = open("gui/" + self.file_name + ".prj", 'r')
             contents = prj.read()
-
-            # Fix multiple image inputing stuff
 
             material_count = len(re.findall("M,", contents))
 
@@ -284,16 +286,78 @@ class ImageInput(RelativeLayout):
                 ####################################################################################
                 self.box_layout.height += 80
 
-            try:
-                self.material_scrollview.add_widget(self.box_layout)
-            except:
-                pass
+            self.material_scrollview.add_widget(self.box_layout)
 
             self.parent.add_widget(self.material_scrollview)
 
+            if exists:
+                self.readExisting(contents)
 
+    def readExisting(self, contents):
+        for i in self.parent.children:
+            #radar, seismic, spacial_information, material_window / material_box
+            if i.name == "radar":
+                radar = i.children[0]
+                #populate radar text fields
+                radar.children[6].text = re.findall("E,time_steps,\S*", contents)[0][13:]
+                radar.children[10].text = re.findall("E,x,\S*", contents)[0][4:]
+                radar.children[9].text = re.findall("E,y,\S*", contents)[0][4:]
+                radar.children[8].text = re.findall("E,z,\S*", contents)[0][4:]
+                radar.children[2].text = re.findall("E,f0,\S*", contents)[0][5:]
+                radar.children[4].text = re.findall("E,theta,\S*", contents)[0][8:]
+                radar.children[0].text = re.findall("E,phi,\S*", contents)[0][6:]
+                for i in radar.children:
+                    try:
+                        if i.text == "":
+                            i.text = None
+                    except:
+                        pass
+            elif i.name == "seismic":
+                seismic = i.children[0]
+                #populate radar text fields
+                seismic.children[6].text = re.findall("S,time_steps,\S*", contents)[0][13:]
+                seismic.children[10].text = re.findall("S,x,\S*", contents)[0][4:]
+                seismic.children[9].text = re.findall("S,y,\S*", contents)[0][4:]
+                seismic.children[8].text = re.findall("S,z,\S*", contents)[0][4:]
+                seismic.children[2].text = re.findall("S,f0,\S*", contents)[0][5:]
+                seismic.children[4].text = re.findall("S,theta,\S*", contents)[0][8:]
+                seismic.children[0].text = re.findall("S,phi,\S*", contents)[0][6:]
+                for i in seismic.children:
+                    try:
+                        if i.text == "":
+                            i.text = None
+                    except:
+                        pass
+
+            elif i.name == "spacial_information":
+                spacial = i.children[0]
+                spacial.children[6].text = re.findall("D,dx,\S*", contents)[0][5:]
+                spacial.children[5].text = re.findall("D,dy,\S*", contents)[0][5:]
+                spacial.children[4].text = re.findall("D,dz,\S*", contents)[0][5:]
+
+                for i in spacial.children:
+                    try:
+                        if i.text == "":
+                            i.text = None
+                    except:
+                        pass
+
+            elif i.name == "material_window":
+                for j in i.children:
+                    if j.name == "material_box":
+                        for curr_material in zip(re.findall("M,\S*", contents),reversed(j.children)):
+                            values = curr_material[0].split(",")
+                            curr_widget = curr_material[1]
+
+                            curr_widget.children[6].text = values[2]
+                            curr_widget.children[5].text = values[4]
+                            curr_widget.children[4].text = values[5]
+                            curr_widget.children[3].text = values[6]
+                            curr_widget.children[2].text = values[7]
+                            curr_widget.children[1].active = True if values[9] == "True" else False
+                            curr_widget.children[0].text = values[10]
+                        #populate the material sections with this information
 class SeidarTGUI(App):
-
     def build(self):
         # base tabbed thing
         base = TotalLayout(size=(WIDTH, HEIGHT))
