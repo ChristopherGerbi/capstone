@@ -1,5 +1,203 @@
 #:kivy 1.11.1 
 
+#Properties of the SeidarTGUI window.
+<TotalLayout>:
+    name: "total_layout"
+    background_color: (2.9,2.9,2.9,2.9)
+    tab_height: 25
+
+#PRJ info tab ------------------------------------------------------
+<ImageInput>:
+    name: "image_input"
+    pos_hint: {"x": 0.005, "y": 0.49}
+    size_hint: 0.5, 0.5
+
+    TextInput:
+        id: file_path
+        name: "file_name"
+        hint_text: "Enter the name of your image"
+        font_size: self.height * 0.65
+        multiline: False
+        halign: 'left'
+        valign: 'top'
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        padding: self.width * 0.02, self.height * 0.1, 0, 0
+        pos_hint: {"x":0, "y":0.9}
+        size_hint: 0.71, 0.1
+        on_text_validate: root.getImage()
+
+    Button:
+        name: "import_image_button"
+        text: "Import Image"
+        pos_hint: {"x":0.72, "y":0.9}
+        size_hint: 0.28, 0.1
+        id: file_input
+        on_release: root.getImage()
+
+<GlacierImage>:
+    size_hint: 1, .9
+    id: image
+    name: "glacier_image"
+
+<DimensionButtons>:
+    size_hint: 0.4, 0.1
+    pos_hint: {'x': 0.61, 'y': 0.89}
+    name: "dimension_button"
+    Label:
+        text: "Dimensions to be plotted:"
+        color: 0,0,0,1
+        font_size: 18
+        pos_hint: {'x': 0, 'y': 0.5}
+        size_hint: 0.55, 0.5
+    
+    ToggleButton:
+        name: "dim_two"
+        text: '2'
+        pos_hint: {'x': 0.63, 'y':0.5}
+        size_hint: 0.1, 0.45
+        group: "dimension"
+        state: "down"
+
+    ToggleButton:
+        text: "2.5"
+        pos_hint: {"x": 0.75, "y":0.5}
+        size_hint: 0.1, 0.45
+        group: "dimension"
+
+<SpacialInformation>:
+    name: "spacial_information"
+    pos_hint: {'x':0.55, 'y':0.78}
+    size_hint: 0.43, 0.14
+    
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label:
+            name: "lbl_sinfo"
+            text: "Spatial Information"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            pos_hint: {'x': 0, 'y':0.75}
+            size_hint: 1, 0.22
+
+        Label:
+            name: "lbl_iscale"
+            text: "Image scale (Pixel/Meter):"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.width * 0.084, self.height * 0.95)
+            multiline: False
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            pos_hint: {'x':0.025, 'y':0.45}
+            size_hint: 0.475, 0.25
+
+        TextInput:
+            name: "inp_iscale_x"
+            hint_text: "X"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.51, 'y':0.44}
+            size_hint: 0.15, 0.25
+
+        TextInput:
+            name: "inp_iscale_y"
+            hint_text: "Y"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.67, 'y':0.44}
+            size_hint: 0.15, 0.25
+
+        TextInput:
+            name: "inp_iscale_z"
+            hint_text: "Z"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.83, 'y':0.44}
+            size_hint: 0.15, 0.25
+        
+        Label:
+            name: "lbl_timesteps"
+            text: " Timesteps:"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.width * 0.18, self.height * 0.95)
+            multiline: False
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            pos_hint: {'x':0.025, 'y':0.1}
+            size_hint: 0.22, 0.25
+
+        TextInput:
+            name: "inp_timesteps"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.255, 'y':0.08}
+            size_hint: 0.225, 0.25
+
+        Label:
+            name: "lbl_boundary"
+            text: "Boundary:"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.width * 0.18, self.height * 0.95)
+            multiline: False
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            pos_hint: {'x':0.525, 'y':0.1}
+            size_hint: 0.22, 0.25
+
+        TextInput:
+            name: "inp_boundary"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.755, 'y':0.08}
+            size_hint: 0.225, 0.25
+
 <Radar>:
     name: "radar"
     pos_hint: {'x': 0.55, 'y': 0.405}
@@ -276,159 +474,6 @@
             halign: 'center'
             valign: 'middle'
 
-<SpacialInformation>:
-    name: "spacial_information"
-    pos_hint: {'x':0.55, 'y':0.77}
-    size_hint: 0.43, 0.17
-    
-    RelativeLayout:
-        canvas:
-            Color:
-                rgba: 0, 0, 0, 1
-
-            Line:
-                width: 2.0
-                rectangle: (self.x, self.y, self.width, self.height)
-
-        Label:
-            text: "Spatial Information"
-            bold: True
-            color: 0,0,0,1
-            font_size: 20
-            pos_hint: {'x': 0, 'y':0.75}
-            size_hint: 1, 0.2
-
-        Label:
-            text: "Image scale (Pixel/Meter):"
-            color: 0,0,0,1
-            pos_hint: {'x':0, 'y':0.4}
-            size_hint: 0.56, 0.29
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
-
-        TextInput:
-            hint_text: "X"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {'x':0.58, 'y':0.4}
-            size_hint: 0.12, 0.29
-            halign: 'center'
-            valign: 'middle'
-
-        TextInput:
-            hint_text: "Y"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {'x':0.71, 'y':0.4}
-            size_hint: 0.12, 0.29
-            halign: 'center'
-            valign: 'middle'
-
-        TextInput:
-            hint_text: "Z"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {'x':0.84, 'y':0.4}
-            size_hint: 0.12, 0.29
-            halign: 'center'
-            valign: 'middle'
-        
-        Label:
-            text: "Timesteps:"
-            color: 0,0,0,1
-            text_size: self.size
-            pos_hint: {'x':0, 'y':0.08}
-            size_hint: 0.25, 0.29
-            halign: 'right'
-            valign: 'middle'
-
-        TextInput:
-            hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {'x':0.27, 'y':0.08}
-            size_hint: 0.2, 0.29
-            halign: 'center'
-            valign: 'middle'
-
-        Label:
-            text: "Boundary:"
-            color: 0,0,0,1
-            text_size: self.size
-            pos_hint: {'x':0.47, 'y':0.08}
-            size_hint: 0.25, 0.29
-            halign: 'right'
-            valign: 'middle'
-
-        TextInput:
-            hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {'x':0.74, 'y':0.08}
-            size_hint: 0.2, 0.29
-            halign: 'center'
-            valign: 'middle'
-
-<DimensionButtons>:
-    size_hint: 0.4, 0.1
-    pos_hint: {'x': 0.61, 'y': 0.9}
-    name: "dimension_button"
-    Label:
-        text: "Dimensions to be plotted:"
-        color: 0,0,0,1
-        font_size: 18
-        pos_hint: {'x': 0, 'y': 0.5}
-        size_hint: 0.55, 0.5
-    
-    ToggleButton:
-        text: '2'
-        pos_hint: {'x': 0.63, 'y':0.5}
-        size_hint: 0.1, 0.45
-        group: "dimension"
-        state: "down"
-
-    ToggleButton:
-        text: "2.5"
-        pos_hint: {"x": 0.75, "y":0.5}
-        size_hint: 0.1, 0.45
-        group: "dimension"
-
-<ImageInput>:
-    size_hint: 0.5, 0.5
-    pos_hint: {"x": 0, "y": 0.5}
-    name: "image_input"
-    TextInput:
-        name: "file_name"
-        hint_text: "Enter the name of your image"
-        multiline: False
-        background_color: 1, 1, 1, 1 #color of textbox
-        font_size: self.height - 16
-        pos_hint: {"x":0, "y":0.89}
-        size_hint: 0.7, 0.11
-        id: file_path
-        on_text_validate: root.getImage()
-        halign: 'left'
-        valign: 'middle'
-
-    Button:
-        name: "import_image_button"
-        text: "Import Image"
-        pos_hint: {"x":0.7, "y":0.89}
-        size_hint: 0.3, 0.11
-        id: file_input
-        on_release: root.getImage()
-
-<GlacierImage>:
-    size_hint: 1, .9
-    id: image
-    name: "glacier_image"
-
 <MaterialWindow>:
     size_hint: 0.7, 0.5
     name: "material_window"
@@ -438,18 +483,6 @@
 
 <MaterialBox>:
     name: "material_box"
-
-<RunButton>:
-    name: "run_button"
-    text: "Run"
-    pos_hint: {"x":0.91, "y":0.01}
-    size_hint: 0.08, 0.05
-    on_release: root.run()
-
-<TotalLayout>:
-    name: "total_layout"
-    background_color: (2.9,2.9,2.9,2.9)
-    tab_height: 25
 
 <MaterialInput>:
     height: 30
@@ -513,6 +546,15 @@
         multiline: False
         halign: 'center'
         valign: 'middle'
+
+<RunButton>:
+    name: "run_button"
+    text: "Run"
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.run()
+
+#Tab 2 ------------------------------------------------------
 <MultiRunButton>:
     name: "multi_run_button"
     text: "Run"
@@ -623,4 +665,9 @@
             size_hint: 0.25, 0.14
             halign: 'center'
             valign: 'middle'
-        
+
+#Tab 3 ------------------------------------------------------
+
+#Tab 4 ------------------------------------------------------
+
+#Help Tab ------------------------------------------------------
