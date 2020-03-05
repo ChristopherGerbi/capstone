@@ -5,13 +5,6 @@ import os
 import re
 import sys
 
-
-kivy.require('1.11.1')
-
-sys.path.append("../")
-
-MATERIALS = None
-
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.relativelayout import RelativeLayout
@@ -28,15 +21,19 @@ from kivy.core.window import Window
 from kivy.uix.gridlayout import GridLayout
 
 
-WIDTH = 800
-HEIGHT = 640
-MIN_HEIGHT = 480
-MIN_WIDTH = 600
+kivy.require('1.11.1')
 
-Config.set('graphics', 'width', WIDTH)
-Config.set('graphics', 'height', HEIGHT)
-Config.set('graphics', 'minimum_width', MIN_WIDTH)
-Config.set('graphics', 'minimum_height', MIN_HEIGHT)
+MATERIALS = None
+
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 640
+WINDOW_MIN_HEIGHT = 480
+WINDOW_MIN_WIDTH = 600
+
+Config.set('graphics', 'width', WINDOW_WIDTH)
+Config.set('graphics', 'height', WINDOW_HEIGHT)
+Config.set('graphics', 'minimum_width', WINDOW_MIN_WIDTH)
+Config.set('graphics', 'minimum_height', WINDOW_MIN_HEIGHT)
 
 Window.clearcolor = (.7, .7, .7, 1)
 
@@ -71,7 +68,6 @@ class GlacierImage(Image):
 class MaterialWindow(ScrollView):
     def __init__(self, **kwargs):
         super(MaterialWindow, self).__init__(**kwargs)
-        self.file_name = ""
 
 
 class RunButton(Button):
@@ -79,75 +75,68 @@ class RunButton(Button):
         super(RunButton, self).__init__(**kwargs)
 
     def run(self):
-        # print (self.parent.name)
-        file_name = ""
-        for i in self.parent.children:
-            if i.name == "image_input":
-                file_name = i.file_name
-                command = "python exe/prjbuild.py -i gui/" + i.file_name + ".png -o gui/" + i.file_name + ".prj"
+        curr_prj_file_name = ""
+        for widget in self.parent.children:
+            if widget.name == "image_input":
+                curr_prj_file_name = widget.file_name
+                command = "python exe/prjbuild.py -i gui/" + widget.file_name + ".png -o gui/" + widget.file_name + ".prj"
                 os.system(command)
 
-        f = open("gui/" + file_name + ".prj", "r+")
-        text = f.read()
-        for i in self.parent.children:
-            if i.name == "radar":
-                radar = i.children[0]
-                text = re.sub("E,time_steps,", "E,time_steps," + radar.children[6].text, text)
-                text = re.sub("E,x,", "E,x," + radar.children[10].text, text)
-                text = re.sub("E,y,", "E,y," + radar.children[9].text, text)
-                text = re.sub("E,z,", "E,z," + radar.children[8].text, text)
-                text = re.sub("E,f0,", "E,f0," + radar.children[2].text, text)
-                text = re.sub("E,theta,0", "E,theta," + radar.children[4].text, text)
-                text = re.sub("E,phi,0", "E,phi," + radar.children[0].text, text)
-                f.seek(0)
-                f.write(text)
-                f.truncate()
-            elif i.name == "seismic":
-                seismic = i.children[0]
-                text = re.sub("S,time_steps,", "S,time_steps," + seismic.children[6].text, text)
-                text = re.sub("S,x,", "S,x," + seismic.children[10].text, text)
-                text = re.sub("S,y,", "S,y," + seismic.children[9].text, text)
-                text = re.sub("S,z,", "S,z," + seismic.children[8].text, text)
-                text = re.sub("S,f0,", "S,f0," + seismic.children[2].text, text)
-                text = re.sub("S,theta,0", "S,theta," + seismic.children[4].text, text)
-                text = re.sub("S,phi,0", "S,phi," + seismic.children[0].text, text)
-                f.seek(0)
-                f.write(text)
-                f.truncate()
-            elif i.name == "spacial_information":
-                spacial = i.children[0]
-                text = re.sub("D,dx,", "D,dx," + spacial.children[6].text, text)
-                text = re.sub("D,dy,n/a", "D,dy," + spacial.children[5].text, text)
-                text = re.sub("D,dz,", "D,dz," + spacial.children[4].text, text)
+        prj_file = open("gui/" + curr_prj_file_name + ".prj", "r+")
+        prj_text = prj_file.read()
+        for top_level_widget in self.parent.children:
+            if top_level_widget.name == "radar":
+                radar = top_level_widget.children[0]
+                prj_text = re.sub("E,time_steps,", "E,time_steps," + radar.children[6].text, prj_text)
+                prj_text = re.sub("E,x,", "E,x," + radar.children[10].text, prj_text)
+                prj_text = re.sub("E,y,", "E,y," + radar.children[9].text, prj_text)
+                prj_text = re.sub("E,z,", "E,z," + radar.children[8].text, prj_text)
+                prj_text = re.sub("E,f0,", "E,f0," + radar.children[2].text, prj_text)
+                prj_text = re.sub("E,theta,0", "E,theta," + radar.children[4].text, prj_text)
+                prj_text = re.sub("E,phi,0", "E,phi," + radar.children[0].text, prj_text)
+            elif top_level_widget.name == "seismic":
+                seismic = top_level_widget.children[0]
+                prj_text = re.sub("S,time_steps,", "S,time_steps," + seismic.children[6].text, prj_text)
+                prj_text = re.sub("S,x,", "S,x," + seismic.children[10].text, prj_text)
+                prj_text = re.sub("S,y,", "S,y," + seismic.children[9].text, prj_text)
+                prj_text = re.sub("S,z,", "S,z," + seismic.children[8].text, prj_text)
+                prj_text = re.sub("S,f0,", "S,f0," + seismic.children[2].text, prj_text)
+                prj_text = re.sub("S,theta,0", "S,theta," + seismic.children[4].text, prj_text)
+                prj_text = re.sub("S,phi,0", "S,phi," + seismic.children[0].text, prj_text)
+            elif top_level_widget.name == "spacial_information":
+                spacial = top_level_widget.children[0]
+                prj_text = re.sub("D,dx,", "D,dx," + spacial.children[6].text, prj_text)
+                prj_text = re.sub("D,dy,n/a", "D,dy," + spacial.children[5].text, prj_text)
+                prj_text = re.sub("D,dz,", "D,dz," + spacial.children[4].text, prj_text)
 
-            elif i.name == "material_window":
-                for j in i.children:
-                    if j.name == "material_box":
+            elif top_level_widget.name == "material_window":
+                material_box_widget = top_level_widget.children[0]
 
-                        materialColors = re.findall("\d+/\d+/\d+", text)
-                        for k in reversed(j.children):
+                materialColors = re.findall("\d+/\d+/\d+", prj_text)
+                for material in reversed(material_box_widget.children):
 
-                            temp = "M," + str(k.material_number) + "," + k.children[6].text + "," + materialColors[
-                                k.material_number]
+                    curr_material = "M," + str(material.material_number) + "," + material.children[6].text + "," + materialColors[
+                        material.material_number]
 
-                            for num in range(5, 1, -1):
-                                temp += "," + k.children[num].text
+                    for num in range(5, 1, -1):
+                        curr_material += "," + material.children[num].text
 
-                            temp += ",0"
+                    curr_material += ",0"
 
-                            temp += "," + str(k.children[1].active) + ","
+                    curr_material += "," + str(material.children[1].active) + ","
 
-                            if k.children[1].active:
-                                temp += k.children[0].text
+                    if material.children[1].active:
+                        curr_material += material.children[0].text
 
-                            text = re.sub("M.*,,,,,,,", temp, text, count=1)
+                    prj_text = re.sub("M.*,,,,,,,", curr_material, prj_text, count=1)
 
-                        f.seek(0)
-                        # Update this so it writes the proper material information
-                        f.write(text)
-                        f.truncate()
+        prj_file.seek(0)
+        # Update this so it writes the proper material information
+        prj_file.write(prj_text)
+        prj_file.truncate()
 
-        return file_name
+        #return file name for higher level button types have access to it
+        return curr_prj_file_name
 
 
 
@@ -257,7 +246,6 @@ class ImageInput(RelativeLayout):
 
 
             self.material_scrollview = MaterialWindow()
-            self.material_scrollview.file_name = self.file_name + ".prj"
 
             self.box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
 
@@ -360,7 +348,7 @@ class ImageInput(RelativeLayout):
 class SeidarTGUI(App):
     def build(self):
         # base tabbed thing
-        base = TotalLayout(size=(WIDTH, HEIGHT))
+        base = TotalLayout(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
 
         panel1 = TabbedPanelItem()
         panel1.text = "PRJ Info"
