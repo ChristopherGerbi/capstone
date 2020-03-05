@@ -29,11 +29,16 @@
         on_text_validate: root.getImage()
 
     Button:
+        id: file_input
         name: "import_image_button"
         text: "Import Image"
+        font_size: min(self.width * 0.14, self.height * 0.5)
+        text_size: self.size
+        multiline: False
+        halign: 'center'
+        valign: 'middle'
         pos_hint: {"x":0.72, "y":0.9}
         size_hint: 0.28, 0.1
-        id: file_input
         on_release: root.getImage()
 
 <GlacierImage>:
@@ -42,29 +47,48 @@
     name: "glacier_image"
 
 <DimensionButtons>:
-    size_hint: 0.4, 0.1
-    pos_hint: {'x': 0.61, 'y': 0.89}
     name: "dimension_button"
-    Label:
-        text: "Dimensions to be plotted:"
-        color: 0,0,0,1
-        font_size: 18
-        pos_hint: {'x': 0, 'y': 0.5}
-        size_hint: 0.55, 0.5
-    
-    ToggleButton:
-        name: "dim_two"
-        text: '2'
-        pos_hint: {'x': 0.63, 'y':0.5}
-        size_hint: 0.1, 0.45
-        group: "dimension"
-        state: "down"
+    pos_hint: {'x': 0.55, 'y': 0.93}
+    size_hint: 0.4, 0.06    
 
-    ToggleButton:
-        text: "2.5"
-        pos_hint: {"x": 0.75, "y":0.5}
-        size_hint: 0.1, 0.45
-        group: "dimension"
+    RelativeLayout:        
+        Label:
+            name: "lbl_dimbutton"
+            text: "Dimensions to be plotted:"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.45, self.width * 0.08)
+            multiline: False
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: 0.6, 1
+        
+        ToggleButton:
+            name: "dim_two"
+            text: '2'
+            font_size: min(self.width * 0.4, self.height * 0.6)
+            text_size: self.size
+            multiline: False
+            halign: 'center'
+            valign: 'middle'
+            pos_hint: {'x': 0.62, 'y':0}
+            size_hint: 0.15, 1
+            group: "dimension"
+            state: "down"
+
+        ToggleButton:
+            name: "dim_twofive"
+            text: "2.5"
+            font_size: min(self.width * 0.4, self.height * 0.6)
+            text_size: self.size
+            multiline: False
+            halign: 'center'
+            valign: 'middle'
+            pos_hint: {"x": 0.8, "y":0}
+            size_hint: 0.15, 1
+            group: "dimension"
 
 <SpacialInformation>:
     name: "spacial_information"
@@ -86,6 +110,10 @@
             bold: True
             color: 0,0,0,1
             font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
             pos_hint: {'x': 0, 'y':0.75}
             size_hint: 1, 0.22
 
@@ -200,8 +228,8 @@
 
 <Radar>:
     name: "radar"
-    pos_hint: {'x': 0.55, 'y': 0.405}
-    size_hint: 0.21, 0.35
+    pos_hint: {'x': 0.55, 'y': 0.47}
+    size_hint: 0.21, 0.3
 
     RelativeLayout:
         canvas:
@@ -209,137 +237,176 @@
                 rgba: 0, 0, 0, 1
 
             Line:
-                width: 2.0
+                width: 1.5
                 rectangle: (self.x, self.y, self.width, self.height)
 
         Label:
+            name: "lbl_radars"
             text: "Radar Source"
             bold: True
             color: 0,0,0,1
-            font_size: 20
+            font_size: self.height * 0.5
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
             pos_hint: {'x': 0, 'y':0.81}
             size_hint: 1, 0.2
-        
-        #Label: 
-        #    text: "Position:"
-        #    color: 0,0,0,1
-        #    pos_hint: {'x': 0, 'y':0.75}
-        #    size_hint: 0.45, 0.2
-        #    text_size: self.size
-        #    halign: 'left'
-        #    valign: 'middle'
 
         TextInput:
+            name: "inp_radar_pos_x"
             hint_text: "X"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.1, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.05, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         TextInput:
+            name: "inp_radar_pos_y"
             hint_text: "Y"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.38, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.36, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         TextInput:
+            name: "inp_radar_pos_z"
             hint_text: "Z"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.66, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.67, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         Label: 
+            name: "lbl_radar_timestep"
             text: "Time Step:"
+            bold: False
             color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
             pos_hint: {'x': 0, 'y':0.54}
             size_hint: 0.51, 0.1
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
 
         TextInput:
+            name: "inp_radar_timestep"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.52}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
         Label: 
+            name: "lbl_radar_theta"
             text: "Theta:"
+            bold: False
             color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
             pos_hint: {'x': 0, 'y':0.38}
             size_hint: 0.51, 0.1
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
 
         TextInput:
+            name: "inp_radar_theta"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.36}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
-            
 
         Label: 
+            name: "lbl_radar_frequency"
             text: "Frequency:"
+            bold: False
             color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
             pos_hint: {'x': 0, 'y':0.22}
             size_hint: 0.51, 0.1
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
 
         TextInput:
+            name: "inp_radar_frequency"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.2}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
         Label: 
+            name: "lbl_radar_phi"
             text: "Phi:"
+            bold: False
             color: 0,0,0,1
-            pos_hint: {'x': 0, 'y':0.05}
-            size_hint: 0.51, 0.1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
             text_size: self.size
             halign: 'right'
             valign: 'middle'
+            pos_hint: {'x': 0, 'y':0.06}
+            size_hint: 0.51, 0.1
 
         TextInput:
+            name: "inp_radar_phi"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.04}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
 <Seismic>:
     name: "seismic"
-    pos_hint: {'x': 0.77, 'y': 0.405}
-    size_hint: 0.21, 0.35
+    pos_hint: {'x': 0.77, 'y': 0.47}
+    size_hint: 0.21, 0.3
 
     RelativeLayout:
         canvas:
@@ -347,132 +414,171 @@
                 rgba: 0, 0, 0, 1
 
             Line:
-                width: 2.0
+                width: 1.5
                 rectangle: (self.x, self.y, self.width, self.height)
-
-        Label: 
+        
+        Label:
+            name: "lbl_seismics"
             text: "Seismic Source"
             bold: True
             color: 0,0,0,1
-            font_size: 20
+            font_size: self.height * 0.5
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
             pos_hint: {'x': 0, 'y':0.81}
             size_hint: 1, 0.2
-        
-        #Label: 
-        #    text: "Position:"
-        #    color: 0,0,0,1
-        #    pos_hint: {'x': 0, 'y':0.75}
-        #    size_hint: 0.45, 0.2
-        #    text_size: self.size
-        #    halign: 'left'
-        #    valign: 'middle'
 
         TextInput:
+            name: "inp_seismic_pos_x"
             hint_text: "X"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.1, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.05, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         TextInput:
+            name: "inp_seismic_pos_y"
             hint_text: "Y"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.38, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.36, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         TextInput:
+            name: "inp_seismic_pos_z"
             hint_text: "Z"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.66, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.67, 'y':0.68}
+            size_hint: 0.28, 0.14
 
         Label: 
+            name: "lbl_seismic_timestep"
             text: "Time Step:"
+            bold: False
             color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
             pos_hint: {'x': 0, 'y':0.54}
             size_hint: 0.51, 0.1
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
 
         TextInput:
+            name: "inp_seismic_timestep"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.52}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
         Label: 
+            name: "lbl_seismic_theta"
             text: "Theta:"
+            bold: False
             color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
+            text_size: self.size
+            halign: 'right'
+            valign: 'middle'
             pos_hint: {'x': 0, 'y':0.38}
             size_hint: 0.51, 0.1
+
+        TextInput:
+            name: "inp_seismic_theta"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {"x":0.55, "y":0.36}
+            size_hint: 0.4, 0.14       
+
+        Label: 
+            name: "lbl_seismic_frequency"
+            text: "Frequency:"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-
-        TextInput:
-            hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
-            multiline: False
-            pos_hint: {"x":0.55, "y":0.36}
-            size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
-            
-
-        Label: 
-            text: "Frequency:"
-            color: 0,0,0,1
             pos_hint: {'x': 0, 'y':0.22}
             size_hint: 0.51, 0.1
-            text_size: self.size
-            halign: 'right'
-            valign: 'middle'
 
         TextInput:
+            name: "inp_seismic_frequency"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.2}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
         Label: 
+            name: "lbl_seismic_phi"
             text: "Phi:"
+            bold: False
             color: 0,0,0,1
-            pos_hint: {'x': 0, 'y':0.05}
-            size_hint: 0.51, 0.1
+            font_size: min(self.width * 0.175, self.height * 0.85)
+            multiline: False
             text_size: self.size
             halign: 'right'
             valign: 'middle'
+            pos_hint: {'x': 0, 'y':0.06}
+            size_hint: 0.51, 0.1
 
         TextInput:
+            name: "inp_seismic_phi"
             hint_text: "###"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
             pos_hint: {"x":0.55, "y":0.04}
             size_hint: 0.4, 0.14
-            halign: 'center'
-            valign: 'middle'
 
 <MaterialWindow>:
     size_hint: 0.7, 0.5
@@ -550,6 +656,11 @@
 <RunButton>:
     name: "run_button"
     text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
     pos_hint: {"x":0.91, "y":0.01}
     size_hint: 0.08, 0.05
     on_release: root.run()
@@ -558,19 +669,32 @@
 <MultiRunButton>:
     name: "multi_run_button"
     text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
     pos_hint: {"x":0.91, "y":0.01}
     size_hint: 0.08, 0.05
     on_release: root.MultiShot()
+
 <SingleRunButton>:
     name: "single_run_button"
     text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
     pos_hint: {"x":0.91, "y":0.01}
     size_hint: 0.08, 0.05
     on_release: root.SingleShot()
+
 <MultiShotInput>:
     name: "multi_shot_input"
     pos_hint: {'x': 0.55, 'y': 0.405}
     size_hint: 0.55, 0.35
+    
     RelativeLayout:
         Label: 
             text: "Initial Source"
