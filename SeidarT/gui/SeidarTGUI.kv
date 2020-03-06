@@ -9,8 +9,8 @@
 #PRJ info tab ------------------------------------------------------
 <ImageInput>:
     name: "image_input"
-    pos_hint: {"x": 0.005, "y": 0.49}
-    size_hint: 0.5, 0.5
+    pos_hint: {"x": 0.005, "y": 0.47}
+    size_hint: 0.52, 0.52
 
     TextInput:
         id: file_path
@@ -653,31 +653,6 @@
         halign: 'center'
         valign: 'middle'
 
-<RunButton>:
-    name: "run_button"
-    text: "Run"
-    font_size: min(self.width * 0.375, self.height * 0.6)
-    text_size: self.size
-    multiline: False
-    halign: 'center'
-    valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.01}
-    size_hint: 0.08, 0.05
-    on_release: root.run()
-
-#Tab 2 ------------------------------------------------------
-<MultiRunButton>:
-    name: "multi_run_button"
-    text: "Run"
-    font_size: min(self.width * 0.375, self.height * 0.6)
-    text_size: self.size
-    multiline: False
-    halign: 'center'
-    valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.01}
-    size_hint: 0.08, 0.05
-    on_release: root.MultiShot()
-
 <SingleRunButton>:
     name: "single_run_button"
     text: "Run"
@@ -690,105 +665,171 @@
     size_hint: 0.08, 0.05
     on_release: root.SingleShot()
 
+#Tab 2 ------------------------------------------------------
+
 <MultiShotInput>:
     name: "multi_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.405}
-    size_hint: 0.55, 0.35
+    pos_hint: {'x': 0.55, 'y': 0.47}
+    size_hint: 0.4, 0.45
     
     RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
         Label: 
+            name: "lbl_initial_source"
             text: "Initial Source"
             bold: True
             color: 0,0,0,1
-            font_size: 20
-            pos_hint: {'x': 0, 'y':0.81}
-            size_hint: 1, 0.2
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
 
         TextInput:
+            name: "inp_initial_source_x"
             hint_text: "X"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.1, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.1, 'y':0.69}
+            size_hint: 0.25, 0.14
 
         TextInput:
+            name: "inp_initial_source_y"
             hint_text: "Y"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.38, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.69}
+            size_hint: 0.25, 0.14
 
         TextInput:
+            name: "inp_initial_source_z"
             hint_text: "Z"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.66, 'y':0.68}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.69}
+            size_hint: 0.25, 0.14
 
         Label: 
+            name: "lbl_final_receiver"
             text: "Final Receiver"
             bold: True
             color: 0,0,0,1
-            font_size: 20
-            pos_hint: {'x': 0, 'y':0.61}
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.48}
             size_hint: 1, 0.2
 
         TextInput:
+            name: "inp_final_receiver_x"
             hint_text: "X"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.1, 'y':0.48}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.1, 'y':0.36}
+            size_hint: 0.25, 0.14
 
         TextInput:
+            name: "inp_final_receiver_y"
             hint_text: "Y"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.38, 'y':0.48}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.36}
+            size_hint: 0.25, 0.14
 
         TextInput:
+            name: "inp_final_receiver_z"
             hint_text: "Z"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.66, 'y':0.48}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.36}
+            size_hint: 0.25, 0.14
 
         Label: 
+            name: "lbl_receiver_spacing"
             text: "Receiver Spacing"
             bold: True
+            bold: True
             color: 0,0,0,1
-            font_size: 20
-            pos_hint: {'x': 0, 'y':0.41}
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.15}
             size_hint: 1, 0.2
 
         TextInput:
-            hint_text: "Spacing"
-            color: 0,0,0,1
-            font_size: self.height - 16
+            name: "inp_final_receiver_x"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
             multiline: False
-            pos_hint: {'x': 0.1, 'y':0.28}
-            size_hint: 0.25, 0.14
             halign: 'center'
-            valign: 'middle'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.03}
+            size_hint: 0.25, 0.14
+
+<MultiRunButton>:
+    name: "multi_run_button"
+    text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.MultiShot()
 
 #Tab 3 ------------------------------------------------------
 

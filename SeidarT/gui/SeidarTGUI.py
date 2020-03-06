@@ -35,9 +35,10 @@ Config.set('graphics', 'height', WINDOW_HEIGHT)
 Config.set('graphics', 'minimum_width', WINDOW_MIN_WIDTH)
 Config.set('graphics', 'minimum_height', WINDOW_MIN_HEIGHT)
 
+#This is the color for the background of the tabs, not the color on each tab.
 Window.clearcolor = (.7, .7, .7, 1)
 
-class MultiShotInput(Widget):
+class MultiShotInput(RelativeLayout):
     pass
 
 
@@ -350,52 +351,81 @@ class SeidarTGUI(App):
         # base tabbed thing
         base = TotalLayout(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
 
+        # Creating all tab panels
         panel1 = TabbedPanelItem()
+        panel2 = TabbedPanelItem()
+        panel3 = TabbedPanelItem()
+        panel4 = TabbedPanelItem()
+        helpPanel = TabbedPanelItem()
+        
+        # Naming all tabs
         panel1.text = "PRJ Info"
+        panel2.text = ""
+        panel3.text = ""
+        panel4.text = ""
+        helpPanel.text = "Help Page"
 
         # layout for the first tab
         panel1_layout = RelativeLayout()
         panel2_layout = RelativeLayout()
         
-
-        # stupid stubs
-        panel2, panel3, panel4, helpPanel = TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem(), TabbedPanelItem()
-        helpPanel.text = "Help Page"
-
-        # input forms
+        #Image input stuff
         image_input = ImageInput()
-        seismic_stuff = Seismic()
-        radar_stuff = Radar()
-        spacial_inputs = SpacialInformation()
-        dimension_buttons = DimensionButtons()
-        run_button = SingleRunButton()
-
-        run_button_2 = MultiRunButton()
-
-        multi_shot_inputs = MultiShotInput()
-        panel2_layout.add_widget(multi_shot_inputs)
-
-        image_input.defaultTab = True
         image_input_2 = ImageInput()
 
-        panel2_layout.add_widget(image_input_2)
-        panel2_layout.add_widget(run_button_2)
-        panel2.add_widget(panel2_layout)
+        image_input.defaultTab = True
 
         image_inputs = [image_input, image_input_2]
         image_input.image_inputs = image_inputs
         image_input_2.image_inputs = image_inputs
 
-        # adding widgets to the layout
-        panel1_layout.add_widget(run_button)
+        # panel1-------------------------------------------------------------
+        # PRJ info: imports image, prj data entry, and uses the build and single shot operations.
+
+        # Elements for panel1
+        dimension_buttons = DimensionButtons()
+        spacial_inputs = SpacialInformation()
+        radar_stuff = Radar()
+        seismic_stuff = Seismic()
+        run_button = SingleRunButton()
+
+        # Adding elements to panel1 layout
         panel1_layout.add_widget(image_input)
         panel1_layout.add_widget(dimension_buttons)
-        panel1_layout.add_widget(seismic_stuff)
-        panel1_layout.add_widget(radar_stuff)
         panel1_layout.add_widget(spacial_inputs)
+        panel1_layout.add_widget(radar_stuff)
+        panel1_layout.add_widget(seismic_stuff)
+        panel1_layout.add_widget(run_button)
 
-        # adding the layout to the tab
+        # Assigning layout to panel1
         panel1.add_widget(panel1_layout)
+
+        # panel2-------------------------------------------------------------
+        # NEEDS NAME: Import image and Multi run
+
+        # Elements for panel1
+        multi_shot_inputs = MultiShotInput()
+        run_button_2 = MultiRunButton()
+       
+        # Adding elements to panel2 layout
+        panel2_layout.add_widget(image_input_2)
+        panel2_layout.add_widget(multi_shot_inputs)
+        panel2_layout.add_widget(run_button_2)
+
+        # Assigning layout to panel2
+        panel2.add_widget(panel2_layout)
+
+        # panel3-------------------------------------------------------------
+        # ______: ___________
+
+
+        # panel4-------------------------------------------------------------
+        # ______: ___________
+
+
+        # help pannel--------------------------------------------------------
+        # Help Page: Contains user manual
+
 
         # adding tabs to the window
         base.add_widget(panel1)
