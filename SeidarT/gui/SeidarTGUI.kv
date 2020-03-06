@@ -581,14 +581,21 @@
             size_hint: 0.4, 0.14
 
 <MaterialWindow>:
-    size_hint: 0.7, 0.5
+    size_hint: 0.9, 0.35
     name: "material_window"
     minimum_height: 10
     do_scroll_y: True
-    pos_hint: {"y": -.2}
+    pos_hint: {"x": 0.05, "y": 0.1}
 
 <MaterialBox>:
     name: "material_box"
+    canvas:
+        Color:
+            rgba: 2, 0, 0, 1
+
+        Line:
+            width: 1.0
+            rectangle: (self.x, self.y, self.width, self.height)
 
 <MaterialInput>:
     height: 30
@@ -602,56 +609,70 @@
         Line:
             width: 1.0
             rectangle: (self.x, self.y, self.width, self.height)
+
     TextInput:
         name: "material_name"
         hint_text: "Name"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
     TextInput:
         hint_text: "Temperature"
         name: "material_temperature"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
     TextInput:
         name: "material_attenuation"
         hint_text: "Attenuation"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
     TextInput:
         name: "material_density"
         hint_text: "Density"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
     TextInput:
         name: "material_water_content"
         hint_text: "Porosity"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
     CheckBox:
         name: "anisotropic_button"
     TextInput:  
         name: "material_ang_file"
         hint_text: "ang_file"
-        color: 0,0,0,1
-        font_size: self.height - 16
+        foreground_color: 0, 0, 0, 1
+        hint_text_color: 0, 0, 0, 0.5
+        font_size: self.height * 0.65
         multiline: False
         halign: 'center'
-        valign: 'middle'
+        valign: 'top'
+        padding: 0, self.height * 0.125, 0, 0
 
 <SingleRunButton>:
     name: "single_run_button"
