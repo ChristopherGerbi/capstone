@@ -55,27 +55,27 @@ D,dim,2
 D,nx,300
 D,ny,n/a
 D,nz,100
-D,dx,a
-D,dy,b
-D,dz,c
+D,dx,x
+D,dy,y
+D,dz,z
 D,cpml,20
 D,nmats,3
 D,tfile,
 
 # number, id, R/G/B, Temperature, Attenuation, Density, Porosity, Water_Content, Anisotropic, ANG_File
-M,0,,120/152/76,,,,,0,False,
+M,0,name,120/152/76,temp,atten,dens,por,0,True,file name
 M,1,,220/220/220,,,,,0,False,
 M,2,,255/75/75,,,,,0,False,
 
 # The source parameters for the seismic model
 S,dt,
-S,time_steps,
-S,x,
-S,y,
-S,z,
-S,f0,
-S,theta,
-S,phi,
+S,time_steps,st
+S,x,sx
+S,y,sy
+S,z,sz
+S,f0,sfreq
+S,theta,stheta
+S,phi,sphi
 
 # id, C11, C12, C13, C22, C23, C33, C44, C55, C66, rho
 C,0,,,,,,,,,,
@@ -84,13 +84,13 @@ C,2,,,,,,,,,,
 
 # The source parameters for the elecromagnetic model
 E,dt,
-E,time_steps,
-E,x,
-E,y,
-E,z,
-E,f0,
-E,theta,s
-E,phi,
+E,time_steps,rt
+E,x,rx
+E,y,ry
+E,z,rz
+E,f0,rfreq
+E,theta,rtheta
+E,phi,rphi
 
 # id, e11, e22, e33, s11, s22, s33
 P,0,,,,,,,,,,

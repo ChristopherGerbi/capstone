@@ -78,8 +78,8 @@ class RunButton(Button):
         curr_prj_file_name = ""
         for widget in self.parent.children:
             if widget.name == "image_input":
-                curr_prj_file_name = widget.file_name
-                command = "python exe/prjbuild.py -i gui/" + widget.file_name + ".png -o gui/" + widget.file_name + ".prj"
+                curr_prj_file_name = widget.current_file_name
+                command = "python exe/prjbuild.py -i gui/" + widget.current_file_name + ".png -o gui/" + widget.current_file_name + ".prj"
                 os.system(command)
 
         prj_file = open("gui/" + curr_prj_file_name + ".prj", "r+")
@@ -193,93 +193,92 @@ class TotalLayout(TabbedPanel):
 class ImageInput(RelativeLayout):
     def __init__(self, **kwargs):
         super(ImageInput, self).__init__(**kwargs)
-        self.image_things = [] #list of 4 ImageInput 
-        self.box_layout = None
-        self.image = None
+        
+        self.material_box_layout = None
+        self.current_image = None
         self.material_scrollview = None
-        self.file_name = ""
-        self.image_inputs = []
-        self.defaultTab = False
+        self.current_file_name = ""
+        self.image_input_region_references = []
+        self.default_tab = False
 
-    def getImage(self, first = True):
-        if self.image:
-            if first:
+    def getImage(self, first_call = True):
+        if self.current_image:
+            if first_call:
                 self.parent.remove_widget(self.material_scrollview)
                 self.material_scrollview = None
-                self.box_layout = None
-            self.remove_widget(self.image)
-            self.image = None
+                self.material_box_layout = None
+            self.remove_widget(self.current_image)
+            self.current_image = None
 
-        self.file_name = self.ids['file_path'].text
+        self.current_file_name = self.ids['file_path'].text
 
-        if first:
-            for i in self.image_inputs:
+        if first_call:
+            for i in self.image_input_region_references:
                 if not i == self:
                     for j in i.children:
                         if j.name == "file_name":
-                            j.text = self.file_name
-                            i.getImage(first= False)
+                            j.text = self.current_file_name
+                            i.getImage(first_call= False)
                             break
             
 
-        self.image = GlacierImage()
-        self.image.source = "gui/" + self.file_name + ".png"
+        self.current_image = GlacierImage()
+        self.current_image.source = "gui/" + self.current_file_name + ".png"
 
-        self.add_widget(self.image)
+        self.add_widget(self.current_image)
 
         # prjbuild -i /path/to/geometry/image.png -o project_filename.prj
-        if self.defaultTab:
+        if self.default_tab:
             # find a way to call prjbuild
-            prj = None
-            exists = False
+            current_prj = None
+            current_prj_exists = False
             try:
-                prj = open("gui/" + self.file_name + ".prj", 'r')
-                exists = True
+                current_prj = open("gui/" + self.current_file_name + ".prj", 'r')
+                current_prj_exists = True
             except:
-                command = "python exe/prjbuild.py -i gui/" + self.file_name + ".png -o gui/" + self.file_name + ".prj"
+                command = "python exe/prjbuild.py -i gui/" + self.current_file_name + ".png -o gui/" + self.current_file_name + ".prj"
                 os.system(command)
-                prj = open("gui/" + self.file_name + ".prj", 'r')
+                current_prj = open("gui/" + self.current_file_name + ".prj", 'r')
 
-            contents = prj.read()
+            prj_contents = current_prj.read()
 
-            material_count = len(re.findall("M,", contents))
+            # Acquire the colors from the prj
+            colors = re.findall("\d*/\d*/\d*", prj_contents)
+            material_colors = []
+            for i in range(len(colors)):
+                colors_split = colors[i].split("/")
 
+                colors_tuple = (
+                (float(colors_split[0]) / 256), (float(colors_split[1]) / 256), (float(colors_split[2]) / 256), 1)
+
+                material_colors.append(colors_tuple)
+
+            material_count = len(re.findall("M,", prj_contents))
 
             self.material_scrollview = MaterialWindow()
 
-            self.box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
+            self.material_box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
 
-            # Acquire the colors from the prj
-            colors = re.findall("\d*/\d*/\d*", contents)
-            colorsKivy = []
-            for i in range(len(colors)):
-                colorsSplit = colors[i].split("/")
-
-                colorsTuple = (
-                (float(colorsSplit[0]) / 256), (float(colorsSplit[1]) / 256), (float(colorsSplit[2]) / 256), 1)
-
-                colorsKivy.append(colorsTuple)
-
-            for i in range(material_count):
+            for material in range(material_count):
                 # Replace this with a row for a material
                 # Create a new "structure" in the KV file for a row, given the color from the .prj
                 temp = MaterialInput(size_hint_y=None, height=30)
-                temp.material_number = i
-                temp.color = colorsKivy[i]
+                temp.material_number = material
+                temp.color = material_colors[material]
 
-                self.box_layout.add_widget(temp)
+                self.material_box_layout.add_widget(temp)
 
                 ####################################################################################
                 #TODO The spacing on this is too large, but decreasing it causes some rows to disappear#
                 ####################################################################################
-                self.box_layout.height += 80
+                self.material_box_layout.height += 80
 
-            self.material_scrollview.add_widget(self.box_layout)
+            self.material_scrollview.add_widget(self.material_box_layout)
 
             self.parent.add_widget(self.material_scrollview)
 
-            if exists:
-                self.readExisting(contents)
+            if current_prj_exists:
+                self.readExisting(prj_contents)
 
     def readExisting(self, contents):
         for i in self.parent.children:
@@ -375,7 +374,7 @@ class SeidarTGUI(App):
         multi_shot_inputs = MultiShotInput()
         panel2_layout.add_widget(multi_shot_inputs)
 
-        image_input.defaultTab = True
+        image_input.default_tab = True
         image_input_2 = ImageInput()
 
         panel2_layout.add_widget(image_input_2)
