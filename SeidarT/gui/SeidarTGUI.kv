@@ -862,7 +862,249 @@
     on_release: root.MultiShot()
 
 #Tab 3 ------------------------------------------------------
+<CommonOffsetInputFields>:
+    name: "common_offset_shot_input"
+    pos_hint: {'x': 0.55, 'y': 0.47}
+    size_hint: 0.4, 0.45
+    
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
 
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label: 
+            name: "lbl_final_receiver"
+            text: "Final Receiver"
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.48}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_final_receiver_x"
+            hint_text: "X"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.1, 'y':0.36}
+            size_hint: 0.25, 0.14
+
+        TextInput:
+            name: "inp_final_receiver_y"
+            hint_text: "Y"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.36}
+            size_hint: 0.25, 0.14
+
+        TextInput:
+            name: "inp_final_receiver_z"
+            hint_text: "Z"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.36}
+            size_hint: 0.25, 0.14
+
+        Label: 
+            name: "lbl_offset_distance"
+            text: "Offset Distance"
+            bold: True
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.15}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_offset_distance"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.03}
+            size_hint: 0.25, 0.14
+        
+        Label: 
+            name: "lbl_step_length"
+            text: "Step Length"
+            bold: True
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.15}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_step_length"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.03}
+            size_hint: 0.25, 0.14
+
+<CommonOffsetRunButton>:
+    name: "common_offset_run_button"
+    text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.CommonOffsetShot()
 #Tab 4 ------------------------------------------------------
+<CommonMidpointInputFields>:
+    name: "common_midpoint_shot_input"
+    pos_hint: {'x': 0.55, 'y': 0.47}
+    size_hint: 0.4, 0.45
+    
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
 
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label: 
+            name: "lbl_final_receiver_distance"
+            text: "Final Receiver Distance"
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.48}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_final_receiver_distance"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.36}
+            size_hint: 0.25, 0.14
+
+        Label: 
+            name: "lbl_initial_receiver_distance"
+            text: "Initial Receiver Distance"
+            bold: True
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.15}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_initial_receiver_distance"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.03}
+            size_hint: 0.25, 0.14
+        
+        Label: 
+            name: "lbl_delta"
+            text: "Step Length"
+            bold: True
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0, 'y':0.15}
+            size_hint: 1, 0.2
+
+        TextInput:
+            name: "inp_step_length"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.38, 'y':0.03}
+            size_hint: 0.25, 0.14
+
+<CommonMidpointRunButton>:
+    name: "common_midpoint_run_button"
+    text: "Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.91, "y":0.01}
+    size_hint: 0.08, 0.05
+    on_release: root.CommonMidpointShot()
 #Help Tab ------------------------------------------------------
