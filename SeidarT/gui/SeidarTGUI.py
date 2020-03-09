@@ -218,7 +218,14 @@ class ImageInputFields(RelativeLayout):
                             break
             
 
+        try:
+            test = open("gui/" + self.current_file_name + ".png")
+        except:
+            print ("Image not found")
+            return
+
         self.current_image = GlacierImage()
+
         self.current_image.source = "gui/" + self.current_file_name + ".png"
 
         self.add_widget(self.current_image)
