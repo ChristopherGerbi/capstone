@@ -5,6 +5,9 @@ import os
 import re
 import sys
 
+import pathlib
+
+
 from kivy.app import App
 from kivy.uix.image import Image
 from kivy.config import Config
@@ -157,9 +160,9 @@ class SingleRunButton(RunButton):
         file_name, run_mode = super().run()
 
         #single shot specific stuff
-        command = "python exe/prjrun.py " + file_name + ".prj -M " + run_mode
+        command = "prjrun " + str(pathlib.Path(__file__).parent.absolute()) + "/" + file_name + ".prj -M " + run_mode
 
-        #os.system(command)
+        os.system(command)
         print (command)
 
 class MultiRunButton(RunButton):
@@ -225,7 +228,6 @@ class ImageInputFields(RelativeLayout):
 
         if first_call:
             for i in self.image_input_region_references:
-                print (i)
                 if not i == self:
                     for j in i.children:
                         if j.name == "file_name":

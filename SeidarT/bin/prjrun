@@ -9,9 +9,10 @@ import argparse
 import matplotlib.image as mpimg
 import numpy as np
 import os.path
-from fdtd import emFDTD2D as em2d
+import emFDTD2D as em2d
 # Modeling modules
-from fdtd import seismicFDTD2D as seis2d
+import seismicFDTD2D as seis2d
+import material_functions as mf
 from subprocess import call
 
 # import materials.material_functions as mf
