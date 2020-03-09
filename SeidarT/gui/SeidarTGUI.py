@@ -225,6 +225,7 @@ class ImageInputFields(RelativeLayout):
 
         if first_call:
             for i in self.image_input_region_references:
+                print (i)
                 if not i == self:
                     for j in i.children:
                         if j.name == "file_name":
@@ -390,8 +391,8 @@ class SeidarTGUI(App):
 
         #List of image inputs so that each image input region references the others
         image_inputs = [panel1_image_input, panel2_image_input]
-        panel1_image_input.image_inputs = image_inputs
-        panel2_image_input.image_inputs = image_inputs
+        panel1_image_input.image_input_region_references = image_inputs
+        panel2_image_input.image_input_region_references = image_inputs
 
         #Assigned so that image propogation through the tabs later is simpler
         panel1_image_input.default_tab = True
