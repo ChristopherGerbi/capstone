@@ -240,6 +240,11 @@
                 width: 1.5
                 rectangle: (self.x, self.y, self.width, self.height)
 
+        CheckBox:
+            name: "radar_included"
+            pos_hint: {"x": 0.8, 'y':0.81}
+            size_hint: 0.2, 0.2
+
         Label:
             name: "lbl_radars"
             text: "Radar Source"
@@ -251,7 +256,7 @@
             halign: "center"
             valign: "middle"
             pos_hint: {'x': 0, 'y':0.81}
-            size_hint: 1, 0.2
+            size_hint: 0.8, 0.2
 
         TextInput:
             name: "inp_radar_pos_x"
@@ -417,6 +422,11 @@
                 width: 1.5
                 rectangle: (self.x, self.y, self.width, self.height)
         
+        CheckBox:
+            name: "seismic_included"
+            pos_hint: {"x": 0.8, 'y':0.81}
+            size_hint: 0.2, 0.2
+
         Label:
             name: "lbl_seismics"
             text: "Seismic Source"
@@ -428,7 +438,7 @@
             halign: "center"
             valign: "middle"
             pos_hint: {'x': 0, 'y':0.81}
-            size_hint: 1, 0.2
+            size_hint: 0.8, 0.2
 
         TextInput:
             name: "inp_seismic_pos_x"

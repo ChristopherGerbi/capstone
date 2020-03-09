@@ -63,7 +63,7 @@ D,nmats,3
 D,tfile,
 
 # number, id, R/G/B, Temperature, Attenuation, Density, Porosity, Water_Content, Anisotropic, ANG_File
-M,0,name,120/152/76,temp,atten,dens,por,0,True,file name
+M,0,name,120/152/76,temp,atten,dens,por,0,True,file
 M,1,,220/220/220,,,,,0,False,
 M,2,,255/75/75,,,,,0,False,
 

@@ -78,6 +78,9 @@ class RunButton(Button):
                 command = "python exe/prjbuild.py -i gui/" + widget.current_file_name + ".png -o gui/" + widget.current_file_name + ".prj"
                 os.system(command)
 
+        run_seismic = False
+        run_radar = False
+
         prj_file = open("gui/" + curr_prj_file_name + ".prj", "r+")
         prj_text = prj_file.read()
         for top_level_widget in self.parent.children:
@@ -90,6 +93,7 @@ class RunButton(Button):
                 prj_text = re.sub("E,f0,", "E,f0," + radar.children[2].text, prj_text)
                 prj_text = re.sub("E,theta,0", "E,theta," + radar.children[4].text, prj_text)
                 prj_text = re.sub("E,phi,0", "E,phi," + radar.children[0].text, prj_text)
+                run_radar = radar.children[12].active
             elif top_level_widget.name == "seismic":
                 seismic = top_level_widget.children[0]
                 prj_text = re.sub("S,time_steps,", "S,time_steps," + seismic.children[6].text, prj_text)
@@ -99,6 +103,7 @@ class RunButton(Button):
                 prj_text = re.sub("S,f0,", "S,f0," + seismic.children[2].text, prj_text)
                 prj_text = re.sub("S,theta,0", "S,theta," + seismic.children[4].text, prj_text)
                 prj_text = re.sub("S,phi,0", "S,phi," + seismic.children[0].text, prj_text)
+                run_seismic = seismic.children[12].active
             elif top_level_widget.name == "spacial_information":
                 spacial = top_level_widget.children[0]
                 prj_text = re.sub("D,dx,", "D,dx," + spacial.children[6].text, prj_text)
@@ -126,23 +131,33 @@ class RunButton(Button):
 
                     prj_text = re.sub("M.*,,,,,,,", curr_material, prj_text, count=1)
 
+        
         prj_file.seek(0)
         # Update this so it writes the proper material information
         prj_file.write(prj_text)
         prj_file.truncate()
 
+        run_mode = "n"
+
+        if run_seismic and run_radar:
+            run_mode = "b"
+        elif run_seismic:
+            run_mode = "s"
+        elif run_radar:
+            run_mode = "r"
+
         #return file name for higher level button types have access to it
-        return curr_prj_file_name
+        return curr_prj_file_name, run_mode
 
 
 
 
 class SingleRunButton(RunButton):
     def SingleShot(self):
-        file_name = super().run()
+        file_name, run_mode = super().run()
 
         #single shot specific stuff
-        command = "python exe/prjrun.py " + file_name + ".prj -M b"
+        command = "python exe/prjrun.py " + file_name + ".prj -M " + run_mode
 
         #os.system(command)
         print (command)
