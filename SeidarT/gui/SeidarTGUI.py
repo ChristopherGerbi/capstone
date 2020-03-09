@@ -275,21 +275,19 @@ class ImageInputFields(RelativeLayout):
 
             self.material_scrollview = MaterialInputRegion()
 
-            self.material_box_layout = MaterialInputBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
+            self.material_box_layout = MaterialInputBox(spacing=5, orientation='vertical', size_hint_y=None, height=0)
 
             for material in range(material_count):
                 # Replace this with a row for a material
                 # Create a new "structure" in the KV file for a row, given the color from the .prj
-                temp = MaterialInputFields(size_hint_y=None, height=30)
+                temp = MaterialInputFields(size_hint_y=None, height=25)
                 temp.material_number = material
                 temp.color = material_colors[material]
 
                 self.material_box_layout.add_widget(temp)
 
-                ####################################################################################
-                #TODO The spacing on this is too large, but decreasing it causes some rows to disappear#
-                ####################################################################################
-                self.material_box_layout.height += 80
+            #Box_Layout height = Material input hight + spacing * num of materials
+            self.material_box_layout.height += (30 * material_count)
 
             self.material_scrollview.add_widget(self.material_box_layout)
 
@@ -375,13 +373,11 @@ class SeidarTGUI(App):
 
         #These do not follow naming conventions, but will when instantiated
         panel3 = TabbedPanelItem()
-        panel4 = TabbedPanelItem()
         
         # Naming all tabs
         prj_input_tab.text = "PRJ Info"
-        multi_shot_run_tab.text = "Multishot Run"
-        panel3.text = ""
-        panel4.text = ""
+        multi_shot_run_tab.text = "Multishot Run" #all runs
+        panel3.text = "Plots"
         help_panel.text = "Help Page"
 
         # layout for the first tabs
@@ -421,6 +417,9 @@ class SeidarTGUI(App):
         # Assigning layout to panel1
         prj_input_tab.add_widget(panel1_layout)
 
+        # panel2-------------------------------------------------------------
+        # Run operations: All extra input fields required for all run types.
+
         # Elements for panel2
         multi_shot_inputs = MultiShotInputFields()
         multi_shot_run_button = MultiRunButton()
@@ -449,7 +448,6 @@ class SeidarTGUI(App):
         base.add_widget(prj_input_tab)
         base.add_widget(multi_shot_run_tab)
         base.add_widget(panel3)
-        base.add_widget(panel4)
         base.add_widget(help_panel)
 
         # setting the default tab
