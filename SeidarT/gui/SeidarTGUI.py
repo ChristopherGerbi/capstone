@@ -39,35 +39,33 @@ Window.clearcolor = (.7, .7, .7, 1)
 class MultiShotInputFields(RelativeLayout):
     pass
 
+class CommonOffsetInputFields(RelativeLayout):
+    pass
+
+class CommonMidpointInputFields(RelativeLayout):
+    pass
 
 class SeismicInputFields(RelativeLayout):
     pass
 
-
 class RadarInputFields(RelativeLayout):
     pass
 
-
-class SpacialInputFields(RelativeLayout):
+class SpatialInputFields(RelativeLayout):
     pass
-
 
 class MaterialInputBox(BoxLayout):
     pass
 
-
 class DimensionButtons(RelativeLayout):
     pass
-
 
 class GlacierImage(Image):
     pass
 
-
 class MaterialInputRegion(ScrollView):
     def __init__(self, **kwargs):
         super(MaterialInputRegion, self).__init__(**kwargs)
-
 
 class RunButton(Button):
     def __init__(self, **kwargs):
@@ -107,11 +105,11 @@ class RunButton(Button):
                 prj_text = re.sub("S,theta,0", "S,theta," + seismic.children[4].text, prj_text)
                 prj_text = re.sub("S,phi,0", "S,phi," + seismic.children[0].text, prj_text)
                 run_seismic = seismic.children[12].active
-            elif top_level_widget.name == "spacial_information":
-                spacial = top_level_widget.children[0]
-                prj_text = re.sub("D,dx,", "D,dx," + spacial.children[6].text, prj_text)
-                prj_text = re.sub("D,dy,n/a", "D,dy," + spacial.children[5].text, prj_text)
-                prj_text = re.sub("D,dz,", "D,dz," + spacial.children[4].text, prj_text)
+            elif top_level_widget.name == "spatial_information":
+                spatial = top_level_widget.children[0]
+                prj_text = re.sub("D,dx,", "D,dx," + spatial.children[6].text, prj_text)
+                prj_text = re.sub("D,dy,n/a", "D,dy," + spatial.children[5].text, prj_text)
+                prj_text = re.sub("D,dz,", "D,dz," + spatial.children[4].text, prj_text)
 
             elif top_level_widget.name == "material_window":
                 material_box_widget = top_level_widget.children[0]
@@ -165,12 +163,50 @@ class SingleRunButton(RunButton):
         os.system(command)
         print (command)
 
+class CommonOffsetRunButton(RunButton):
+    def CommonOffsetShot(self):
+        file_name, run_mode = super().run()
+
+        command = "common_offset -f " + file_name + ".prj -F "
+
+        for i in self.parent.children:
+            if i.name == "common_offset_shot_input":
+                child = i.children[0]
+
+                command += child.children[6].text + " " 
+                command += child.children[5].text + " " 
+                command += child.children[4].text + " -o " 
+                command += child.children[2].text + " -d " 
+                command += child.children[0].text + " "
+        print (command)
+                
+        #TODO WRITE THIS CODE
+
+class CommonMidpointRunButton(RunButton):
+    def CommonMidpointShot(self):
+        file_name, run_mode = super().run()
+
+        command = "common_midoing -f " + file_name + ".prj -t "
+
+        for i in self.parent.children:
+            if i.name == "common_midpoint_shot_input":
+                child = i.children[0]
+                command += child.children[4].text + " -o "
+                command += str(float(int(child.children[4].text)/2.0)) + " -d "
+                command += child.children[0].text
+
+        if run_mode == "s":
+            command += " s"
+
+        print (command)
+    #TODO WRITE THIS TOO
+
 class MultiRunButton(RunButton):
     def __init__(self, **kwargs):
         super(MultiRunButton, self).__init__(**kwargs)
     
     def MultiShot(self):
-        file_name = super().run()
+        file_name, run_mode = super().run()
 
         command = "wide_angle -f " + file_name + ".prj -I"
 
@@ -186,7 +222,7 @@ class MultiRunButton(RunButton):
                 command += " " + child.children[3].text
                 command += " " + child.children[2].text
                 command += " -d " + child.children[0].text
-                command += " -s" 
+                command += " -" + run_mode 
 
 
         #os.system(command)
@@ -301,7 +337,7 @@ class ImageInputFields(RelativeLayout):
 
     def readExisting(self, contents):
         for top_level_widget in self.parent.children:
-            #radar, seismic, spacial_information, material_window / material_box
+            #radar, seismic, spatial_information, material_window / material_box
             if top_level_widget.name == "radar":
                 radar = top_level_widget.children[0]
                 #populate radar text fields
@@ -335,16 +371,16 @@ class ImageInputFields(RelativeLayout):
                     except:
                         pass
 
-            elif top_level_widget.name == "spacial_information":
-                spacial = top_level_widget.children[0]
-                spacial.children[6].text = re.findall("D,dx,\S*", contents)[0][5:]
-                spacial.children[5].text = re.findall("D,dy,\S*", contents)[0][5:]
-                spacial.children[4].text = re.findall("D,dz,\S*", contents)[0][5:]
+            elif top_level_widget.name == "spatial_information":
+                spatial = top_level_widget.children[0]
+                spatial.children[6].text = re.findall("D,dx,\S*", contents)[0][5:]
+                spatial.children[5].text = re.findall("D,dy,\S*", contents)[0][5:]
+                spatial.children[4].text = re.findall("D,dz,\S*", contents)[0][5:]
 
-                for spacial_child in spacial.children:
+                for spatial_child in spatial.children:
                     try:
-                        if spacial_child.text == "":
-                            spacial_child.text = None
+                        if spatial_child.text == "":
+                            spatial_child.text = None
                     except:
                         pass
 
@@ -404,7 +440,7 @@ class SeidarTGUI(App):
 
         # Elements for panel1, minus image importing
         dimension_input_fields = DimensionButtons()
-        spacial_input_fields = SpacialInputFields()
+        Spatial_input_fields = SpatialInputFields()
         radar_input_fields = RadarInputFields()
         seismic_input_fields = SeismicInputFields()
         prj_input_run_button = SingleRunButton()
@@ -412,7 +448,7 @@ class SeidarTGUI(App):
         # Adding elements to panel1 layout
         panel1_layout.add_widget(panel1_image_input)
         panel1_layout.add_widget(dimension_input_fields)
-        panel1_layout.add_widget(spacial_input_fields)
+        panel1_layout.add_widget(Spatial_input_fields)
         panel1_layout.add_widget(radar_input_fields)
         panel1_layout.add_widget(seismic_input_fields)
         panel1_layout.add_widget(prj_input_run_button)
@@ -426,11 +462,21 @@ class SeidarTGUI(App):
         # Elements for panel2
         multi_shot_inputs = MultiShotInputFields()
         multi_shot_run_button = MultiRunButton()
+        common_offset_inputs = CommonOffsetInputFields()
+        common_offset_run_button = CommonOffsetRunButton()
+        common_midpoint_inputs = CommonMidpointInputFields()
+        common_midpoint_run_button = CommonMidpointRunButton()
        
+        
+
         # Adding elements to panel2 layout
         panel2_layout.add_widget(panel2_image_input)
         panel2_layout.add_widget(multi_shot_inputs)
+        panel2_layout.add_widget(common_offset_inputs)
+        panel2_layout.add_widget(common_midpoint_inputs)
         panel2_layout.add_widget(multi_shot_run_button)
+        panel2_layout.add_widget(common_offset_run_button)
+        panel2_layout.add_widget(common_midpoint_run_button)
 
         # Assigning layout to panel2
         multi_shot_run_tab.add_widget(panel2_layout)

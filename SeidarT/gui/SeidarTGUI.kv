@@ -90,8 +90,8 @@
             size_hint: 0.15, 1
             group: "dimension"
 
-<SpacialInputFields>:
-    name: "spacial_information"
+<SpatialInputFields>:
+    name: "spatial_information"
     pos_hint: {'x':0.55, 'y':0.78}
     size_hint: 0.43, 0.14
     
@@ -699,7 +699,7 @@
 #Tab 2 ------------------------------------------------------
 <MultiShotInputFields>:
     name: "multi_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.47}
+    pos_hint: {'x': 0.55, 'y': 0.53}
     size_hint: 0.4, 0.45
     
     RelativeLayout:
@@ -713,7 +713,7 @@
 
         Label: 
             name: "lbl_initial_source"
-            text: "Initial Source"
+            text: "Multi Shot Initial Source"
             bold: True
             color: 0,0,0,1
             font_size: min(self.height * 0.5, self.width * 0.1)
@@ -851,20 +851,20 @@
 
 <MultiRunButton>:
     name: "multi_run_button"
-    text: "Run"
+    text: "MS Run"
     font_size: min(self.width * 0.375, self.height * 0.6)
     text_size: self.size
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.01}
+    pos_hint: {"x":0.91, "y":0.54}
     size_hint: 0.08, 0.05
     on_release: root.MultiShot()
 
 #Tab 3 ------------------------------------------------------
 <CommonOffsetInputFields>:
     name: "common_offset_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.47}
+    pos_hint: {'x': 0.55, 'y': 0.03}
     size_hint: 0.4, 0.45
     
     RelativeLayout:
@@ -886,7 +886,7 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.48}
+            pos_hint: {'x': 0, 'y':0.78}
             size_hint: 1, 0.2
 
         TextInput:
@@ -900,7 +900,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.1, 'y':0.36}
+            pos_hint: {'x': 0.1, 'y':0.64}
             size_hint: 0.25, 0.14
 
         TextInput:
@@ -914,7 +914,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.36}
+            pos_hint: {'x': 0.38, 'y':0.64}
             size_hint: 0.25, 0.14
 
         TextInput:
@@ -928,7 +928,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.66, 'y':0.36}
+            pos_hint: {'x': 0.66, 'y':0.64}
             size_hint: 0.25, 0.14
 
         Label: 
@@ -942,7 +942,7 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.15}
+            pos_hint: {'x': 0, 'y':0.4}
             size_hint: 1, 0.2
 
         TextInput:
@@ -956,7 +956,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.03}
+            pos_hint: {'x': 0.38, 'y':0.30}
             size_hint: 0.25, 0.14
         
         Label: 
@@ -989,19 +989,19 @@
 
 <CommonOffsetRunButton>:
     name: "common_offset_run_button"
-    text: "Run"
+    text: "CO Run"
     font_size: min(self.width * 0.375, self.height * 0.6)
     text_size: self.size
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.01}
+    pos_hint: {"x":0.81, "y":0.14}
     size_hint: 0.08, 0.05
     on_release: root.CommonOffsetShot()
 #Tab 4 ------------------------------------------------------
 <CommonMidpointInputFields>:
     name: "common_midpoint_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.47}
+    pos_hint: {'x': 0.05, 'y': 0.03}
     size_hint: 0.4, 0.45
     
     RelativeLayout:
@@ -1015,7 +1015,7 @@
 
         Label: 
             name: "lbl_final_receiver_distance"
-            text: "Final Receiver Distance"
+            text: "Common Midpoint Final Receiver Distance"
             bold: True
             color: 0,0,0,1
             font_size: min(self.height * 0.5, self.width * 0.1)
@@ -1023,7 +1023,7 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.48}
+            pos_hint: {'x': 0, 'y':0.78}
             size_hint: 1, 0.2
 
         TextInput:
@@ -1037,7 +1037,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.36}
+            pos_hint: {'x': 0.38, 'y':0.62}
             size_hint: 0.25, 0.14
 
         Label: 
@@ -1051,7 +1051,7 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.15}
+            pos_hint: {'x': 0, 'y':0.4}
             size_hint: 1, 0.2
 
         TextInput:
@@ -1065,7 +1065,7 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.03}
+            pos_hint: {'x': 0.38, 'y':0.30}
             size_hint: 0.25, 0.14
         
         Label: 
@@ -1098,13 +1098,13 @@
 
 <CommonMidpointRunButton>:
     name: "common_midpoint_run_button"
-    text: "Run"
+    text: "CM Run"
     font_size: min(self.width * 0.375, self.height * 0.6)
     text_size: self.size
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.01}
+    pos_hint: {"x":0.41, "y":0.04}
     size_hint: 0.08, 0.05
     on_release: root.CommonMidpointShot()
 #Help Tab ------------------------------------------------------
