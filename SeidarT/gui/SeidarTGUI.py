@@ -6,20 +6,15 @@ import re
 import sys
 
 from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.relativelayout import RelativeLayout
-from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
 from kivy.config import Config
-from kivy.uix.button import Button
-from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
-from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.core.window import Window
 from kivy.uix.gridlayout import GridLayout
-
+from kivy.uix.button import Button
 
 kivy.require('1.11.1')
 
@@ -38,23 +33,23 @@ Config.set('graphics', 'minimum_height', WINDOW_MIN_HEIGHT)
 #This is the color for the background of the tabs, not the color on each tab.
 Window.clearcolor = (.7, .7, .7, 1)
 
-class MultiShotInput(RelativeLayout):
+class MultiShotInputFields(RelativeLayout):
     pass
 
 
-class Seismic(RelativeLayout):
+class SeismicInputFields(RelativeLayout):
     pass
 
 
-class Radar(RelativeLayout):
+class RadarInputFields(RelativeLayout):
     pass
 
 
-class SpacialInformation(RelativeLayout):
+class SpacialInputFields(RelativeLayout):
     pass
 
 
-class MaterialBox(BoxLayout):
+class MaterialInputBox(BoxLayout):
     pass
 
 
@@ -66,9 +61,9 @@ class GlacierImage(Image):
     pass
 
 
-class MaterialWindow(ScrollView):
+class MaterialInputRegion(ScrollView):
     def __init__(self, **kwargs):
-        super(MaterialWindow, self).__init__(**kwargs)
+        super(MaterialInputRegion, self).__init__(**kwargs)
 
 
 class RunButton(Button):
@@ -179,9 +174,9 @@ class MultiRunButton(RunButton):
         #os.system(command)
         print (command)
 
-class MaterialInput(GridLayout):
+class MaterialInputFields(GridLayout):
     def __init__(self, **kwargs):
-        super(MaterialInput, self).__init__(**kwargs)
+        super(MaterialInputFields, self).__init__(**kwargs)
         self.material_number = None
         self.color = None
 
@@ -191,9 +186,9 @@ class TotalLayout(TabbedPanel):
         super(TotalLayout, self).__init__(**kwargs)
 
 
-class ImageInput(RelativeLayout):
+class ImageInputFields(RelativeLayout):
     def __init__(self, **kwargs):
-        super(ImageInput, self).__init__(**kwargs)
+        super(ImageInputFields, self).__init__(**kwargs)
         
         self.material_box_layout = None
         self.current_image = None
@@ -256,14 +251,14 @@ class ImageInput(RelativeLayout):
 
             material_count = len(re.findall("M,", prj_contents))
 
-            self.material_scrollview = MaterialWindow()
+            self.material_scrollview = MaterialInputRegion()
 
-            self.material_box_layout = MaterialBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
+            self.material_box_layout = MaterialInputBox(spacing=60, orientation='vertical', size_hint_y=None, height=0)
 
             for material in range(material_count):
                 # Replace this with a row for a material
                 # Create a new "structure" in the KV file for a row, given the color from the .prj
-                temp = MaterialInput(size_hint_y=None, height=30)
+                temp = MaterialInputFields(size_hint_y=None, height=30)
                 temp.material_number = material
                 temp.color = material_colors[material]
 
@@ -282,10 +277,10 @@ class ImageInput(RelativeLayout):
                 self.readExisting(prj_contents)
 
     def readExisting(self, contents):
-        for i in self.parent.children:
+        for top_level_widget in self.parent.children:
             #radar, seismic, spacial_information, material_window / material_box
-            if i.name == "radar":
-                radar = i.children[0]
+            if top_level_widget.name == "radar":
+                radar = top_level_widget.children[0]
                 #populate radar text fields
                 radar.children[6].text = re.findall("E,time_steps,\S*", contents)[0][13:]
                 radar.children[10].text = re.findall("E,x,\S*", contents)[0][4:]
@@ -294,14 +289,14 @@ class ImageInput(RelativeLayout):
                 radar.children[2].text = re.findall("E,f0,\S*", contents)[0][5:]
                 radar.children[4].text = re.findall("E,theta,\S*", contents)[0][8:]
                 radar.children[0].text = re.findall("E,phi,\S*", contents)[0][6:]
-                for i in radar.children:
+                for radar_child in radar.children:
                     try:
-                        if i.text == "":
-                            i.text = None
+                        if radar_child.text == "":
+                            radar_child.text = None
                     except:
                         pass
-            elif i.name == "seismic":
-                seismic = i.children[0]
+            elif top_level_widget.name == "seismic":
+                seismic = top_level_widget.children[0]
                 #populate radar text fields
                 seismic.children[6].text = re.findall("S,time_steps,\S*", contents)[0][13:]
                 seismic.children[10].text = re.findall("S,x,\S*", contents)[0][4:]
@@ -310,109 +305,111 @@ class ImageInput(RelativeLayout):
                 seismic.children[2].text = re.findall("S,f0,\S*", contents)[0][5:]
                 seismic.children[4].text = re.findall("S,theta,\S*", contents)[0][8:]
                 seismic.children[0].text = re.findall("S,phi,\S*", contents)[0][6:]
-                for i in seismic.children:
+                for seismic_child in seismic.children:
                     try:
-                        if i.text == "":
-                            i.text = None
+                        if seismic_child.text == "":
+                            seismic_child.text = None
                     except:
                         pass
 
-            elif i.name == "spacial_information":
-                spacial = i.children[0]
+            elif top_level_widget.name == "spacial_information":
+                spacial = top_level_widget.children[0]
                 spacial.children[6].text = re.findall("D,dx,\S*", contents)[0][5:]
                 spacial.children[5].text = re.findall("D,dy,\S*", contents)[0][5:]
                 spacial.children[4].text = re.findall("D,dz,\S*", contents)[0][5:]
 
-                for i in spacial.children:
+                for spacial_child in spacial.children:
                     try:
-                        if i.text == "":
-                            i.text = None
+                        if spacial_child.text == "":
+                            spacial_child.text = None
                     except:
                         pass
 
-            elif i.name == "material_window":
-                for j in i.children:
-                    if j.name == "material_box":
-                        for curr_material in zip(re.findall("M,\S*", contents),reversed(j.children)):
-                            values = curr_material[0].split(",")
-                            curr_widget = curr_material[1]
+            elif top_level_widget.name == "material_window":
+                material_box_widget = top_level_widget.children[0]
+                for curr_material in zip(re.findall("M,\S*", contents),reversed(material_box_widget.children)):
+                    values = curr_material[0].split(",")
+                    curr_widget = curr_material[1]
 
-                            curr_widget.children[6].text = values[2]
-                            curr_widget.children[5].text = values[4]
-                            curr_widget.children[4].text = values[5]
-                            curr_widget.children[3].text = values[6]
-                            curr_widget.children[2].text = values[7]
-                            curr_widget.children[1].active = True if values[9] == "True" else False
-                            curr_widget.children[0].text = values[10]
-                        #populate the material sections with this information
+                    curr_widget.children[6].text = values[2]
+                    curr_widget.children[5].text = values[4]
+                    curr_widget.children[4].text = values[5]
+                    curr_widget.children[3].text = values[6]
+                    curr_widget.children[2].text = values[7]
+                    curr_widget.children[1].active = True if values[9] == "True" else False
+                    curr_widget.children[0].text = values[10]
+                    #populate the material sections with this information
+
+
 class SeidarTGUI(App):
     def build(self):
         # base tabbed thing
         base = TotalLayout(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
 
         # Creating all tab panels
-        panel1 = TabbedPanelItem()
-        panel2 = TabbedPanelItem()
+        prj_input_tab = TabbedPanelItem()
+        multi_shot_run_tab = TabbedPanelItem()
+        help_panel = TabbedPanelItem()
+
+        #These do not follow naming conventions, but will when instantiated
         panel3 = TabbedPanelItem()
         panel4 = TabbedPanelItem()
-        helpPanel = TabbedPanelItem()
         
         # Naming all tabs
-        panel1.text = "PRJ Info"
-        panel2.text = ""
+        prj_input_tab.text = "PRJ Info"
+        multi_shot_run_tab.text = "Multishot Run"
         panel3.text = ""
         panel4.text = ""
-        helpPanel.text = "Help Page"
+        help_panel.text = "Help Page"
 
-        # layout for the first tab
+        # layout for the first tabs
         panel1_layout = RelativeLayout()
         panel2_layout = RelativeLayout()
         
         #Image input stuff
-        image_input = ImageInput()
-        image_input_2 = ImageInput()
+        panel1_image_input = ImageInputFields()
+        panel2_image_input = ImageInputFields()
 
-        image_input.defaultTab = True
+        #List of image inputs so that each image input region references the others
+        image_inputs = [panel1_image_input, panel2_image_input]
+        panel1_image_input.image_inputs = image_inputs
+        panel2_image_input.image_inputs = image_inputs
 
-        image_inputs = [image_input, image_input_2]
-        image_input.image_inputs = image_inputs
-        image_input_2.image_inputs = image_inputs
+        #Assigned so that image propogation through the tabs later is simpler
+        panel1_image_input.default_tab = True
 
         # panel1-------------------------------------------------------------
         # PRJ info: imports image, prj data entry, and uses the build and single shot operations.
 
-        # Elements for panel1
-        dimension_buttons = DimensionButtons()
-        spacial_inputs = SpacialInformation()
-        radar_stuff = Radar()
-        seismic_stuff = Seismic()
-        run_button = SingleRunButton()
+        # Elements for panel1, minus image importing
+        dimension_input_fields = DimensionButtons()
+        spacial_input_fields = SpacialInputFields()
+        radar_input_fields = RadarInputFields()
+        seismic_input_fields = SeismicInputFields()
+        prj_input_run_button = SingleRunButton()
 
         # Adding elements to panel1 layout
-        panel1_layout.add_widget(image_input)
-        panel1_layout.add_widget(dimension_buttons)
-        panel1_layout.add_widget(spacial_inputs)
-        panel1_layout.add_widget(radar_stuff)
-        panel1_layout.add_widget(seismic_stuff)
-        panel1_layout.add_widget(run_button)
+        panel1_layout.add_widget(panel1_image_input)
+        panel1_layout.add_widget(dimension_input_fields)
+        panel1_layout.add_widget(spacial_input_fields)
+        panel1_layout.add_widget(radar_input_fields)
+        panel1_layout.add_widget(seismic_input_fields)
+        panel1_layout.add_widget(prj_input_run_button)
 
         # Assigning layout to panel1
-        panel1.add_widget(panel1_layout)
+        prj_input_tab.add_widget(panel1_layout)
 
-        image_input.default_tab = True
-        image_input_2 = ImageInput()
-
-        # Elements for panel1
-        multi_shot_inputs = MultiShotInput()
-        run_button_2 = MultiRunButton()
+        # Elements for panel2
+        multi_shot_inputs = MultiShotInputFields()
+        multi_shot_run_button = MultiRunButton()
        
         # Adding elements to panel2 layout
-        panel2_layout.add_widget(image_input_2)
+        panel2_layout.add_widget(panel2_image_input)
         panel2_layout.add_widget(multi_shot_inputs)
-        panel2_layout.add_widget(run_button_2)
+        panel2_layout.add_widget(multi_shot_run_button)
 
         # Assigning layout to panel2
-        panel2.add_widget(panel2_layout)
+        multi_shot_run_tab.add_widget(panel2_layout)
 
         # panel3-------------------------------------------------------------
         # ______: ___________
@@ -427,14 +424,14 @@ class SeidarTGUI(App):
 
 
         # adding tabs to the window
-        base.add_widget(panel1)
-        base.add_widget(panel2)
+        base.add_widget(prj_input_tab)
+        base.add_widget(multi_shot_run_tab)
         base.add_widget(panel3)
         base.add_widget(panel4)
-        base.add_widget(helpPanel)
+        base.add_widget(help_panel)
 
         # setting the default tab
-        base.default_tab = panel1
+        base.default_tab = prj_input_tab
 
         return base
 
