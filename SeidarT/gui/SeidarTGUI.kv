@@ -6,7 +6,7 @@
     background_color: (2.9,2.9,2.9,2.9)
     tab_height: 25
 
-#PRJ info tab ------------------------------------------------------
+#PRJ info Tab ------------------------------------------------------
 <ImageInputFields>:
     name: "image_input"
     pos_hint: {"x": 0.005, "y": 0.47}
@@ -696,12 +696,17 @@
     size_hint: 0.08, 0.05
     on_release: root.SingleShot()
 
-#Tab 2 ------------------------------------------------------
+#Run Tab ------------------------------------------------------
 <MultiShotInputFields>:
     name: "multi_shot_input"
     pos_hint: {'x': 0.55, 'y': 0.53}
     size_hint: 0.4, 0.45
     
+    #:set msi_inp_height 0.14
+
+    #:set msi_lbl_height 0.1
+    #:set msi_lbl_width 0.9
+
     RelativeLayout:
         canvas:
             Color:
@@ -712,8 +717,8 @@
                 rectangle: (self.x, self.y, self.width, self.height)
 
         Label: 
-            name: "lbl_initial_source"
-            text: "Multi Shot Initial Source"
+            name: "lbl_multirun_title"
+            text: "Multi Shot Info"
             bold: True
             color: 0,0,0,1
             font_size: min(self.height * 0.5, self.width * 0.1)
@@ -723,6 +728,19 @@
             valign: "middle"
             pos_hint: {'x': 0.05, 'y':0.81}
             size_hint: 0.9, 0.2
+        
+        Label: 
+            name: "lbl_initial_source"
+            text: "Initial Source"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.74}
+            size_hint: msi_lbl_width, msi_lbl_height
 
         TextInput:
             name: "inp_initial_source_x"
@@ -735,8 +753,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.1, 'y':0.69}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.05, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
 
         TextInput:
             name: "inp_initial_source_y"
@@ -749,8 +767,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.69}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.36, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
 
         TextInput:
             name: "inp_initial_source_z"
@@ -763,21 +781,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.66, 'y':0.69}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
 
         Label: 
             name: "lbl_final_receiver"
             text: "Final Receiver"
-            bold: True
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.48}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.48}
+            size_hint: msi_lbl_width, msi_lbl_height
 
         TextInput:
             name: "inp_final_receiver_x"
@@ -790,8 +808,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.1, 'y':0.36}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.05, 'y':0.33}
+            size_hint: 0.28, 0.14
 
         TextInput:
             name: "inp_final_receiver_y"
@@ -804,8 +822,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.36}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.36, 'y':0.33}
+            size_hint: 0.28, 0.14
 
         TextInput:
             name: "inp_final_receiver_z"
@@ -818,22 +836,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.66, 'y':0.36}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.33}
+            size_hint: 0.28, 0.14
 
         Label: 
             name: "lbl_receiver_spacing"
             text: "Receiver Spacing"
-            bold: True
-            bold: True
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.15}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.19}
+            size_hint: msi_lbl_width, msi_lbl_height
 
         TextInput:
             name: "inp_final_receiver_x"
@@ -846,8 +863,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.03}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.15}
+            size_hint: 0.28, 0.14
 
 <MultiRunButton>:
     name: "multi_run_button"
@@ -857,11 +874,10 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.91, "y":0.54}
-    size_hint: 0.08, 0.05
+    pos_hint: {"x":0.7, "y":0.54}
+    size_hint: 0.1, 0.05
     on_release: root.MultiShot()
 
-#Tab 3 ------------------------------------------------------
 <CommonOffsetInputFields>:
     name: "common_offset_shot_input"
     pos_hint: {'x': 0.55, 'y': 0.03}
@@ -877,8 +893,8 @@
                 rectangle: (self.x, self.y, self.width, self.height)
 
         Label: 
-            name: "lbl_final_receiver"
-            text: "Final Receiver"
+            name: "lbl_common_offset_title"
+            text: "Common Offset"
             bold: True
             color: 0,0,0,1
             font_size: min(self.height * 0.5, self.width * 0.1)
@@ -886,8 +902,21 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.78}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
+
+        Label: 
+            name: "lbl_final_receiver"
+            text: "Final Receiver"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.74}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_final_receiver_x"
@@ -900,8 +929,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.1, 'y':0.64}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.05, 'y':0.59}
+            size_hint: 0.28, 0.14
 
         TextInput:
             name: "inp_final_receiver_y"
@@ -914,8 +943,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.64}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.36, 'y':0.59}
+            size_hint: 0.28, 0.14
 
         TextInput:
             name: "inp_final_receiver_z"
@@ -928,22 +957,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.66, 'y':0.64}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, 0.14
 
         Label: 
             name: "lbl_offset_distance"
             text: "Offset Distance"
-            bold: True
-            bold: True
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.4}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.4}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_offset_distance"
@@ -956,22 +984,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.30}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.37}
+            size_hint: 0.28, 0.14
         
         Label: 
             name: "lbl_step_length"
             text: "Step Length"
-            bold: True
-            bold: True
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.15}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.21}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_step_length"
@@ -984,8 +1011,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.03}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.18}
+            size_hint: 0.28, 0.14
 
 <CommonOffsetRunButton>:
     name: "common_offset_run_button"
@@ -995,10 +1022,10 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.81, "y":0.14}
-    size_hint: 0.08, 0.05
+    pos_hint: {"x":0.7, "y":0.04}
+    size_hint: 0.1, 0.05
     on_release: root.CommonOffsetShot()
-#Tab 4 ------------------------------------------------------
+
 <CommonMidpointInputFields>:
     name: "common_midpoint_shot_input"
     pos_hint: {'x': 0.05, 'y': 0.03}
@@ -1014,8 +1041,8 @@
                 rectangle: (self.x, self.y, self.width, self.height)
 
         Label: 
-            name: "lbl_final_receiver_distance"
-            text: "Common Midpoint Final Receiver Distance"
+            name: "lbl_common_midpoint_title"
+            text: "Common Midpoint"
             bold: True
             color: 0,0,0,1
             font_size: min(self.height * 0.5, self.width * 0.1)
@@ -1023,8 +1050,21 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.78}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
+
+        Label: 
+            name: "lbl_final_receiver_distance"
+            text: "Final Distance"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.62}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_final_receiver_distance"
@@ -1037,22 +1077,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.62}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, 0.14
 
         Label: 
             name: "lbl_initial_receiver_distance"
-            text: "Initial Receiver Distance"
-            bold: True
-            bold: True
+            text: "Initial Distance"
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.4}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.415}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_initial_receiver_distance"
@@ -1065,22 +1104,21 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.30}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.385}
+            size_hint: 0.28, 0.14
         
         Label: 
             name: "lbl_delta"
             text: "Step Length"
-            bold: True
-            bold: True
+            bold: False
             color: 0,0,0,1
-            font_size: min(self.height * 0.5, self.width * 0.1)
+            font_size: min(self.height * 0.75, self.width * 0.07)
             multiline: False
             text_size: self.size
-            halign: "center"
+            halign: "left"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.15}
-            size_hint: 1, 0.2
+            pos_hint: {'x': 0.05, 'y':0.21}
+            size_hint: 0.9, 0.1
 
         TextInput:
             name: "inp_step_length"
@@ -1093,8 +1131,8 @@
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.38, 'y':0.03}
-            size_hint: 0.25, 0.14
+            pos_hint: {'x': 0.66, 'y':0.18}
+            size_hint: 0.28, 0.14
 
 <CommonMidpointRunButton>:
     name: "common_midpoint_run_button"
@@ -1104,7 +1142,12 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.41, "y":0.04}
-    size_hint: 0.08, 0.05
+    pos_hint: {"x":0.2, "y":0.04}
+    size_hint: 0.1, 0.05
     on_release: root.CommonMidpointShot()
+
+#Plot Tab ------------------------------------------------------
+
+
+
 #Help Tab ------------------------------------------------------
