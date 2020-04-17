@@ -89,6 +89,8 @@
             pos_hint: {"x": 0.8, "y":0}
             size_hint: 0.15, 1
             group: "dimension"
+            #remove when 2.5 is implemented
+            disabled: 1
 
 <SpatialInputFields>:
     name: "spatial_information"
@@ -114,21 +116,21 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.75}
-            size_hint: 1, 0.22
+            pos_hint: {'x': 0, 'y':0.71}
+            size_hint: 1, 0.24
 
         Label:
             name: "lbl_iscale"
             text: "Image scale (Pixel/Meter):"
             bold: False
             color: 0,0,0,1
-            font_size: min(self.width * 0.084, self.height * 0.95)
+            font_size: min(self.width * 0.09, self.height * 0.72)
             multiline: False
             text_size: self.size
             halign: "right"
             valign: "middle"
-            pos_hint: {'x':0.025, 'y':0.45}
-            size_hint: 0.475, 0.25
+            pos_hint: {'x':0.02, 'y':0.38}
+            size_hint: 0.48, 0.28
 
         TextInput:
             name: "inp_iscale_x"
@@ -136,13 +138,14 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.125, 0, 0
-            pos_hint: {'x':0.51, 'y':0.44}
-            size_hint: 0.15, 0.25
+            pos_hint: {'x':0.51, 'y':0.38}
+            size_hint: 0.15, 0.28
 
         TextInput:
             name: "inp_iscale_y"
@@ -150,13 +153,17 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.125, 0, 0
-            pos_hint: {'x':0.67, 'y':0.44}
-            size_hint: 0.15, 0.25
+            pos_hint: {'x':0.67, 'y':0.38}
+            size_hint: 0.15, 0.28
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
+
 
         TextInput:
             name: "inp_iscale_z"
@@ -164,26 +171,27 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.125, 0, 0
-            pos_hint: {'x':0.83, 'y':0.44}
-            size_hint: 0.15, 0.25
+            pos_hint: {'x':0.83, 'y':0.38}
+            size_hint: 0.15, 0.28
         
         Label:
             name: "lbl_timesteps"
-            text: " Timesteps:"
+            text: "Timesteps:"
             bold: False
             color: 0,0,0,1
-            font_size: min(self.width * 0.18, self.height * 0.95)
+            font_size: min(self.width * 0.2, self.height * 0.72)
             multiline: False
             text_size: self.size
             halign: "right"
             valign: "middle"
-            pos_hint: {'x':0.025, 'y':0.1}
-            size_hint: 0.22, 0.25
+            pos_hint: {'x':0.025, 'y':0.05}
+            size_hint: 0.22, 0.28
 
         TextInput:
             name: "inp_timesteps"
@@ -191,26 +199,27 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "int"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.125, 0, 0
-            pos_hint: {'x':0.255, 'y':0.08}
-            size_hint: 0.225, 0.25
+            pos_hint: {'x':0.255, 'y':0.05}
+            size_hint: 0.225, 0.28
 
         Label:
             name: "lbl_boundary"
             text: "Boundary:"
             bold: False
             color: 0,0,0,1
-            font_size: min(self.width * 0.18, self.height * 0.95)
+            font_size: min(self.width * 0.2, self.height * 0.72)
             multiline: False
             text_size: self.size
             halign: "right"
             valign: "middle"
-            pos_hint: {'x':0.525, 'y':0.1}
-            size_hint: 0.22, 0.25
+            pos_hint: {'x':0.525, 'y':0.05}
+            size_hint: 0.22, 0.28
 
         TextInput:
             name: "inp_boundary"
@@ -218,45 +227,48 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "int"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.125, 0, 0
-            pos_hint: {'x':0.755, 'y':0.08}
-            size_hint: 0.225, 0.25
+            pos_hint: {'x':0.755, 'y':0.05}
+            size_hint: 0.225, 0.29
 
 <RadarInputFields>:
     name: "radar"
-    pos_hint: {'x': 0.55, 'y': 0.47}
-    size_hint: 0.21, 0.3
+    pos_hint: {'x': 0.77, 'y': 0.48}
+    size_hint: 0.21, 0.29
 
     RelativeLayout:
         canvas:
             Color:
                 rgba: 0, 0, 0, 1
 
+            #outline of section
             Line:
                 width: 1.5
                 rectangle: (self.x, self.y, self.width, self.height)
 
         CheckBox:
             name: "radar_included"
-            pos_hint: {"x": 0.8, 'y':0.81}
-            size_hint: 0.2, 0.2
+            color: 0,0,0,1
+            pos_hint: {"x": 0.87, 'y':0.86}
+            size_hint: 0.1, 0.1
 
         Label:
             name: "lbl_radars"
             text: "Radar Source"
             bold: True
             color: 0,0,0,1
-            font_size: self.height * 0.5
+            font_size: self.height
             multiline: False
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.81}
-            size_hint: 0.8, 0.2
+            pos_hint: {'x': 0.05, 'y':0.851}
+            size_hint: 0.8, 0.12
 
         TextInput:
             name: "inp_radar_pos_x"
@@ -264,12 +276,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.05, 'y':0.68}
+            pos_hint: {'x': 0.05, 'y':0.686}
             size_hint: 0.28, 0.14
 
         TextInput:
@@ -278,13 +291,16 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.36, 'y':0.68}
+            pos_hint: {'x': 0.36, 'y':0.686}
             size_hint: 0.28, 0.14
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_radar_pos_z"
@@ -292,12 +308,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.67, 'y':0.68}
+            pos_hint: {'x': 0.67, 'y':0.686}
             size_hint: 0.28, 0.14
 
         Label: 
@@ -310,8 +327,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.54}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.521}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_radar_timestep"
@@ -319,12 +336,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "int"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.52}
+            pos_hint: {"x":0.55, "y":0.521}
             size_hint: 0.4, 0.14
 
         Label: 
@@ -337,8 +355,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.38}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.356}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_radar_theta"
@@ -346,12 +364,12 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.36}
+            pos_hint: {"x":0.55, "y":0.356}
             size_hint: 0.4, 0.14
 
         Label: 
@@ -364,8 +382,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.22}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.191}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_radar_frequency"
@@ -373,12 +391,12 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.2}
+            pos_hint: {"x":0.55, "y":0.191}
             size_hint: 0.4, 0.14
 
         Label: 
@@ -391,8 +409,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.06}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.026}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_radar_phi"
@@ -400,18 +418,18 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.04}
+            pos_hint: {"x":0.55, "y":0.026}
             size_hint: 0.4, 0.14
 
 <SeismicInputFields>:
     name: "seismic"
-    pos_hint: {'x': 0.77, 'y': 0.47}
-    size_hint: 0.21, 0.3
+    pos_hint: {'x': 0.55, 'y': 0.48}
+    size_hint: 0.21, 0.29
 
     RelativeLayout:
         canvas:
@@ -424,21 +442,22 @@
         
         CheckBox:
             name: "seismic_included"
-            pos_hint: {"x": 0.8, 'y':0.81}
-            size_hint: 0.2, 0.2
+            color: 0,0,0,1
+            pos_hint: {"x": 0.87, 'y':0.86}
+            size_hint: 0.1, 0.1
 
         Label:
             name: "lbl_seismics"
             text: "Seismic Source"
             bold: True
             color: 0,0,0,1
-            font_size: self.height * 0.5
+            font_size: self.height
             multiline: False
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0, 'y':0.81}
-            size_hint: 0.8, 0.2
+            pos_hint: {'x': 0.05, 'y':0.851}
+            size_hint: 0.8, 0.12
 
         TextInput:
             name: "inp_seismic_pos_x"
@@ -446,12 +465,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.05, 'y':0.68}
+            pos_hint: {'x': 0.05, 'y':0.686}
             size_hint: 0.28, 0.14
 
         TextInput:
@@ -460,13 +480,16 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.36, 'y':0.68}
+            pos_hint: {'x': 0.36, 'y':0.686}
             size_hint: 0.28, 0.14
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_seismic_pos_z"
@@ -474,12 +497,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {'x': 0.67, 'y':0.68}
+            pos_hint: {'x': 0.67, 'y':0.686}
             size_hint: 0.28, 0.14
 
         Label: 
@@ -492,8 +516,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.54}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.521}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_seismic_timestep"
@@ -501,12 +525,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
+            input_filter: "int"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.52}
+            pos_hint: {"x":0.55, "y":0.521}
             size_hint: 0.4, 0.14
 
         Label: 
@@ -519,8 +544,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.38}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.356}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_seismic_theta"
@@ -528,13 +553,13 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.36}
-            size_hint: 0.4, 0.14       
+            pos_hint: {"x":0.55, "y":0.356}
+            size_hint: 0.4, 0.14     
 
         Label: 
             name: "lbl_seismic_frequency"
@@ -546,8 +571,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.22}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.191}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_seismic_frequency"
@@ -555,12 +580,12 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.2}
+            pos_hint: {"x":0.55, "y":0.191}
             size_hint: 0.4, 0.14
 
         Label: 
@@ -573,8 +598,8 @@
             text_size: self.size
             halign: 'right'
             valign: 'middle'
-            pos_hint: {'x': 0, 'y':0.06}
-            size_hint: 0.51, 0.1
+            pos_hint: {'x': 0, 'y':0.026}
+            size_hint: 0.51, 0.14
 
         TextInput:
             name: "inp_seismic_phi"
@@ -582,12 +607,12 @@
             background_color: 1, 1, 1, 1
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
-            font_size: self.height * 0.65
+            font_size: self.height * 0.6
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
-            pos_hint: {"x":0.55, "y":0.04}
+            pos_hint: {"x":0.55, "y":0.026}
             size_hint: 0.4, 0.14
 
 <MaterialInputRegion>:
@@ -631,48 +656,58 @@
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+
     TextInput:
         hint_text: "Temperature"
         name: "material_temperature"
         foreground_color: 0, 0, 0, 1
         hint_text_color: 0, 0, 0, 0.5
         font_size: self.height * 0.65
+        input_filter: "float"
         multiline: False
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+
     TextInput:
         name: "material_attenuation"
         hint_text: "Attenuation"
         foreground_color: 0, 0, 0, 1
         hint_text_color: 0, 0, 0, 0.5
         font_size: self.height * 0.65
+        input_filter: "float"
         multiline: False
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+
     TextInput:
         name: "material_density"
         hint_text: "Density"
         foreground_color: 0, 0, 0, 1
         hint_text_color: 0, 0, 0, 0.5
         font_size: self.height * 0.65
+        input_filter: "float"
         multiline: False
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+
     TextInput:
         name: "material_water_content"
         hint_text: "Porosity"
         foreground_color: 0, 0, 0, 1
         hint_text_color: 0, 0, 0, 0.5
         font_size: self.height * 0.65
+        input_filter: "float"
         multiline: False
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+
     CheckBox:
         name: "anisotropic_button"
+
     TextInput:  
         name: "material_ang_file"
         hint_text: "ang_file"
@@ -749,6 +784,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -763,12 +799,15 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.59}
             size_hint: 0.28, msi_inp_height
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_initial_source_z"
@@ -777,6 +816,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -804,6 +844,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -818,12 +859,15 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.33}
             size_hint: 0.28, 0.14
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_final_receiver_z"
@@ -832,6 +876,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -859,6 +904,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -925,6 +971,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -939,12 +986,15 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.59}
             size_hint: 0.28, 0.14
+            disabled: 1
+            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_final_receiver_z"
@@ -953,6 +1003,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -980,6 +1031,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -1007,6 +1059,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -1073,6 +1126,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -1100,6 +1154,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'
@@ -1127,6 +1182,7 @@
             foreground_color: 0, 0, 0, 1
             hint_text_color: 0, 0, 0, 0.5
             font_size: self.height * 0.65
+            input_filter: "float"
             multiline: False
             halign: 'center'
             valign: 'top'

@@ -34,7 +34,7 @@ Config.set('graphics', 'minimum_width', WINDOW_MIN_WIDTH)
 Config.set('graphics', 'minimum_height', WINDOW_MIN_HEIGHT)
 
 #This is the color for the background of the tabs, not the color on each tab.
-Window.clearcolor = (.7, .7, .7, 1)
+Window.clearcolor = (.75, .75, .75, 1)
 
 class MultiShotInputFields(RelativeLayout):
     pass
