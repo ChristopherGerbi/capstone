@@ -18,6 +18,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.core.window import Window
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
+from kivy.graphics import *
 
 kivy.require('1.11.1')
 
@@ -61,6 +62,9 @@ class DimensionButtons(RelativeLayout):
     pass
 
 class GlacierImage(Image):
+    pass
+
+class MaterialLabelBox(RelativeLayout):
     pass
 
 class MaterialInputRegion(ScrollView):
@@ -314,16 +318,22 @@ class ImageInputFields(RelativeLayout):
 
             self.material_scrollview = MaterialInputRegion()
 
-            self.material_box_layout = MaterialInputBox(spacing=5, orientation='vertical', size_hint_y=None, height=0)
-
+            self.material_box_layout = MaterialInputBox(spacing=5, orientation='vertical', size_hint_y=None, height=0, padding=(35,0,5,0)) #padding(left top right bottom)
+            
+            y=30*(material_count-1)-1
             for material in range(material_count):
                 # Replace this with a row for a material
                 # Create a new "structure" in the KV file for a row, given the color from the .prj
                 temp = MaterialInputFields(size_hint_y=None, height=25)
+                
+                temp.canvas.add(Color(rgba=material_colors[material]))
+                temp.canvas.add(Rectangle(size=(25,25),pos=(5,y)))
+
                 temp.material_number = material
                 temp.color = material_colors[material]
 
                 self.material_box_layout.add_widget(temp)
+                y=y-30
 
             #Box_Layout height = Material input hight + spacing * num of materials
             self.material_box_layout.height += (30 * material_count)
@@ -444,6 +454,7 @@ class SeidarTGUI(App):
         radar_input_fields = RadarInputFields()
         seismic_input_fields = SeismicInputFields()
         prj_input_run_button = SingleRunButton()
+        material_label_box = MaterialLabelBox()
 
         # Adding elements to panel1 layout
         panel1_layout.add_widget(panel1_image_input)
@@ -452,6 +463,7 @@ class SeidarTGUI(App):
         panel1_layout.add_widget(radar_input_fields)
         panel1_layout.add_widget(seismic_input_fields)
         panel1_layout.add_widget(prj_input_run_button)
+        panel1_layout.add_widget(material_label_box)
 
         # Assigning layout to panel1
         prj_input_tab.add_widget(panel1_layout)

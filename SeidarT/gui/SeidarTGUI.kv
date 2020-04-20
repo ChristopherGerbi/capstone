@@ -615,36 +615,128 @@
             pos_hint: {"x":0.55, "y":0.026}
             size_hint: 0.4, 0.14
 
+<MaterialLabelBox>:
+    size_hint: 0.96, 0.4
+    name: "material_label_box"
+    minimum_height: 10
+    do_scroll_y: True
+    pos_hint: {"x": 0.02, "y": 0.07}
+
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label:
+            name: "lbl_material_name"
+            text: "Name"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_temp"
+            text: "Temperature"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.185, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_attenuation"
+            text: "Attenuation"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.32, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_density"
+            text: "Density"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.455, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_porosity"
+            text: "Porosity"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.59, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_anisotropic"
+            text: "Anisotropic"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.725, 'y':0.9}
+            size_hint: 0.13, 0.07
+
+        Label:
+            name: "lbl_material_ang"
+            text: "ang_file"
+            bold: True
+            color: 0,0,0,1
+            font_size: self.height
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.86, 'y':0.9}
+            size_hint: 0.13, 0.07
+
 <MaterialInputRegion>:
-    size_hint: 0.9, 0.35
+    size_hint: 0.96, 0.34
     name: "material_window"
     minimum_height: 10
     do_scroll_y: True
-    pos_hint: {"x": 0.05, "y": 0.1}
+    pos_hint: {"x": 0.02, "y": 0.08}
 
 <MaterialInputBox>:
     name: "material_box"
-    canvas:
-        Color:
-            rgba: 2, 0, 0, 1
-
-        Line:
-            width: 1.0
-            rectangle: (self.x, self.y, self.width, self.height)
 
 <MaterialInputFields>:
     height: 30
     rows: 1
     cols: 7
-
-    canvas:
-        Color:
-            rgba: 2, 2, 2, 1
-
-        Line:
-            width: 1.0
-            rectangle: (self.x, self.y, self.width, self.height)
-
+    
     TextInput:
         name: "material_name"
         hint_text: "Name"
@@ -656,6 +748,7 @@
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+        size_hint: 1, 1
 
     TextInput:
         hint_text: "Temperature"
@@ -668,6 +761,7 @@
         halign: 'center'
         valign: 'top'
         padding: 0, self.height * 0.125, 0, 0
+        size_hint: 1, 1
 
     TextInput:
         name: "material_attenuation"
