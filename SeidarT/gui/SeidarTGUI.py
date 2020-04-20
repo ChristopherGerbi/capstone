@@ -18,7 +18,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.core.window import Window
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
-from kivy.graphics import *
+from kivy.graphics import Color, Rectangle
 
 kivy.require('1.11.1')
 
