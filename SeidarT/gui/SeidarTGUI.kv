@@ -89,8 +89,6 @@
             pos_hint: {"x": 0.8, "y":0}
             size_hint: 0.15, 1
             group: "dimension"
-            #remove when 2.5 is implemented
-            disabled: 1
 
 <SpatialInputFields>:
     name: "spatial_information"
@@ -161,9 +159,6 @@
             padding: 0, self.height * 0.125, 0, 0
             pos_hint: {'x':0.67, 'y':0.38}
             size_hint: 0.15, 0.28
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
-
 
         TextInput:
             name: "inp_iscale_z"
@@ -299,8 +294,6 @@
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.686}
             size_hint: 0.28, 0.14
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_radar_pos_z"
@@ -488,8 +481,6 @@
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.686}
             size_hint: 0.28, 0.14
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_seismic_pos_z"
@@ -801,6 +792,7 @@
 
     CheckBox:
         name: "anisotropic_button"
+        color: 0,0,0,1
 
     TextInput:  
         name: "material_ang_file"
@@ -900,8 +892,6 @@
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.59}
             size_hint: 0.28, msi_inp_height
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_initial_source_z"
@@ -960,8 +950,6 @@
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.33}
             size_hint: 0.28, 0.14
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_final_receiver_z"
@@ -1087,8 +1075,6 @@
             padding: 0, self.height * 0.1, 0, 0
             pos_hint: {'x': 0.36, 'y':0.59}
             size_hint: 0.28, 0.14
-            disabled: 1
-            disabled_foreground_color: 0,0,0,0
 
         TextInput:
             name: "inp_final_receiver_z"
