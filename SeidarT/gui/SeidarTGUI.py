@@ -481,8 +481,8 @@ class SeidarTGUI(App):
         # Creating all tab panels
         prj_input_tab = TabbedPanelItem()
         multi_shot_run_tab = TabbedPanelItem()
-        help_panel = TabbedPanelItem()
         plot_panel = TabbedPanelItem()
+        help_panel = TabbedPanelItem()
         
         # Naming all tabs
         prj_input_tab.text = "PRJ Info"
@@ -585,8 +585,8 @@ class SeidarTGUI(App):
 
         # adding tabs to the window
         base.add_widget(prj_input_tab)
-        base.add_widget(plot_panel)
         base.add_widget(multi_shot_run_tab)
+        base.add_widget(plot_panel)
         base.add_widget(help_panel)
 
         # setting the default tab
