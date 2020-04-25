@@ -37,6 +37,75 @@ Config.set('graphics', 'minimum_height', WINDOW_MIN_HEIGHT)
 #This is the color for the background of the tabs, not the color on each tab.
 Window.clearcolor = (.75, .75, .75, 1)
 
+class ArrayPlotButton(Button):
+    def __init__(self, **kwargs):
+        super(ArrayPlotButton, self).__init__(**kwargs)
+
+    def ArrayPlot(self):
+        command = "arrayplot "
+        name = ""
+        parameters = ""
+        for i in self.parent.children:
+            if i.name == "array_plot_inputs":
+                a2p_inputs = i.children[0].children
+                parameters = " -c " + a2p_inputs[2].text + " -g " + a2p_inputs[1].text + " -e " + a2p_inputs[0].text 
+                    
+            elif i.name == "image_input":
+                name = j.current_file_name
+
+        command += name + ".xxx.meta.txt " + parameters
+        print (command)
+        os.system(command)
+
+class CodisplayButton(Button):
+    def __init__(self, **kwargs):
+        super(CodisplayButton, self).__init__(**kwargs)
+
+    def Codisplay(self):
+        command = "codisplay "
+        name = ""
+        parameters = ""
+        for i in self.parent.children:
+            if i.name == "codisplay_input_fields":
+                co_input = i.children[0].children
+                parameters = " -c " + co_input[2].text + " -g " + co_input[1].text + " -e " + co_input[0].text 
+                    
+            elif i.name == "image_input":
+                name = j.current_file_name
+
+        command += name + ".xxx.meta.txt " + parameters
+        print (command)
+        os.system(command)
+
+class Image2AnimationButton(Button):
+    def __init__(self, **kwargs):
+        super(Image2AnimationButton, self).__init__(**kwargs)
+
+    def Image2Animation(self):
+        command = "im2anim "
+        name = ""
+        parameters = ""
+        for i in self.parent.children:
+            if i.name == "image_2_animation_input":
+                i2a_inputs = i.children[0].children
+                parameters = " -c " + i2a_inputs[2].text + " -n " + i2a_inputs[1].text + " -f " + i2a_inputs[0].text 
+                    
+            elif i.name == "image_input":
+                name = j.current_file_name
+
+        command += name + ".xxx.meta.txt " + parameters
+        print (command)
+        #os.system(command)
+
+class ArrayPlotInputFields(RelativeLayout):
+    pass
+
+class CodisplayInputFields(RelativeLayout):
+    pass
+
+class Image2AnimationInputFields(RelativeLayout):
+    pass
+
 class MultiShotInputFields(RelativeLayout):
     pass
 
@@ -154,9 +223,6 @@ class RunButton(Button):
         #return file name for higher level button types have access to it
         return curr_prj_file_name, run_mode
 
-
-
-
 class SingleRunButton(RunButton):
     def SingleShot(self):
         file_name, run_mode = super().run()
@@ -184,7 +250,7 @@ class CommonOffsetRunButton(RunButton):
                 command += child.children[0].text + " "
         print (command)
                 
-        #TODO WRITE THIS CODE
+        os.system(command)
 
 class CommonMidpointRunButton(RunButton):
     def CommonMidpointShot(self):
@@ -203,7 +269,7 @@ class CommonMidpointRunButton(RunButton):
             command += " s"
 
         print (command)
-    #TODO WRITE THIS TOO
+        os.system(command)
 
 class MultiRunButton(RunButton):
     def __init__(self, **kwargs):
@@ -229,7 +295,7 @@ class MultiRunButton(RunButton):
                 command += " -" + run_mode 
 
 
-        #os.system(command)
+        os.system(command)
         print (command)
 
 class MaterialInputFields(GridLayout):
@@ -238,11 +304,9 @@ class MaterialInputFields(GridLayout):
         self.material_number = None
         self.color = None
 
-
 class TotalLayout(TabbedPanel):
     def __init__(self, **kwargs):
         super(TotalLayout, self).__init__(**kwargs)
-
 
 class ImageInputFields(RelativeLayout):
     def __init__(self, **kwargs):
@@ -409,7 +473,6 @@ class ImageInputFields(RelativeLayout):
                     curr_widget.children[0].text = values[10]
                     #populate the material sections with this information
 
-
 class SeidarTGUI(App):
     def build(self):
         # base tabbed thing
@@ -419,28 +482,29 @@ class SeidarTGUI(App):
         prj_input_tab = TabbedPanelItem()
         multi_shot_run_tab = TabbedPanelItem()
         help_panel = TabbedPanelItem()
-
-        #These do not follow naming conventions, but will when instantiated
-        panel3 = TabbedPanelItem()
+        plot_panel = TabbedPanelItem()
         
         # Naming all tabs
         prj_input_tab.text = "PRJ Info"
         multi_shot_run_tab.text = "Multishot Run" #all runs
-        panel3.text = "Plots"
+        plot_panel.text = "Plots"
         help_panel.text = "Help Page"
 
         # layout for the first tabs
         panel1_layout = RelativeLayout()
         panel2_layout = RelativeLayout()
+        panel3_layout = RelativeLayout()
         
         #Image input stuff
         panel1_image_input = ImageInputFields()
         panel2_image_input = ImageInputFields()
+        panel3_image_input = ImageInputFields()
 
         #List of image inputs so that each image input region references the others
-        image_inputs = [panel1_image_input, panel2_image_input]
+        image_inputs = [panel1_image_input, panel2_image_input, panel3_image_input]
         panel1_image_input.image_input_region_references = image_inputs
         panel2_image_input.image_input_region_references = image_inputs
+        panel3_image_input.image_input_region_references = image_inputs
 
         #Assigned so that image propogation through the tabs later is simpler
         panel1_image_input.default_tab = True
@@ -480,7 +544,6 @@ class SeidarTGUI(App):
         common_midpoint_run_button = CommonMidpointRunButton()
        
         
-
         # Adding elements to panel2 layout
         panel2_layout.add_widget(panel2_image_input)
         panel2_layout.add_widget(multi_shot_inputs)
@@ -494,8 +557,23 @@ class SeidarTGUI(App):
         multi_shot_run_tab.add_widget(panel2_layout)
 
         # panel3-------------------------------------------------------------
-        # ______: ___________
+        #Display Plot 
+        image2animation_inputs = Image2AnimationInputFields()
+        array_plot_inputs = ArrayPlotInputFields()
+        codisplay_inputs = CodisplayInputFields()
+        image2animation_button = Image2AnimationButton()
+        array_plot_button = ArrayPlotButton()
+        codisplay_button = CodisplayButton()
 
+        panel3_layout.add_widget(image2animation_inputs)
+        panel3_layout.add_widget(array_plot_inputs)
+        panel3_layout.add_widget(codisplay_inputs)
+        panel3_layout.add_widget(codisplay_button)
+        panel3_layout.add_widget(array_plot_button)
+        panel3_layout.add_widget(image2animation_button)
+
+
+        plot_panel.add_widget(panel3_layout)
 
         # panel4-------------------------------------------------------------
         # ______: ___________
@@ -507,15 +585,14 @@ class SeidarTGUI(App):
 
         # adding tabs to the window
         base.add_widget(prj_input_tab)
+        base.add_widget(plot_panel)
         base.add_widget(multi_shot_run_tab)
-        base.add_widget(panel3)
         base.add_widget(help_panel)
 
         # setting the default tab
         base.default_tab = prj_input_tab
 
         return base
-
 
 def startGui():
     SeidarTGUI().run()

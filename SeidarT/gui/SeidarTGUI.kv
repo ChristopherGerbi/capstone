@@ -1283,7 +1283,306 @@
     on_release: root.CommonMidpointShot()
 
 #Plot Tab ------------------------------------------------------
+<ArrayPlotInputFields>:
+    name: "array_plot_inputs"
+    pos_hint: {'x': 0.55, 'y': 0.53}
+    size_hint: 0.4, 0.45
+    
+    #:set msi_inp_height 0.14
 
+    #:set msi_lbl_height 0.1
+    #:set msi_lbl_width 0.9
+
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label: 
+            name: "lbl_arrayplot_title"
+            text: "Array Plot Info"
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
+        
+        Label: 
+            name: "lbl_signal_direction"
+            text: "Signal Direction"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.74}
+            size_hint: msi_lbl_width, msi_lbl_height
+
+        Spinner:
+            id: dropdown
+            name: "dpwn_direction"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            pos_hint: {'x': 0.05, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+            values: ["Ez", "Ex", "Vz", "Vx"]
+
+        TextInput:
+            name: "inp_gain_factor"
+            hint_text: "gain"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.36, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+
+        TextInput:
+            name: "inp_vertical_exxageration"
+            hint_text: "Vertical Exxageration"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+<ArrayPlotButton>:
+    name: "array_plot_button"
+    text: "AP Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.7, "y":0.54}
+    size_hint: 0.1, 0.05
+    on_release: root.ArrayPlot()
+<CodisplayInputfields>:
+    name: "codisplay_input_fields"
+    pos_hint: {'x': 0.05, 'y': 0.03}
+    size_hint: 0.4, 0.45
+    
+    #:set msi_inp_height 0.14
+
+    #:set msi_lbl_height 0.1
+    #:set msi_lbl_width 0.9
+
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label: 
+            name: "lbl_codisplay_title"
+            text: "Codisplay Plot Info"
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
+        
+        Label: 
+            name: "lbl_signal_direction"
+            text: "Signal Direction"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.74}
+            size_hint: msi_lbl_width, msi_lbl_height
+
+        Spinner:
+            id: dropdown
+            name: "dpwn_direction"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            pos_hint: {'x': 0.05, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+            values: ["Ez", "Ex", "Vz", "Vx"]
+
+        TextInput:
+            name: "inp_gain_factor"
+            hint_text: "gain"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.36, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+
+        TextInput:
+            name: "inp_vertical_exxageration"
+            hint_text: "Vertical Exxageration"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+<CodisplayButton>:
+    name: "codisplay_button"
+    text: "CO Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.2, "y":0.04}
+    size_hint: 0.1, 0.05
+    on_release: root.Codisplay()
+<Image2AnimationInputFields>:
+    name: "image_2_animation_input"
+    pos_hint: {'x': 0.55, 'y': 0.03}
+    size_hint: 0.4, 0.45
+    
+    #:set msi_inp_height 0.14
+
+    #:set msi_lbl_height 0.1
+    #:set msi_lbl_width 0.9
+
+    RelativeLayout:
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+
+            Line:
+                width: 1.5
+                rectangle: (self.x, self.y, self.width, self.height)
+
+        Label: 
+            name: "lbl_im2animation_title"
+            text: "Image to Animation Info"
+            bold: True
+            color: 0,0,0,1
+            font_size: min(self.height * 0.5, self.width * 0.1)
+            multiline: False
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.81}
+            size_hint: 0.9, 0.2
+        
+        Label: 
+            name: "lbl_signal_direction"
+            text: "Signal Direction"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.height * 0.75, self.width * 0.07)
+            multiline: False
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            pos_hint: {'x': 0.05, 'y':0.74}
+            size_hint: msi_lbl_width, msi_lbl_height
+
+        Spinner:
+            id: dropdown
+            name: "dpwn_direction"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "float"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            pos_hint: {'x': 0.05, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+            values: ["Ez", "Ex", "Vz", "Vx"]
+
+        TextInput:
+            name: "inp_number_steps"
+            hint_text: "Steps"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "int"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.36, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+
+        TextInput:
+            name: "inp_fps"
+            hint_text: "FPS"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.65
+            input_filter: "int"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.1, 0, 0
+            pos_hint: {'x': 0.66, 'y':0.59}
+            size_hint: 0.28, msi_inp_height
+<Image2AnimationButton>:
+    name: "image_2_animation_button"
+    text: "I2A Run"
+    font_size: min(self.width * 0.375, self.height * 0.6)
+    text_size: self.size
+    multiline: False
+    halign: 'center'
+    valign: 'middle'
+    pos_hint: {"x":0.7, "y":0.04}
+    size_hint: 0.1, 0.05
+    on_release: root.Image2Animation()
 
 
 #Help Tab ------------------------------------------------------
