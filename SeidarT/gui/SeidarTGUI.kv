@@ -632,8 +632,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.05, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_temp"
@@ -645,8 +645,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.185, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+(self.parent.width - 33)/(self.parent.width*7), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_attenuation"
@@ -658,8 +658,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.32, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+2*((self.parent.width - 33)/(self.parent.width*7)), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_density"
@@ -671,8 +671,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.455, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+3*((self.parent.width - 33)/(self.parent.width*7)), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_porosity"
@@ -684,8 +684,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.59, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+4*((self.parent.width - 33)/(self.parent.width*7)), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_anisotropic"
@@ -697,8 +697,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.725, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+5*((self.parent.width - 33)/(self.parent.width*7)), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
         Label:
             name: "lbl_material_ang"
@@ -710,8 +710,8 @@
             text_size: self.size
             halign: "center"
             valign: "middle"
-            pos_hint: {'x': 0.86, 'y':0.9}
-            size_hint: 0.13, 0.07
+            pos_hint: {'x': (33/self.parent.width)+6*((self.parent.width - 33)/(self.parent.width*7)), 'y':0.9}
+            size_hint: (self.parent.width - 33)/(self.parent.width*7), 0.07
 
 <MaterialInputRegion>:
     size_hint: 0.96, 0.34
