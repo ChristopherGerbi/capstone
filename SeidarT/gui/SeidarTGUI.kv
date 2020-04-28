@@ -42,9 +42,17 @@
         on_release: root.getImage()
 
 <GlacierImage>:
-    size_hint: 1, .9
     id: image
     name: "glacier_image"
+    size_hint: 1, .9
+    
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+
+        Line:
+            width: 1.5
+            rectangle: (self.x, self.y, self.width, self.height)
 
 <DimensionButtons>:
     name: "dimension_button"
@@ -607,11 +615,11 @@
             size_hint: 0.4, 0.14
 
 <MaterialLabelBox>:
-    size_hint: 0.96, 0.4
     name: "material_label_box"
     minimum_height: 10
     do_scroll_y: True
     pos_hint: {"x": 0.02, "y": 0.07}
+    size_hint: 0.96, 0.4
 
     RelativeLayout:
         canvas:
@@ -820,8 +828,8 @@
 #Run Tab ------------------------------------------------------
 <MultiShotInputFields>:
     name: "multi_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.53}
-    size_hint: 0.4, 0.45
+    pos_hint: {'x': 0.02, 'y': 0.02}
+    size_hint: 0.31, 0.43
 
     RelativeLayout:
         canvas:
@@ -997,14 +1005,14 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.7, "y":0.54}
+    pos_hint: {"x":0.13, "y":0.03}
     size_hint: 0.1, 0.05
     on_release: root.MultiShot()
 
 <CommonOffsetInputFields>:
     name: "common_offset_shot_input"
-    pos_hint: {'x': 0.55, 'y': 0.03}
-    size_hint: 0.4, 0.45
+    pos_hint: {'x': 0.345, 'y': 0.02}
+    size_hint: 0.31, 0.43
     
     RelativeLayout:
         canvas:
@@ -1150,14 +1158,14 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.7, "y":0.04}
+    pos_hint: {"x":0.455, "y":0.03}
     size_hint: 0.1, 0.05
     on_release: root.CommonOffsetShot()
 
 <CommonMidpointInputFields>:
     name: "common_midpoint_shot_input"
-    pos_hint: {'x': 0.05, 'y': 0.03}
-    size_hint: 0.4, 0.45
+    pos_hint: {'x': 0.67, 'y': 0.02}
+    size_hint: 0.31, 0.43
     
     RelativeLayout:
         canvas:
@@ -1273,7 +1281,7 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.2, "y":0.04}
+    pos_hint: {"x":0.78, "y":0.03}
     size_hint: 0.1, 0.05
     on_release: root.CommonMidpointShot()
 
