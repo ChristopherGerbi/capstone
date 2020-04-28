@@ -180,9 +180,10 @@ class RunButton(Button):
                 run_seismic = seismic.children[12].active
             elif top_level_widget.name == "spatial_information":
                 spatial = top_level_widget.children[0]
-                prj_text = re.sub("D,dx,", "D,dx," + spatial.children[6].text, prj_text)
-                prj_text = re.sub("D,dy,n/a", "D,dy," + spatial.children[5].text, prj_text)
-                prj_text = re.sub("D,dz,", "D,dz," + spatial.children[4].text, prj_text)
+                prj_text = re.sub("D,dx,", "D,dx," + spatial.children[4].text, prj_text)
+                prj_text = re.sub("D,dy,n/a", "D,dy," + spatial.children[3].text, prj_text)
+                prj_text = re.sub("D,dz,", "D,dz," + spatial.children[2].text, prj_text)
+                prj_text = re.sub("D,tfile,", "D,tfile," + spatial.children[0])
 
             elif top_level_widget.name == "material_window":
                 material_box_widget = top_level_widget.children[0]
@@ -447,9 +448,9 @@ class ImageInputFields(RelativeLayout):
 
             elif top_level_widget.name == "spatial_information":
                 spatial = top_level_widget.children[0]
-                spatial.children[6].text = re.findall("D,dx,\S*", contents)[0][5:]
-                spatial.children[5].text = re.findall("D,dy,\S*", contents)[0][5:]
-                spatial.children[4].text = re.findall("D,dz,\S*", contents)[0][5:]
+                spatial.children[4].text = re.findall("D,dx,\S*", contents)[0][5:]
+                spatial.children[3].text = re.findall("D,dy,\S*", contents)[0][5:]
+                spatial.children[2].text = re.findall("D,dz,\S*", contents)[0][5:]
 
                 for spatial_child in spatial.children:
                     try:
@@ -486,8 +487,8 @@ class SeidarTGUI(App):
         
         # Naming all tabs
         prj_input_tab.text = "PRJ Info"
-        multi_shot_run_tab.text = "Multishot Run" #all runs
-        plot_panel.text = "Plots"
+        multi_shot_run_tab.text = "PRJ Run" #all runs
+        plot_panel.text = "PRJ Plots"
         help_panel.text = "Help Page"
 
         # layout for the first tabs
@@ -571,6 +572,7 @@ class SeidarTGUI(App):
         panel3_layout.add_widget(codisplay_button)
         panel3_layout.add_widget(array_plot_button)
         panel3_layout.add_widget(image2animation_button)
+        panel3_layout.add_widget(panel3_image_input)
 
 
         plot_panel.add_widget(panel3_layout)
