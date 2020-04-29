@@ -183,7 +183,8 @@ class RunButton(Button):
                 prj_text = re.sub("D,dx,", "D,dx," + spatial.children[4].text, prj_text)
                 prj_text = re.sub("D,dy,n/a", "D,dy," + spatial.children[3].text, prj_text)
                 prj_text = re.sub("D,dz,", "D,dz," + spatial.children[2].text, prj_text)
-                prj_text = re.sub("D,tfile,", "D,tfile," + spatial.children[0])
+                prj_text = re.sub("D,tfile,", "D,tfile," + spatial.children[0].text, prj_text)
+                prj_text = re.sub("D,cpml,", "D,cpml," + spatial.children[7].text, prj_text)
 
             elif top_level_widget.name == "material_window":
                 material_box_widget = top_level_widget.children[0]

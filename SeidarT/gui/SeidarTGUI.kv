@@ -113,6 +113,34 @@
                 rectangle: (self.x, self.y, self.width, self.height)
 
         Label:
+            name: "lbl_boundary"
+            text: "Boundary:"
+            bold: False
+            color: 0,0,0,1
+            font_size: min(self.width * 0.2, self.height * 0.72)
+            multiline: False
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            pos_hint: {'x':0.525, 'y':0.05}
+            size_hint: 0.22, 0.28
+
+        TextInput:
+            name: "inp_width"
+            hint_text: "###"
+            background_color: 1, 1, 1, 1
+            foreground_color: 0, 0, 0, 1
+            hint_text_color: 0, 0, 0, 0.5
+            font_size: self.height * 0.6
+            input_filter: "int"
+            multiline: False
+            halign: 'center'
+            valign: 'top'
+            padding: 0, self.height * 0.125, 0, 0
+            pos_hint: {'x':0.75, 'y':0.05}
+            size_hint: 0.225, 0.28        
+
+        Label:
             name: "lbl_sinfo"
             text: "Spatial Information"
             bold: True

@@ -49,31 +49,31 @@
 # -----------------------------------------------------------------------------
 
 
-I,gui/shapes.png
+I,gui/jarvis2.png
 
 D,dim,2
-D,nx,300
+D,nx,250
 D,ny,n/a
-D,nz,100
-D,dx,
-D,dy,n/a
-D,dz,
-D,cpml,30
+D,nz,195
+D,dx,1
+D,dy,
+D,dz,1
+D,cpml,3030
 D,nmats,3
-D,tfile,
+D,tfile,10
 
 # number, id, R/G/B, Temperature, Attenuation, Density, Porosity, Water_Content, Anisotropic, ANG_File
-M,0,,120/152/76,,,,,,,
-M,1,,220/220/220,,,,,,,
-M,2,,255/75/75,,,,,,,
+M,0,ice1h,60/81/163,-10,2,910,0,0,False,
+M,1,ice1h,237/26/87,-10,2,910,0,0,True,10TSM.ang
+M,2,granite,255/255/255,-10,2,2700,0,0,False,
 
 # The source parameters for the seismic model
 S,dt,
-S,time_steps,
-S,x,
-S,y,
-S,z,
-S,f0,
+S,time_steps,500
+S,x,5
+S,y,0
+S,z,1
+S,f0,80
 S,theta,0
 S,phi,0
 
@@ -84,11 +84,11 @@ C,2,,,,,,,,,,
 
 # The source parameters for the elecromagnetic model
 E,dt,
-E,time_steps,
-E,x,
-E,y,
-E,z,
-E,f0,
+E,time_steps,1600
+E,x,5
+E,y,0
+E,z,0
+E,f0,10000000
 E,theta,0
 E,phi,0
 
