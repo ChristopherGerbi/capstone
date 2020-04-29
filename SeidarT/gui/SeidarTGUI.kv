@@ -239,8 +239,6 @@
             pos_hint: {'x':0.255, 'y':0.05}
             size_hint: 0.225, 0.28
 
-
-
 <RadarInputFields>:
     name: "radar"
     pos_hint: {'x': 0.77, 'y': 0.48}
@@ -830,8 +828,8 @@
 #Run Tab ------------------------------------------------------
 <MultiShotInputFields>:
     name: "multi_shot_input"
-    pos_hint: {'x': 0.02, 'y': 0.02}
-    size_hint: 0.31, 0.43
+    pos_hint: {'x': 0.005, 'y': 0.01}
+    size_hint: 0.325, 0.43
 
     RelativeLayout:
         canvas:
@@ -1007,14 +1005,14 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.13, "y":0.03}
+    pos_hint: {"x":0.145, "y":0.02}
     size_hint: 0.1, 0.05
     on_release: root.MultiShot()
 
 <CommonOffsetInputFields>:
     name: "common_offset_shot_input"
-    pos_hint: {'x': 0.345, 'y': 0.02}
-    size_hint: 0.31, 0.43
+    pos_hint: {'x': 0.3375, 'y': 0.01}
+    size_hint: 0.325, 0.43
     
     RelativeLayout:
         canvas:
@@ -1160,14 +1158,14 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.455, "y":0.03}
+    pos_hint: {"x":0.4625, "y":0.02}
     size_hint: 0.1, 0.05
     on_release: root.CommonOffsetShot()
 
 <CommonMidpointInputFields>:
     name: "common_midpoint_shot_input"
-    pos_hint: {'x': 0.67, 'y': 0.02}
-    size_hint: 0.31, 0.43
+    pos_hint: {'x': 0.67, 'y': 0.01}
+    size_hint: 0.325, 0.43
     
     RelativeLayout:
         canvas:
@@ -1283,7 +1281,7 @@
     multiline: False
     halign: 'center'
     valign: 'middle'
-    pos_hint: {"x":0.78, "y":0.03}
+    pos_hint: {"x":0.78, "y":0.02}
     size_hint: 0.1, 0.05
     on_release: root.CommonMidpointShot()
 
